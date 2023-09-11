@@ -6,22 +6,28 @@ import { AuthGuard } from './_helpers/auth.guard';
 
 const routes: Routes = [
   {
-    path:'login',
-    component: LoginComponent,
-  },
-  {
-    path:'deck',
-    component: DeckComponent,
-  },
-  {
-    path:'user/decks',
-    canActivate:[AuthGuard],
-    component: DeckComponent,
+    path: '', loadChildren: () => import('./public/public.module').then(
+    (module) => module.PublicModule
+    ),
+    
   }
+  // {
+  //   path:'login',
+  //   component: LoginComponent,
+  // },
+  // {
+  //   path:'deck',F
+  //   component: DeckComponent,
+  // },
+  // {
+  //   path:'user/decks',
+  //   canActivate:[AuthGuard],
+  //   component: DeckComponent,
+  // }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
