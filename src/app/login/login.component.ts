@@ -1,40 +1,52 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { AuthService } from '../_services/auth.service';
+import { Credentials } from '../models/credentials.model';
+import { Token } from '../models/token.model';
+import { TokenService } from '../_services/token.service';
 import { Router } from '@angular/router';
-import { FormGroup,Validators,FormBuilder } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  loginForm:any = FormGroup;
+  loginForm!: FormGroup;
+  credentials: Credentials = {};
 
   constructor(
-    private router:Router,
     private formBuilder: FormBuilder,
-    private http: HttpClient) { }
+    private authService: AuthService,
+    private tokenService: TokenService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.email]],
-      password: ['', 
+      password: [
+        '',
         [
-          Validators.required, 
+          Validators.required,
           Validators.minLength(8),
-          Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])/)
-        ]
-      ]
+          Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])/),
+        ],
+      ],
     });
   }
 
-  onSubmit():void {
-    console.log(this.loginForm);
-    this.http.post('https://127.0.0.1:8000/api/login_check', this.loginForm.value).subscribe(
-      data => console.log(data),
-      err => console.log(err)
-    )
+  onSubmit(): void {
+    this.credentials.username = this.loginForm.value.username;
+    this.credentials.password = this.loginForm.value.password;
+
+    this.authService.login(this.credentials).subscribe(
+      (data: Token) => {
+        console.log(data.token);
+        this.tokenService.saveToken(data.token);
+        this.router.navigate(['user/decks'])
+      },
+      (err) => console.log(err)
+    );
   }
 }
