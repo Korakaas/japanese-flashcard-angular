@@ -8,10 +8,11 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 // import { AuthInterceptor } from './authInterceptor';
 import { DeckComponent } from './deck/deck.component';
+import { ErrorComponent } from './_utils/error/error.component';
 
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DeckComponent],
+  declarations: [AppComponent, LoginComponent, DeckComponent, ErrorComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
