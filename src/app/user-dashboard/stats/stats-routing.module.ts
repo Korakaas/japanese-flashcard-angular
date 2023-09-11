@@ -9,7 +9,7 @@ const routes: Routes = [
 
   },
   {
-    path:'deck', component:SDeckComponent,
+    path:'deck/:id', component:SDeckComponent,
 
   }
 ];

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-d-delete',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./d-delete.component.scss']
 })
 export class DDeleteComponent {
+  constructor(private activated: ActivatedRoute) {}
 
+  ngOnInit(): void {
+    this.activated.params.subscribe(
+      (data) => console.log(data)
+    )
+  }
 }

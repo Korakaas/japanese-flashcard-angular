@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-d-details',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./d-details.component.scss']
 })
 export class DDetailsComponent {
+  constructor(private activated: ActivatedRoute) {}
 
+  ngOnInit(): void {
+    this.activated.params.subscribe(
+      (data) => console.log(data)
+    )
+  }
 }

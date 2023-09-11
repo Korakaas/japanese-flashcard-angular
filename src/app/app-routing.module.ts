@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { DeckComponent } from './deck/deck.component';
-import { AuthGuard } from './_helpers/auth.guard';
 import { ErrorComponent } from './_utils/error/error.component';
+import { AuthGuard } from './_helpers/auth.guard';
 
 const routes: Routes = [
   {
@@ -17,23 +15,17 @@ const routes: Routes = [
       import('./user-dashboard/user-dashboard.module').then(
         (module) => module.UserDashboardModule
       ),
+    canActivate: [AuthGuard],
   },
   {
-    path:'**', component: ErrorComponent
-  }
-  // {
-  //   path:'login',
-  //   component: LoginComponent,
-  // },
-  // {
-  //   path:'deck',F
-  //   component: DeckComponent,
-  // },
-  // {
-  //   path:'user/decks',
-  //   canActivate:[AuthGuard],
-  //   component: DeckComponent,
-  // }
+    path: 'auth',
+    loadChildren: () =>
+      import('./auth/auth.module').then((module) => module.AuthModule),
+  },
+  {
+    path: '**',
+    component: ErrorComponent,
+  },
 ];
 
 @NgModule({

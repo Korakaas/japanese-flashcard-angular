@@ -19,6 +19,6 @@ export class AuthGuard {
       return true
     }
 
-    return this.router.navigate(['login'])
+    return this.router.navigate(['auth/login'])
   }
 }
