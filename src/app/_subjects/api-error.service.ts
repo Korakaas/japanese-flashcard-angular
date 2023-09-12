@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiErrorService {
-  apiError = new Subject();
+  apiError = new Subject<string>();
 
   constructor() {}
 

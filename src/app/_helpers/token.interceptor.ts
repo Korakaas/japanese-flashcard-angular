@@ -31,7 +31,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
       return next.handle(clone).pipe(
         catchError((error) => {
-          this.apiErrorService.sendError('test subjcer eroor');
+          this.apiErrorService.sendError(error.error.message);
 
           if (error.status === 401) {
             this.tokenService.clearToken();
