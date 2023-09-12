@@ -14,7 +14,7 @@ const routes: Routes = [
 
       { path: 'home', component: HomeComponent },
       { path: 'decks', component: DecksComponent },
-      { path: 'decks-detail', component: DecksDetailComponent },
+      { path: 'decks-detail/:id', component: DecksDetailComponent },
     ],
   },
 ];

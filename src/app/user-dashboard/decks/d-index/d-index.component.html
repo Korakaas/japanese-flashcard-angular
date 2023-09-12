@@ -1,1 +1,8 @@
 <p>d-index works!</p>
+<a [routerLink]="['add']">Créer un paquet</a>
+<div *ngFor="let deck of deckList">
+  <div *ngIf="deck">
+    <a [routerLink]="['edit', deck.id]">{{ deck.name }}</a>
+    <a (click)="delete(deck.id!)">Supprimer</a>
+  </div>
+</div>

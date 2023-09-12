@@ -8,6 +8,8 @@ import { DEditComponent } from './d-edit/d-edit.component';
 import { DDeleteComponent } from './d-delete/d-delete.component';
 import { DDetailsComponent } from './d-details/d-details.component';
 import { DTestComponent } from './d-test/d-test.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { DTestComponent } from './d-test/d-test.component';
   ],
   imports: [
     CommonModule,
-    DecksRoutingModule
+    DecksRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class DecksModule { }

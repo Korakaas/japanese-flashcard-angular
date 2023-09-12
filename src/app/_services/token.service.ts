@@ -1,19 +1,26 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenService {
+  constructor() {}
 
-  constructor() { }
-
-  saveToken(token: string): void{
+  saveToken(token: string): void {
     localStorage.setItem('token', token);
   }
 
-  isLogged(): boolean{
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  clearToken(): void {
+    localStorage.removeItem('token');
+  }
+
+  isLogged(): boolean {
     const token = localStorage.getItem('token');
-    console.log(token)
-    return !! token;
+    console.log(token);
+    return !!token;
   }
 }
