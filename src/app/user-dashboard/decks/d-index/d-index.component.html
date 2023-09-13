@@ -2,7 +2,12 @@
 <a [routerLink]="['add']">Créer un paquet</a>
 <div *ngFor="let deck of deckList">
   <div *ngIf="deck">
-    <a [routerLink]="['edit', deck.id]">{{ deck.name }}</a>
-    <a (click)="delete(deck.id!)">Supprimer</a>
+    <ul style="display: flex; justify-content: space-between;">
+      <li>
+        <a [routerLink]="['edit', deck.id]">{{ deck.name }}</a>
+      </li>
+      <li><a (click)="delete(deck.id!)">Supprimer</a></li>
+      <li><a [routerLink]="['./', deck.id,'flashcards']">Liste des cartes</a></li>
+    </ul>
   </div>
 </div>

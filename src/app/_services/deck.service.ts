@@ -65,4 +65,12 @@ export class DeckService {
   updateUserDecks(deck: Deck): Observable<string> {
     return this.http.put<string>(environment.api + 'user/decks/'+ deck.id, deck);
   }
+
+  /*
+    Récupère un deck de l'utilisateur en fonction de son id
+    @route GET ['/user/decks/id']
+  */
+    duplicateDecks(id: string): Observable<string> {
+      return this.http.post<string>(environment.api + 'duplicate/decks/' + id, null);
+    }
 }

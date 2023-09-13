@@ -1,1 +1,12 @@
 <p>f-index works!</p>
+<a [routerLink]="['add']">Créer une carte</a>
+<div *ngFor="let flashcard of flashcardList">
+  <div *ngIf="flashcard">
+    <ul style="display: flex; justify-content: space-between;">
+      <li>
+        <a [routerLink]="['edit', flashcard.id]">{{ flashcard.translation }}</a>
+      </li>
+      <!-- <li><a (click)="delete(flashcard.id!)">Supprimer</a></li> -->
+    </ul>
+  </div>
+</div>

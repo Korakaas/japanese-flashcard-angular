@@ -18,7 +18,7 @@ const routes: Routes = [
           import('./decks/decks.module').then((module) => module.DecksModule),
       },
       {
-        path: 'flashcards',
+        path: 'decks/:deckId/flashcards',
         loadChildren: () =>
           import('./flashcards/flashcards.module').then(
             (module) => module.FlashcardsModule

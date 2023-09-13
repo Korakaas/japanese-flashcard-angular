@@ -7,6 +7,8 @@ import { FDetailsComponent } from './f-details/f-details.component';
 import { FAddComponent } from './f-add/f-add.component';
 import { FEditComponent } from './f-edit/f-edit.component';
 import { FDeleteComponent } from './f-delete/f-delete.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { FDeleteComponent } from './f-delete/f-delete.component';
   ],
   imports: [
     CommonModule,
-    FlashcardsRoutingModule
+    FlashcardsRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class FlashcardsModule { }

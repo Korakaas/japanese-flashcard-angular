@@ -1,1 +1,104 @@
-<p>f-add works!</p>
+<p *ngIf="message">{{ message }}</p>
+<div class="form-container">
+  <form [formGroup]="flashcardForm" (ngSubmit)="onSubmit()">
+    <select name="" id="" (change)="onselectchange($event)" formControlName="type">
+      <option value="" disabled selected>
+        Sélectionnez une catégorie de carte
+      </option>
+      <option
+        *ngFor="let type of cardType"
+        [value]="type.value"
+        [label]="type.label"
+      ></option>
+    </select>
+    <div *ngIf="type">
+      <h2>Recto</h2>
+      <div formGroupName="flashcardTypeForm">
+        <div *ngIf="type === 'vocabulary'">
+          <label for="word">Word</label>
+          <input type="text" id="word" formControlName="word" />
+        </div>
+        <div *ngIf="type === 'kanji'">
+          <label for="kanji">Kanji</label>
+          <input type="text" id="kanji" formControlName="kanji" />
+        </div>
+        <div *ngIf="type === 'grammar'">
+          <label for="grammarPoint">Point de grammaire</label>
+          <input type="text" id="grammarPoint" formControlName="grammarPoint" />
+        </div>
+        <div *ngIf="type === 'conjugation'">
+          <label for="dictionnary">Verbe forme neutre</label>
+          <input type="text" id="dictionnary" formControlName="dictionnary" />
+        </div>
+      </div>
+      <div>
+        <h2>Verso</h2>
+        <div>
+          <label for="translation">Traduction</label>
+          <input type="text" id="translation" formControlName="translation" />
+        </div>
+        <div>
+          <label for="example">Exemple</label>
+          <input type="text" id="example" formControlName="example" />
+        </div>
+        <div>
+          <label for="furigana">Furigana</label>
+          <input type="text" id="furigana" formControlName="furigana" />
+        </div>
+
+        <div formGroupName="flashcardTypeForm">
+          <div *ngIf="type === 'vocabulary'">
+            <label for="audio">Audio</label>
+            <input type="text" id="audio" formControlName="audio" />
+            <label for="image">Image</label>
+            <input type="text" id="image" formControlName="image" />
+          </div>
+
+          <div *ngIf="type === 'kanji'">
+            <label for="onyomi">Lecture onyomi</label>
+            <input type="text" id="onyomi" formControlName="onyomi" />
+            <label for="kunyomi">Lecture kunyomi</label>
+            <input type="text" id="kunyomi" formControlName="kunyomi" />
+          </div>
+
+          <div *ngIf="type === 'grammar'">
+            <label for="grammarRule">Règle de grammaire</label>
+            <input type="text" id="grammarRule" formControlName="grammarRule" />
+          </div>
+
+          <div *ngIf="type === 'conjugation'">
+            <label for="polite">Forme polie</label>
+            <input type="text" id="polite" formControlName="polite" />
+            <label for="negative">Forme negative</label>
+            <input type="text" id="negative" formControlName="negative" />
+            <label for="conditionnalBa">Forme conditionelle en Ba</label>
+            <input
+              type="text"
+              id="conditionnalBa"
+              formControlName="conditionnalBa"
+            />
+            <label for="conditionnalTara">Forme conditionelle en Tara</label>
+            <input
+              type="text"
+              id="conditionnalTara"
+              formControlName="conditionnalTara"
+            />
+            <label for="imperative">forme impérative</label>
+            <input type="text" id="imperative" formControlName="imperative" />
+            <label for="volitional">Forme volitive</label>
+            <input type="text" id="volitional" formControlName="volitional" />
+            <label for="causative">Forme causative</label>
+            <input type="text" id="causative" formControlName="causative" />
+            <label for="potential">Forme potentielle</label>
+            <input type="text" id="potential" formControlName="potential" />
+            <label for="teForm">Form en te</label>
+            <input type="text" id="teForm" formControlName="teForm" />
+            <label for="taForm">Forme en ta</label>
+            <input type="text" id="taForm" formControlName="taForm" />
+          </div>
+        </div>
+      </div>
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+</div>

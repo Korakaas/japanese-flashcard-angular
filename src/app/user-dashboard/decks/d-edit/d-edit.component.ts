@@ -33,12 +33,12 @@ export class DEditComponent implements OnInit {
       this.deckService.getUserDecksDetail(id).subscribe((data: Deck) => {
         this.deck = data;
         console.log(this.deck);
-        this.editDeckForm(this.deck);
+        this.initializeDeckForm(this.deck);
       });
     }
   }
 
-  editDeckForm(deck: Deck) {
+  initializeDeckForm(deck: Deck) {
     this.deckForm.patchValue({
       name: deck.name,
       description: deck.description,

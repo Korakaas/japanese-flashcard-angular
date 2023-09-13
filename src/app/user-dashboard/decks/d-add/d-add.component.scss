@@ -1,0 +1,58 @@
+// Styles pour les mobiles (max-width : 767px)
+.form-container {
+    width: 100%;
+  }
+  label {
+    font-size: 16px; // Taille de police pour les étiquettes
+    margin-bottom: 8px; // Espacement entre les étiquettes
+  }
+  
+  input[type="text"],
+  textarea {
+    width: 100%; // Remplir la largeur de l'écran
+    padding: 10px; // Remplissage intérieur
+    margin-bottom: 16px; // Espacement entre les champs
+    border: 1px solid #ccc; // Bordure légère
+    border-radius: 4px; // Coins arrondis
+    font-size: 14px; // Taille de police pour les champs de texte
+  }
+  
+  .form-check {
+    margin-bottom: 16px; // Espacement entre les cases à cocher
+    label {
+      font-size: 14px; // Taille de police pour les étiquettes de case à cocher
+    }
+  }
+  
+  button[type="submit"] {
+    background-color: #007bff; // Couleur de fond du bouton
+    color: #fff; // Couleur du texte du bouton
+    border: none; // Supprimer la bordure
+    border-radius: 4px; // Coins arrondis
+    padding: 10px 20px; // Remplissage intérieur du bouton
+    font-size: 16px; // Taille de police du bouton
+    cursor: pointer; // Curseur pointer au survol
+    width: 100%; // Remplir la largeur de l'écran
+  }
+  
+  // Styles pour les tablettes et les écrans plus larges (min-width : 768px)
+  @media (min-width: 768px) {
+    .form-container {
+      width: 50%;
+      margin: auto;
+    }
+  
+    label {
+      font-size: 18px; // Taille de police pour les étiquettes
+    }
+  
+    input[type="text"],
+    textarea {
+      font-size: 16px; // Taille de police pour les champs de texte
+    }
+  
+    button[type="submit"] {
+      font-size: 18px; // Taille de police du bouton
+    }
+  }
+  

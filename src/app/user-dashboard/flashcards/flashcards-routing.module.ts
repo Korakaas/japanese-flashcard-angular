@@ -12,7 +12,7 @@ const routes: Routes = [
 
   },
   {
-    path:'edit/:id', component:FEditComponent,
+    path:'edit/:flashcardId', component:FEditComponent,
 
   },{
     path:'add', component:FAddComponent,

@@ -20,4 +20,10 @@ export class DecksComponent {
       },
     )
   }
+
+  duplicate(id:string){
+    this.deckService.duplicateDecks(id).subscribe(
+      data => console.log(data)
+    )
+  }
 }

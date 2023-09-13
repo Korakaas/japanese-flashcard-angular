@@ -3,5 +3,6 @@
 <div *ngFor="let deck of deckList">
   <div>
     <a [routerLink]="['/decks-detail', deck.id]">{{ deck.name }}</a>
+    <a (click)="duplicate(deck.id!)">Ajouter à mes paquets</a>
   </div>
 </div>
