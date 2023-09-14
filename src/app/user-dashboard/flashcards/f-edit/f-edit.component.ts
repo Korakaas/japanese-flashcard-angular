@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { FlashcardsService } from 'src/app/_services/flashcard.service';
 import {
   Flashcard,
-  FlashcardConjugation,
   FlashcardGrammar,
   FlashcardKanji,
   FlashcardVocabulary,
@@ -32,7 +31,8 @@ export class FEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.flashcardForm = this.formbuilder.group({
-      translation: '',
+      front: '',
+      back: '',
       example: '',
       furigana: '',
       flashcardTypeForm: this.formbuilder.group({}),
@@ -47,6 +47,7 @@ export class FEditComponent implements OnInit {
         .subscribe((data: Flashcard) => {
           this.flashcard = data;
           this.type = this.flashcard.type;
+          console.log(this.flashcard);
 
           this.initializeFlashcardForm(this.flashcard);
         });
@@ -58,7 +59,6 @@ export class FEditComponent implements OnInit {
 
     switch (this.type) {
       case 'vocabulary':
-        this.flashcardTypeForm.addControl('word', this.formbuilder.control(''));
         this.flashcardTypeForm.addControl(
           'audio',
           this.formbuilder.control('')
@@ -70,7 +70,7 @@ export class FEditComponent implements OnInit {
         break;
       case 'kanji':
         this.flashcardTypeForm.addControl(
-          'kanji',
+          'mnemotic',
           this.formbuilder.control('')
         );
         this.flashcardTypeForm.addControl(
@@ -84,60 +84,60 @@ export class FEditComponent implements OnInit {
         break;
       case 'grammar':
         this.flashcardTypeForm.addControl(
-          'grammarRule',
+          'grammarConstruction',
           this.formbuilder.control('')
         );
         this.flashcardTypeForm.addControl(
-          'grammarPoint',
+          'grammarNotes',
           this.formbuilder.control('')
         );
         break;
-      case 'conjugation':
-        this.flashcardTypeForm.addControl(
-          'dictionnary',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'polite',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'negative',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'conditionnalBa',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'conditionnalTara',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'imperative',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'volitional',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'causative',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'potential',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'teForm',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'taForm',
-          this.formbuilder.control('')
-        );
-        break;
+      // case 'conjugation':
+      //   this.flashcardTypeForm.addControl(
+      //     'dictionnary',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'polite',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'negative',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'conditionnalBa',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'conditionnalTara',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'imperative',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'volitional',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'causative',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'potential',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'teForm',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'taForm',
+      //     this.formbuilder.control('')
+      //   );
+      //   break;
 
       default:
         console.error('Le type de la carte est inconnu');
@@ -146,7 +146,8 @@ export class FEditComponent implements OnInit {
 
     this.flashcardForm.setControl('flashcardTypeForm', this.flashcardTypeForm);
     this.flashcardForm.patchValue({
-      translation: flashcard.translation,
+      front: flashcard.front,
+      back: flashcard.back,
       example: flashcard.example,
       furigana: flashcard.furigana,
     });
@@ -159,7 +160,6 @@ export class FEditComponent implements OnInit {
         const flashcardVocab: FlashcardVocabulary = flashcard;
         this.flashcardForm.patchValue({
           flashcardTypeForm: {
-            word: flashcardVocab.word,
             audio: flashcardVocab.audio,
             image: flashcardVocab.image,
           },
@@ -169,7 +169,7 @@ export class FEditComponent implements OnInit {
         const flashcardKanji: FlashcardKanji = flashcard;
         this.flashcardForm.patchValue({
           flashcardTypeForm: {
-            kanji: flashcardKanji.kanji,
+            mnemotic: flashcardKanji.mnemotic,
             onyomi: flashcardKanji.onyomi,
             kunyomi: flashcardKanji.kunyomi,
           },
@@ -179,29 +179,29 @@ export class FEditComponent implements OnInit {
         const flashcardGrammar: FlashcardGrammar = flashcard;
         this.flashcardForm.patchValue({
           flashcardTypeForm: {
-            grammarRule: flashcardGrammar.grammarRule,
-            grammarPoint: flashcardGrammar.grammarPoint,
+            grammarConstruction: flashcardGrammar.grammarConstruction,
+            grammarNotes: flashcardGrammar.grammarNotes,
           },
         });
         break;
-      case 'conjugation':
-        const flashcardConjugation: FlashcardConjugation = flashcard;
-        this.flashcardForm.patchValue({
-          flashcardTypeForm: {
-            dictionnary: flashcardConjugation.dictionnary,
-            polite: flashcardConjugation.polite,
-            negative: flashcardConjugation.negative,
-            conditionnalBa: flashcardConjugation.conditionnalBa,
-            conditionnalTara: flashcardConjugation.conditionnalTara,
-            imperative: flashcardConjugation.imperative,
-            volitional: flashcardConjugation.volitional,
-            causative: flashcardConjugation.causative,
-            potential: flashcardConjugation.potential,
-            teForm: flashcardConjugation.teForm,
-            taForm: flashcardConjugation.taForm,
-          },
-        });
-        break;
+      // case 'conjugation':
+      //   const flashcardConjugation: FlashcardConjugation = flashcard;
+      //   this.flashcardForm.patchValue({
+      //     flashcardTypeForm: {
+      //       dictionnary: flashcardConjugation.dictionnary,
+      //       polite: flashcardConjugation.polite,
+      //       negative: flashcardConjugation.negative,
+      //       conditionnalBa: flashcardConjugation.conditionnalBa,
+      //       conditionnalTara: flashcardConjugation.conditionnalTara,
+      //       imperative: flashcardConjugation.imperative,
+      //       volitional: flashcardConjugation.volitional,
+      //       causative: flashcardConjugation.causative,
+      //       potential: flashcardConjugation.potential,
+      //       teForm: flashcardConjugation.teForm,
+      //       taForm: flashcardConjugation.taForm,
+      //     },
+      //   });
+      //   break;
 
       default:
         console.error('Le type de la carte est inconnu');

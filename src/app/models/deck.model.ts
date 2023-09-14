@@ -11,7 +11,6 @@ export class Deck {
   name?: string;
   description?: string;
   public?:boolean;
-  reverse?:boolean;
   createdAt?:Date;
   updatedAt?:Date;
   flashcards?: Flashcard[]

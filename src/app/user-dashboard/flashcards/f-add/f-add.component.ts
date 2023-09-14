@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FlashcardsService } from 'src/app/_services/flashcard.service';
 import { Flashcard } from 'src/app/models/flashcard.model';
@@ -13,7 +13,7 @@ export class FAddComponent implements OnInit {
   cardType = [
     { value: 'kanji', label: 'Kanji' },
     { value: 'vocabulary', label: 'Vocabulaire' },
-    { value: 'conjugation', label: 'Conjugaison' },
+    // { value: 'conjugation', label: 'Conjugaison' },
     { value: 'grammar', label: 'Grammaire' },
   ];
 
@@ -30,11 +30,13 @@ export class FAddComponent implements OnInit {
   ) {}
 ngOnInit(): void {
   this.flashcardForm = this.formbuilder.group({
-    translation: '',
-    example: '',
-    furigana: '',
-    type: '',
+    front: new FormControl(''),
+    back: new FormControl(''),
+    example: new FormControl(''),
+    furigana: new FormControl(''),
+    type: new FormControl(''),
     flashcardTypeForm: this.formbuilder.group({}),
+    reverse: new FormControl(''),
   });
   this.deckId = this.activated.snapshot.paramMap.get('deckId');
 }
@@ -47,7 +49,6 @@ ngOnInit(): void {
 
     switch (this.type) {
       case 'vocabulary':
-        this.flashcardTypeForm.addControl('word', this.formbuilder.control(''));
         this.flashcardTypeForm.addControl(
           'audio',
           this.formbuilder.control('')
@@ -59,7 +60,7 @@ ngOnInit(): void {
         break;
       case 'kanji':
         this.flashcardTypeForm.addControl(
-          'kanji',
+          'mnemotic',
           this.formbuilder.control('')
         );
         this.flashcardTypeForm.addControl(
@@ -73,60 +74,60 @@ ngOnInit(): void {
         break;
       case 'grammar':
         this.flashcardTypeForm.addControl(
-          'grammarRule',
+          'grammarConstruction',
           this.formbuilder.control('')
         );
         this.flashcardTypeForm.addControl(
-          'grammarPoint',
+          'grammarNotes',
           this.formbuilder.control('')
         );
         break;
-      case 'conjugation':
-        this.flashcardTypeForm.addControl(
-          'dictionnary',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'polite',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'negative',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'conditionnalBa',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'conditionnalTara',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'imperative',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'volitional',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'causative',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'potential',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'teForm',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'taForm',
-          this.formbuilder.control('')
-        );
-        break;
+      // case 'conjugation':
+      //   this.flashcardTypeForm.addControl(
+      //     'dictionnary',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'polite',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'negative',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'conditionnalBa',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'conditionnalTara',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'imperative',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'volitional',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'causative',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'potential',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'teForm',
+      //     this.formbuilder.control('')
+      //   );
+      //   this.flashcardTypeForm.addControl(
+      //     'taForm',
+      //     this.formbuilder.control('')
+      //   );
+      //   break;
 
       default:
         console.error('Le type de la carte est inconnu');

@@ -43,7 +43,6 @@ export class DEditComponent implements OnInit {
       name: deck.name,
       description: deck.description,
       public: deck.public,
-      reverse: deck.reverse,
     });
   }
 
@@ -51,7 +50,6 @@ export class DEditComponent implements OnInit {
     this.deck.name = this.deckForm.value.name;
     this.deck.description = this.deckForm.value.description;
     this.deck.public = this.deckForm.value.public;
-    this.deck.reverse = this.deckForm.value.reverse;
 
     this.deckService
       .updateUserDecks(this.deck)

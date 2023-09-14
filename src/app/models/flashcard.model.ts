@@ -8,39 +8,40 @@ export class Flashcard{
     id?: string;
     example?: string;
     furigana?: string;
-    translation?: string;
+    front?: string;
+    back?: string;
     type?:FlashcardType;
     updatedAt?:Date;
     createdAt?:Date;
+    reverse?:Boolean;
   }
 
   export class FlashcardKanji extends Flashcard{
-    kanji?: string;
+    mnemotic?: string;
     onyomi?: string;
     kunyomi?: string;
   }
 
   export class FlashcardGrammar extends Flashcard{
-    grammarRule?: string;
-    grammarPoint?: string;
+    grammarConstruction?: string;
+    grammarNotes?: string;
   }
 
-  export class FlashcardConjugation extends Flashcard{
-    polite?: string;
-    dictionnary?: string;
-    negative?: string;
-    conditionnalBa?: string;
-    conditionnalTara?: string;
-    imperative?: string;
-    volitional?: string;
-    causative?: string;
-    potential?: string;
-    teForm?: string;
-    taForm?: string;
-  }
+  // export class FlashcardConjugation extends Flashcard{
+  //   polite?: string;
+  //   dictionnary?: string;
+  //   negative?: string;
+  //   conditionnalBa?: string;
+  //   conditionnalTara?: string;
+  //   imperative?: string;
+  //   volitional?: string;
+  //   causative?: string;
+  //   potential?: string;
+  //   teForm?: string;
+  //   taForm?: string;
+  // }
 
   export class FlashcardVocabulary extends Flashcard{
-    word?: string;
     audio?: string;
     image?: string;
   }
@@ -49,5 +50,5 @@ export class Flashcard{
     Kanji = "kanji",
     Vocabulary = "vocabulary",
     Grammar = "grammar",
-    Conjugation = "conjugation"
+    // Conjugation = "conjugation"
   }

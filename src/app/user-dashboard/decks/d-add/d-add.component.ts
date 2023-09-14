@@ -26,7 +26,6 @@ export class DAddComponent {
       name: new FormControl(''),
       description: new FormControl(''),
       public: new FormControl(false),
-      reverse: new FormControl(false),
     });
     }
 
@@ -36,7 +35,6 @@ export class DAddComponent {
       name: this.deckForm.value.name,
       description: this.deckForm.value.description,
       public: this.deckForm.value.public,
-      reverse: this.deckForm.value.reverse
     }
     
 

@@ -10,6 +10,7 @@ import { Flashcard, PaginationFlashcard } from 'src/app/models/flashcard.model';
 })
 export class FIndexComponent {
   flashcardList:Flashcard[] = [];
+
   constructor(private flashcardService: FlashcardsService, private activated: ActivatedRoute){
 
   }

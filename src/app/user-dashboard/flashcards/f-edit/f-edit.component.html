@@ -3,29 +3,15 @@
 <div class="form-container">
   <form [formGroup]="flashcardForm" (ngSubmit)="onSubmit()">
     <h2>Recto</h2>
-    <div formGroupName="flashcardTypeForm">
-      <div *ngIf="type === 'vocabulary'">
-        <label for="word">Word</label>
-        <input type="text" id="word" formControlName="word" />
+      <div>
+        <label for="front">Word</label>
+        <input type="text" id="front" formControlName="front" />
       </div>
-      <div *ngIf="type === 'kanji'">
-        <label for="kanji">Kanji</label>
-        <input type="text" id="kanji" formControlName="kanji" />
-      </div>
-      <div *ngIf="type === 'grammar'">
-        <label for="grammarPoint">Point de grammaire</label>
-        <input type="text" id="grammarPoint" formControlName="grammarPoint" />
-      </div>
-      <div *ngIf="type === 'conjugation'">
-        <label for="translation">Verbe</label>
-        <input type="text" id="translation" formControlName="translation" />
-      </div>
-    </div>
     <div>
       <h2>Verso</h2>
-      <div *ngIf="type !== 'conjugation'">
-        <label for="translation">Traduction</label>
-        <input type="text" id="translation" formControlName="translation" />
+      <div>
+        <label for="back">Traduction</label>
+        <input type="text" id="back" formControlName="back" />
       </div>
 
       <div>
@@ -50,14 +36,18 @@
           <input type="text" id="onyomi" formControlName="onyomi" />
           <label for="kunyomi">Lecture kunyomi</label>
           <input type="text" id="kunyomi" formControlName="kunyomi" />
+          <label for="mnemotic">Aide mnémotechnique</label>
+          <input type="text" id="mnemotic" formControlName="mnemotic" />
         </div>
 
         <div *ngIf="type === 'grammar'">
-          <label for="grammarRule">Règle de grammaire</label>
-          <input type="text" id="grammarRule" formControlName="grammarRule" />
+          <label for="grammarConstruction">Construction grammaire</label>
+          <input type="text" id="grammarConstruction" formControlName="grammarConstruction" />
+          <label for="grammarNotes">Notes</label>
+          <input type="text" id="grammarNotes" formControlName="grammarNotes" />
         </div>
 
-        <div *ngIf="type === 'conjugation'">
+        <!-- <div *ngIf="type === 'conjugation'">
           <label for="polite">Forme polie</label>
           <input type="text" id="polite" formControlName="polite" />
           <label for="negative">Forme negative</label>
@@ -86,7 +76,7 @@
           <input type="text" id="teForm" formControlName="teForm" />
           <label for="taForm">Forme en ta</label>
           <input type="text" id="taForm" formControlName="taForm" />
-        </div>
+        </div> -->
       </div>
     </div>
     <button type="submit">Submit</button>

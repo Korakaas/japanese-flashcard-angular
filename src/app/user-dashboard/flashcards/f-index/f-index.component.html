@@ -4,9 +4,10 @@
   <div *ngIf="flashcard">
     <ul style="display: flex; justify-content: space-between;">
       <li>
-        <a [routerLink]="['edit', flashcard.id]">{{ flashcard.translation }}</a>
+        <a [routerLink]="['edit', flashcard.id]">{{flashcard.front}}</a>
       </li>
       <!-- <li><a (click)="delete(flashcard.id!)">Supprimer</a></li> -->
     </ul>
   </div>
 </div>
+  
