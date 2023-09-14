@@ -6,7 +6,6 @@ import { FIndexComponent } from './f-index/f-index.component';
 import { FDetailsComponent } from './f-details/f-details.component';
 import { FAddComponent } from './f-add/f-add.component';
 import { FEditComponent } from './f-edit/f-edit.component';
-import { FDeleteComponent } from './f-delete/f-delete.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
@@ -17,7 +16,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     FDetailsComponent,
     FAddComponent,
     FEditComponent,
-    FDeleteComponent,
   ],
   imports: [
     CommonModule,

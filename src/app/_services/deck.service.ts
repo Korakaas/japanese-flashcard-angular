@@ -43,34 +43,40 @@ export class DeckService {
   }
 
   /*
-    Récupère un deck de l'utilisateur en fonction de son id
-    @route GET ['/user/decks/id']
+    Supprime un deck de l'utilisateur en fonction de son id
+    @route DELETE ['/user/decks/id']
   */
   deleteUserDecks(id: string): Observable<string> {
     return this.http.delete<string>(environment.api + 'user/decks/' + id);
   }
 
   /*
-    Récupère un deck de l'utilisateur en fonction de son id
-    @route GET ['/user/decks/id']
+    Créer un nouveau deck 
+    @route POST ['/user/decks']
   */
   createUserDecks(deck: Deck): Observable<Deck> {
     return this.http.post<Deck>(environment.api + 'user/decks', deck);
   }
 
   /*
-    Récupère un deck de l'utilisateur en fonction de son id
-    @route GET ['/user/decks/id']
+    Met à jour un deck de l'utilisateur en fonction de son id
+    @route PUT ['/user/decks/id']
   */
   updateUserDecks(deck: Deck): Observable<string> {
-    return this.http.put<string>(environment.api + 'user/decks/'+ deck.id, deck);
+    return this.http.put<string>(
+      environment.api + 'user/decks/' + deck.id,
+      deck
+    );
   }
 
   /*
-    Récupère un deck de l'utilisateur en fonction de son id
-    @route GET ['/user/decks/id']
+    Créer un nouveau deck en copiant un deck publique
+    @route POST ['/duplicate/decks/id']
   */
-    duplicateDecks(id: string): Observable<string> {
-      return this.http.post<string>(environment.api + 'duplicate/decks/' + id, null);
-    }
+  duplicateDecks(id: string): Observable<string> {
+    return this.http.post<string>(
+      environment.api + 'duplicate/decks/' + id,
+      null
+    );
+  }
 }

@@ -1,3 +1,5 @@
+import { Review } from "./review.model";
+
 export class PaginationFlashcard {
   flashcards: Flashcard[] = [];
   page?: number;
@@ -14,6 +16,9 @@ export class Flashcard{
     updatedAt?:Date;
     createdAt?:Date;
     reverse?:Boolean;
+    knownLevel?:number;
+    intervalReview?:number;
+    reviewedAt?:Date;
   }
 
   export class FlashcardKanji extends Flashcard{
@@ -52,3 +57,5 @@ export class Flashcard{
     Grammar = "grammar",
     // Conjugation = "conjugation"
   }
+
+  export type Union = FlashcardVocabulary | FlashcardGrammar | FlashcardKanji
