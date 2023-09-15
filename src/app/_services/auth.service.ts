@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
 import { Credentials } from '../models/credentials.model';
 import { Token } from '../models/token.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,5 +19,9 @@ export class AuthService {
 
   login(credentials:Credentials):Observable<Token>{
     return this.http.post<Token>(environment.api + 'login_check', credentials)
+  }
+
+  register(user:User):Observable<string>{
+    return this.http.post<string>(environment.api + 'register', user)
   }
 }
