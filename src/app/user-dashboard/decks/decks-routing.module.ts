@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { DIndexComponent } from './d-index/d-index.component';
 import { DEditComponent } from './d-edit/d-edit.component';
 import { DAddComponent } from './d-add/d-add.component';
-import { DDetailsComponent } from './d-details/d-details.component';
 import { DTestComponent } from './d-test/d-test.component';
 
 const routes: Routes = [
@@ -16,10 +15,6 @@ const routes: Routes = [
 
   },{
     path:'add', component:DAddComponent,
-
-  },
-  {
-    path:'details/:id', component:DDetailsComponent,
 
   },
   {

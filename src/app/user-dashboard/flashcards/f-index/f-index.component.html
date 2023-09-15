@@ -15,10 +15,6 @@
       <td >{{ flashcard.intervalReview }}</td>
       <td>{{ flashcard.reviewedAt }}</td>
       <td>{{ flashcard.knownLevel }}</td>
-      <td>
-        <a [routerLink]="['edit', flashcard.id]">{{ flashcard.front }}</a>
-      </td>
-
       <td><a (click)="delete(flashcard.id!)">Supprimer</a></td>
     </tr>
   </table>

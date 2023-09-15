@@ -9,6 +9,8 @@ import {
 } from 'src/app/models/flashcard.model';
 import { FlashcardsService } from 'src/app/_services/flashcard.service';
 import { Review, Test } from 'src/app/models/review.model';
+import { DailyStats } from 'src/app/models/dailyStats.model';
+import { DailyStatsService } from 'src/app/_services/daily-stats.service';
 
 @Component({
   selector: 'app-d-test',
@@ -35,7 +37,8 @@ export class DTestComponent {
 
   constructor(
     private activated: ActivatedRoute,
-    private flashcardService: FlashcardsService
+    private flashcardService: FlashcardsService,
+    private dailyStatsService: DailyStatsService
   ) {}
 
   ngOnInit(): void {
@@ -47,21 +50,21 @@ export class DTestComponent {
         .subscribe((data: Test) => {
           console.log(data);
 
-            this.flashcard = data.cards;
-            console.log(this.flashcard);
-            this.isFlashcardKanji = (
-              flashcard: Union
-            ): flashcard is FlashcardKanji => this.flashcard?.type === 'kanji';
-            this.isFlashcardVocab = (
-              flashcard: Union
-            ): flashcard is FlashcardVocabulary =>
-              this.flashcard?.type === 'vocabulary';
-            this.isFlashcardGrammar = (
-              flashcard: Union
-            ): flashcard is FlashcardGrammar =>
-              this.flashcard?.type === 'grammar';
-            console.log(this.flashcard);
-        
+          this.flashcard = data.cards;
+          console.log(this.flashcard);
+          this.isFlashcardKanji = (
+            flashcard: Union
+          ): flashcard is FlashcardKanji => this.flashcard?.type === 'kanji';
+          this.isFlashcardVocab = (
+            flashcard: Union
+          ): flashcard is FlashcardVocabulary =>
+            this.flashcard?.type === 'vocabulary';
+          this.isFlashcardGrammar = (
+            flashcard: Union
+          ): flashcard is FlashcardGrammar =>
+            this.flashcard?.type === 'grammar';
+          console.log(this.flashcard);
+
           this.totalCardCount = data.totalCardCount;
         });
     }
@@ -78,6 +81,11 @@ export class DTestComponent {
         .subscribe((data: string) => {
           console.log(data);
         });
+
+      this.dailyStatsService.addDailyStats(this.deckId, this.review).subscribe(
+        data => console.log(data)
+      );
+
       this.display = false;
       this.flashcard = undefined;
       this.ngOnInit();

@@ -2,7 +2,7 @@
 
   <p>{{ flashcard.front }}</p>
   <button name="answer"  type="button" (click)="displayBack()">Voir la réponse</button>
-  <p>Il rest {{totalCardCount}} à réviser</p>
+  <p>Il reste {{totalCardCount}} à réviser</p>
   <div id="card-back" [class.back]="display"> 
   <p>{{ flashcard.back }}</p>
   <p>{{ flashcard.example }}</p>

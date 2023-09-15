@@ -5,7 +5,6 @@ import { DecksRoutingModule } from './decks-routing.module';
 import { DIndexComponent } from './d-index/d-index.component';
 import { DAddComponent } from './d-add/d-add.component';
 import { DEditComponent } from './d-edit/d-edit.component';
-import { DDetailsComponent } from './d-details/d-details.component';
 import { DTestComponent } from './d-test/d-test.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -16,7 +15,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     DIndexComponent,
        DAddComponent,
        DEditComponent,
-       DDetailsComponent,
        DTestComponent
   ],
   imports: [
