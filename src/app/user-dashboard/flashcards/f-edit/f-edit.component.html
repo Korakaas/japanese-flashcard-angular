@@ -1,11 +1,10 @@
-<p *ngIf="message">{{ message }}</p>
 <div class="form-container">
   <form [formGroup]="flashcardForm" (ngSubmit)="onSubmit()">
     <h2>Recto</h2>
-      <div>
-        <label for="front">Word</label>
-        <input type="text" id="front" formControlName="front" />
-      </div>
+    <div>
+      <label for="front">Word</label>
+      <input type="text" id="front" formControlName="front" />
+    </div>
     <div>
       <h2>Verso</h2>
       <div>
@@ -24,10 +23,14 @@
 
       <div formGroupName="flashcardTypeForm">
         <div *ngIf="type === 'vocabulary'">
-          <label for="audio">Audio</label>
+          <!-- <label for="audio">Audio</label>
           <input type="text" id="audio" formControlName="audio" />
           <label for="image">Image</label>
-          <input type="text" id="image" formControlName="image" />
+          <input type="text" id="image" formControlName="image" /> -->
+          <label for="synonym">Synonyme(s)</label>
+          <input type="text" id="synonym" formControlName="synonym" />
+          <label for="antonym">Antonyme(s)</label>
+          <input type="text" id="antonym" formControlName="antonym" />
         </div>
 
         <div *ngIf="type === 'kanji'">
@@ -41,7 +44,11 @@
 
         <div *ngIf="type === 'grammar'">
           <label for="grammarConstruction">Construction grammaire</label>
-          <input type="text" id="grammarConstruction" formControlName="grammarConstruction" />
+          <input
+            type="text"
+            id="grammarConstruction"
+            formControlName="grammarConstruction"
+          />
           <label for="grammarNotes">Notes</label>
           <input type="text" id="grammarNotes" formControlName="grammarNotes" />
         </div>

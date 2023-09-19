@@ -11,6 +11,8 @@ import { FlashcardsService } from 'src/app/_services/flashcard.service';
 import { Review, Test } from 'src/app/models/review.model';
 import { DailyStats } from 'src/app/models/dailyStats.model';
 import { DailyStatsService } from 'src/app/_services/daily-stats.service';
+import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
+
 
 @Component({
   selector: 'app-d-test',
@@ -38,7 +40,8 @@ export class DTestComponent {
   constructor(
     private activated: ActivatedRoute,
     private flashcardService: FlashcardsService,
-    private dailyStatsService: DailyStatsService
+    private dailyStatsService: DailyStatsService,
+    private apiSuccessService: ApiSuccessService
   ) {}
 
   ngOnInit(): void {
@@ -78,8 +81,9 @@ export class DTestComponent {
     if (this.deckId && this.flashcard?.id) {
       this.flashcardService
         .reviewFlashcard(this.deckId, this.flashcard.id, this.review)
-        .subscribe((data: string) => {
-          console.log(data);
+        .subscribe((message: string) => {
+          console.log(message);
+          this.apiSuccessService.sendSuccess(message);
         });
 
       this.dailyStatsService.addDailyStats(this.deckId, this.review).subscribe(

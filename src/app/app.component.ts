@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiErrorService } from './_subjects/api-error.service';
+import { ApiSuccessService } from './_subjects/api-success.service';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,14 @@ export class AppComponent implements OnInit {
   message: string = '';
   display: boolean = false;
 
-  constructor(private apiErrorService: ApiErrorService) {}
+  constructor(private apiErrorService: ApiErrorService, private apiSuccesService: ApiSuccessService) {}
 
   ngOnInit(): void {
     this.apiErrorService.apiError.subscribe((data: string) => {
+      this.message = data;
+      this.display = true;
+    });
+    this.apiSuccesService.apiSuccess.subscribe((data: string) => {
       this.message = data;
       this.display = true;
     });

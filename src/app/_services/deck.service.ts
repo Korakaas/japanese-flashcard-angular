@@ -54,8 +54,8 @@ export class DeckService {
     Créer un nouveau deck 
     @route POST ['/user/decks']
   */
-  createUserDecks(deck: Deck): Observable<Deck> {
-    return this.http.post<Deck>(environment.api + 'user/decks', deck);
+  createUserDecks(deck: Deck): Observable<string> {
+    return this.http.post<string>(environment.api + 'user/decks', deck);
   }
 
   /*

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FlashcardsService } from 'src/app/_services/flashcard.service';
+import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
 import { Flashcard } from 'src/app/models/flashcard.model';
 
 @Component({
@@ -18,7 +19,6 @@ export class FAddComponent implements OnInit {
   ];
 
   type: string = '';
-  message: string = '';
   flashcardForm!: FormGroup;
   flashcardTypeForm!: FormGroup;
   deckId: string | null = '';
@@ -26,7 +26,8 @@ export class FAddComponent implements OnInit {
   constructor(
     private activated: ActivatedRoute,
     private flashcardService: FlashcardsService,
-    private formbuilder: FormBuilder
+    private formbuilder: FormBuilder, 
+    private apiSuccesService: ApiSuccessService
   ) {}
 ngOnInit(): void {
   this.flashcardForm = this.formbuilder.group({
@@ -49,12 +50,20 @@ ngOnInit(): void {
 
     switch (this.type) {
       case 'vocabulary':
+        // this.flashcardTypeForm.addControl(
+        //   'audio',
+        //   this.formbuilder.control('')
+        // );
+        // this.flashcardTypeForm.addControl(
+        //   'image',
+        //   this.formbuilder.control('')
+        // );
         this.flashcardTypeForm.addControl(
-          'audio',
+          'synonym',
           this.formbuilder.control('')
         );
         this.flashcardTypeForm.addControl(
-          'image',
+          'antonym',
           this.formbuilder.control('')
         );
         break;
@@ -145,7 +154,7 @@ ngOnInit(): void {
     if (this.deckId) {
       this.flashcardService
         .createFlashcard(this.deckId, newFlashcard)
-        .subscribe((data: string) => (this.message = data));
+        .subscribe((message: string) => (this.apiSuccesService.sendSuccess(message)));
     }
   }
   }

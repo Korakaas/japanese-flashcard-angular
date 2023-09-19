@@ -47,8 +47,10 @@ export class Flashcard{
   // }
 
   export class FlashcardVocabulary extends Flashcard{
-    audio?: string;
-    image?: string;
+    // audio?: string;
+    // image?: string;
+    synonym?: string;
+    antonym?: string;
   }
 
   export enum FlashcardType {

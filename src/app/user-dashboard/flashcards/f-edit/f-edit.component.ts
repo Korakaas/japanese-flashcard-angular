@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FlashcardsService } from 'src/app/_services/flashcard.service';
+import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
 import {
   Flashcard,
   FlashcardGrammar,
@@ -21,12 +22,11 @@ export class FEditComponent implements OnInit {
   type: string | undefined = '';
   deckId: string | null = '';
 
-  message: string = '';
-
   constructor(
     private activated: ActivatedRoute,
     private flashcardService: FlashcardsService,
-    private formbuilder: FormBuilder
+    private formbuilder: FormBuilder,
+    private apiSuccessService: ApiSuccessService
   ) {}
 
   ngOnInit(): void {
@@ -59,12 +59,20 @@ export class FEditComponent implements OnInit {
 
     switch (this.type) {
       case 'vocabulary':
+        // this.flashcardTypeForm.addControl(
+        //   'audio',
+        //   this.formbuilder.control('')
+        // );
+        // this.flashcardTypeForm.addControl(
+        //   'image',
+        //   this.formbuilder.control('')
+        // );
         this.flashcardTypeForm.addControl(
-          'audio',
+          'synonym',
           this.formbuilder.control('')
         );
         this.flashcardTypeForm.addControl(
-          'image',
+          'antonym',
           this.formbuilder.control('')
         );
         break;
@@ -160,8 +168,10 @@ export class FEditComponent implements OnInit {
         const flashcardVocab: FlashcardVocabulary = flashcard;
         this.flashcardForm.patchValue({
           flashcardTypeForm: {
-            audio: flashcardVocab.audio,
-            image: flashcardVocab.image,
+            // audio: flashcardVocab.audio,
+            // image: flashcardVocab.image,
+            synonym: flashcardVocab.synonym,
+            antonym: flashcardVocab.antonym,
           },
         });
         break;
@@ -215,7 +225,9 @@ export class FEditComponent implements OnInit {
     if (this.deckId) {
       this.flashcardService
         .updatelFlashcard(this.deckId, this.flashcard)
-        .subscribe((data: string) => (this.message = data));
+        .subscribe((message: string) =>
+          this.apiSuccessService.sendSuccess(message)
+        );
     }
   }
 }

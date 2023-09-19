@@ -1,4 +1,3 @@
-<p *ngIf="message">{{ message }}</p>
 <div class="form-container">
   <form [formGroup]="flashcardForm" (ngSubmit)="onSubmit()">
     <select name="" id="" (change)="onselectchange($event)" formControlName="type">
@@ -35,10 +34,14 @@
     
           <div formGroupName="flashcardTypeForm">
             <div *ngIf="type === 'vocabulary'">
-              <label for="audio">Audio</label>
+              <!-- <label for="audio">Audio</label>
               <input type="text" id="audio" formControlName="audio" />
               <label for="image">Image</label>
-              <input type="text" id="image" formControlName="image" />
+              <input type="text" id="image" formControlName="image" /> -->
+              <label for="synonym">Synonyme(s)</label>
+              <input type="text" id="synonym" formControlName="synonym" />
+              <label for="antonym">Antonyme(s)</label>
+              <input type="text" id="antonym" formControlName="antonym" />
             </div>
     
             <div *ngIf="type === 'kanji'">

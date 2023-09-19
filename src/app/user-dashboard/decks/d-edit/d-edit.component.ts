@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DeckService } from 'src/app/_services/deck.service';
+import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
 import { Deck } from 'src/app/models/deck.model';
 
 @Component({
@@ -12,12 +13,12 @@ import { Deck } from 'src/app/models/deck.model';
 export class DEditComponent implements OnInit {
   deck!: Deck;
   deckForm!: FormGroup;
-  message: string = '';
 
   constructor(
     private activated: ActivatedRoute,
     private deckService: DeckService,
-    private formbuilder: FormBuilder
+    private formbuilder: FormBuilder,
+    private apiSuccessService: ApiSuccessService
   ) {}
 
   ngOnInit(): void {
@@ -53,6 +54,6 @@ export class DEditComponent implements OnInit {
 
     this.deckService
       .updateUserDecks(this.deck)
-      .subscribe((data: string) => this.message = data);
+      .subscribe((message: string) => this.apiSuccessService.sendError(message));
   }
 }

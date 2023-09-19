@@ -10,8 +10,10 @@
   <p *ngIf="isFlashcardKanji(flashcard)">{{ flashcard.kunyomi }}</p>
   <p *ngIf="isFlashcardKanji(flashcard)">{{ flashcard.onyomi }}</p>
   <p *ngIf="isFlashcardKanji(flashcard)">{{ flashcard.mnemotic }}</p>
-  <p *ngIf="isFlashcardVocab(flashcard)">{{ flashcard.audio }}</p>
-  <p *ngIf="isFlashcardVocab(flashcard)">{{ flashcard.image }}</p>
+  <!-- <p *ngIf="isFlashcardVocab(flashcard)">{{ flashcard.audio }}</p>
+  <p *ngIf="isFlashcardVocab(flashcard)">{{ flashcard.image }}</p> -->
+  <p *ngIf="isFlashcardVocab(flashcard)">{{ flashcard.synonym }}</p>
+  <p *ngIf="isFlashcardVocab(flashcard)">{{ flashcard.antonym }}</p>
   <p *ngIf="isFlashcardGrammar(flashcard)">{{ flashcard.grammarConstruction }}</p>
   <p *ngIf="isFlashcardGrammar(flashcard)">{{ flashcard.grammarNotes }}</p>
   <button

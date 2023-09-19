@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DeckService } from 'src/app/_services/deck.service';
+import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
 import { Deck } from 'src/app/models/deck.model';
 
 @Component({
@@ -17,7 +18,8 @@ export class DAddComponent {
   constructor(
     private activated: ActivatedRoute,
     private deckService: DeckService,
-    private formbuilder: FormBuilder
+    private formbuilder: FormBuilder,
+    private apiSuccessService: ApiSuccessService
 
   ) {}
 
@@ -40,6 +42,7 @@ export class DAddComponent {
 
     this.deckService
       .createUserDecks(this.deck)
-      .subscribe((data) => console.log(data));
+      .subscribe((message) => {console.log(message) 
+        this.apiSuccessService.sendError(message)});
   }
 }
