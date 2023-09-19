@@ -1,27 +1,27 @@
-#server-error{
-    position:absolute;
-    background-color:red;
-    padding: 10px;
-    right:10px;
-    top: 50px;
-    display: none;
+#server-error {
+  position: absolute;
+  background-color: red;
+  padding: 10px;
+  right: 10px;
+  top: 50px;
+  display: none;
 }
-#server-success{
-    position:absolute;
-    background-color: green;
-    padding: 10px;
-    right:10px;
-    top: 50px;
-    display: none;
+#server-success {
+  position: absolute;
+  background-color: green;
+  padding: 10px;
+  right: 10px;
+  top: 50px;
+  display: none;
 }
-span{
-    cursor: pointer;
-}
-
-.error{
-    display: block !important;
+span {
+  cursor: pointer;
 }
 
-.success{
-    display: block !important;
+.error {
+  display: block !important;
+}
+
+.success {
+  display: block !important;
 }

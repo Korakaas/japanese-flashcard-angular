@@ -1,4 +1,4 @@
-import { Flashcard } from "./flashcard.model";
+import { Flashcard } from './flashcard.model';
 
 export class PaginationDeck {
   decks: Deck[] = [];
@@ -10,8 +10,8 @@ export class Deck {
   id?: string;
   name?: string;
   description?: string;
-  public?:boolean;
-  createdAt?:Date;
-  updatedAt?:Date;
-  flashcards?: Flashcard[]
+  public?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+  flashcards?: Flashcard[];
 }

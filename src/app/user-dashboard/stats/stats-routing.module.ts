@@ -5,17 +5,17 @@ import { SDeckComponent } from './s-deck/s-deck.component';
 
 const routes: Routes = [
   {
-    path:'', component:SGlobalComponent,
-
+    path: '',
+    component: SGlobalComponent,
   },
   {
-    path:'decks/:deckId', component:SDeckComponent,
-
-  }
+    path: 'decks/:deckId',
+    component: SDeckComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class StatsRoutingModule { }
+export class StatsRoutingModule {}

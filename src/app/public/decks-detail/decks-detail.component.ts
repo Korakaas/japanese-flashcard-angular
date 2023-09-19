@@ -6,14 +6,14 @@ import { Deck } from 'src/app/models/deck.model';
 @Component({
   selector: 'app-decks-detail',
   templateUrl: './decks-detail.component.html',
-  styleUrls: ['./decks-detail.component.scss']
+  styleUrls: ['./decks-detail.component.scss'],
 })
 export class DecksDetailComponent {
   deck!: Deck;
 
   constructor(
     private activated: ActivatedRoute,
-    private deckService: DeckService,
+    private deckService: DeckService
   ) {}
 
   ngOnInit(): void {

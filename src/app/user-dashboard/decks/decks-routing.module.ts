@@ -7,24 +7,25 @@ import { DTestComponent } from './d-test/d-test.component';
 
 const routes: Routes = [
   {
-    path:'', component:DIndexComponent,
-
+    path: '',
+    component: DIndexComponent,
   },
   {
-    path:'edit/:id', component:DEditComponent,
-
-  },{
-    path:'add', component:DAddComponent,
-
+    path: 'edit/:id',
+    component: DEditComponent,
   },
   {
-    path:':id/test', component:DTestComponent,
-
+    path: 'add',
+    component: DAddComponent,
+  },
+  {
+    path: ':id/test',
+    component: DTestComponent,
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class DecksRoutingModule { }
+export class DecksRoutingModule {}

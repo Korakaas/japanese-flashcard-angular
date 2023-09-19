@@ -8,7 +8,7 @@ describe('FAddComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FAddComponent]
+      declarations: [FAddComponent],
     });
     fixture = TestBed.createComponent(FAddComponent);
     component = fixture.componentInstance;

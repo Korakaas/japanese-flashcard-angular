@@ -24,7 +24,7 @@ export class SDeckComponent {
     private activated: ActivatedRoute
   ) {}
   ngOnInit(): void {
-    console.log('hello')
+    console.log('hello');
     const deckId = this.activated.snapshot.paramMap.get('deckId');
     if (deckId)
       this.dailyStatsService

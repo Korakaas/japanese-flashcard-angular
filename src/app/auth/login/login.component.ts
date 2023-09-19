@@ -12,7 +12,7 @@ import { Token } from 'src/app/models/token.model';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  loginForm:FormGroup = this.formBuilder.group({
+  loginForm: FormGroup = this.formBuilder.group({
     username: ['', [Validators.required, Validators.email]],
     password: [
       '',

@@ -5,25 +5,19 @@ import { Deck, PaginationDeck } from 'src/app/models/deck.model';
 @Component({
   selector: 'app-decks',
   templateUrl: './decks.component.html',
-  styleUrls: ['./decks.component.scss']
+  styleUrls: ['./decks.component.scss'],
 })
 export class DecksComponent {
-  deckList:Deck[] = [];
-  constructor(private deckService: DeckService){
-
-  }
+  deckList: Deck[] = [];
+  constructor(private deckService: DeckService) {}
   ngOnInit(): void {
-    this.deckService.getPublicDecks().subscribe(
-      (data:PaginationDeck) => {
-        this.deckList = data.decks;
-        console.log(this.deckList)
-      },
-    )
+    this.deckService.getPublicDecks().subscribe((data: PaginationDeck) => {
+      this.deckList = data.decks;
+      console.log(this.deckList);
+    });
   }
 
-  duplicate(id:string){
-    this.deckService.duplicateDecks(id).subscribe(
-      data => console.log(data)
-    )
+  duplicate(id: string) {
+    this.deckService.duplicateDecks(id).subscribe((data) => console.log(data));
   }
 }

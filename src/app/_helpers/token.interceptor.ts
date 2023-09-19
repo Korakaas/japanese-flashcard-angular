@@ -36,8 +36,7 @@ export class TokenInterceptor implements HttpInterceptor {
           if (error.status === 401) {
             this.tokenService.clearToken();
             this.router.navigate(['auth']);
-          return throwError(() => error);
-
+            return throwError(() => error);
           }
           return throwError(() => error);
         })

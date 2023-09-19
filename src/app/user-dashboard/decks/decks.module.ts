@@ -8,19 +8,13 @@ import { DEditComponent } from './d-edit/d-edit.component';
 import { DTestComponent } from './d-test/d-test.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 @NgModule({
   declarations: [
-  
     DIndexComponent,
-       DAddComponent,
-       DEditComponent,
-       DTestComponent
+    DAddComponent,
+    DEditComponent,
+    DTestComponent,
   ],
-  imports: [
-    CommonModule,
-    DecksRoutingModule,
-    ReactiveFormsModule
-  ]
+  imports: [CommonModule, DecksRoutingModule, ReactiveFormsModule],
 })
-export class DecksModule { }
+export class DecksModule {}

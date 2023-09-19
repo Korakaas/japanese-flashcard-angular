@@ -2,16 +2,13 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiSuccessService {
-
-  constructor() { }
+  constructor() {}
   apiSuccess = new Subject<string>();
-
 
   sendSuccess(message: string): void {
     this.apiSuccess.next(message);
   }
-
 }

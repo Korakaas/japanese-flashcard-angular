@@ -7,10 +7,10 @@ import { User } from 'src/app/models/user.model';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  registerForm!:FormGroup;
+  registerForm!: FormGroup;
   user: User = {};
 
   constructor(
@@ -22,7 +22,7 @@ export class RegisterComponent {
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      pseudo:[''],
+      pseudo: [''],
       password: [
         '',
         [

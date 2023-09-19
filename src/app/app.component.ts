@@ -12,7 +12,10 @@ export class AppComponent implements OnInit {
   message: string = '';
   display: boolean = false;
 
-  constructor(private apiErrorService: ApiErrorService, private apiSuccesService: ApiSuccessService) {}
+  constructor(
+    private apiErrorService: ApiErrorService,
+    private apiSuccesService: ApiSuccessService
+  ) {}
 
   ngOnInit(): void {
     this.apiErrorService.apiError.subscribe((data: string) => {

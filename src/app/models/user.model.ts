@@ -3,5 +3,5 @@ export class User {
   pseudo?: string;
   email?: string;
   password?: string;
-  registrationDate?:Date
+  registrationDate?: Date;
 }

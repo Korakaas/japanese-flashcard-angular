@@ -8,7 +8,13 @@ import { LayoutComponent } from './layout/layout.component';
 import { PHeaderComponent } from './p-header/p-header.component';
 
 @NgModule({
-  declarations: [HomeComponent, DecksComponent, DecksDetailComponent, LayoutComponent, PHeaderComponent],
+  declarations: [
+    HomeComponent,
+    DecksComponent,
+    DecksDetailComponent,
+    LayoutComponent,
+    PHeaderComponent,
+  ],
   imports: [CommonModule, PublicRoutingModule],
 })
 export class PublicModule {}

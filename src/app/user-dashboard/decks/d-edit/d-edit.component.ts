@@ -54,6 +54,8 @@ export class DEditComponent implements OnInit {
 
     this.deckService
       .updateUserDecks(this.deck)
-      .subscribe((message: string) => this.apiSuccessService.sendError(message));
+      .subscribe((message: string) =>
+        this.apiSuccessService.sendSuccess(message)
+      );
   }
 }

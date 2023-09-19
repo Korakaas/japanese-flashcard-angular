@@ -59,14 +59,6 @@ export class FEditComponent implements OnInit {
 
     switch (this.type) {
       case 'vocabulary':
-        // this.flashcardTypeForm.addControl(
-        //   'audio',
-        //   this.formbuilder.control('')
-        // );
-        // this.flashcardTypeForm.addControl(
-        //   'image',
-        //   this.formbuilder.control('')
-        // );
         this.flashcardTypeForm.addControl(
           'synonym',
           this.formbuilder.control('')
@@ -100,52 +92,6 @@ export class FEditComponent implements OnInit {
           this.formbuilder.control('')
         );
         break;
-      // case 'conjugation':
-      //   this.flashcardTypeForm.addControl(
-      //     'dictionnary',
-      //     this.formbuilder.control('')
-      //   );
-      //   this.flashcardTypeForm.addControl(
-      //     'polite',
-      //     this.formbuilder.control('')
-      //   );
-      //   this.flashcardTypeForm.addControl(
-      //     'negative',
-      //     this.formbuilder.control('')
-      //   );
-      //   this.flashcardTypeForm.addControl(
-      //     'conditionnalBa',
-      //     this.formbuilder.control('')
-      //   );
-      //   this.flashcardTypeForm.addControl(
-      //     'conditionnalTara',
-      //     this.formbuilder.control('')
-      //   );
-      //   this.flashcardTypeForm.addControl(
-      //     'imperative',
-      //     this.formbuilder.control('')
-      //   );
-      //   this.flashcardTypeForm.addControl(
-      //     'volitional',
-      //     this.formbuilder.control('')
-      //   );
-      //   this.flashcardTypeForm.addControl(
-      //     'causative',
-      //     this.formbuilder.control('')
-      //   );
-      //   this.flashcardTypeForm.addControl(
-      //     'potential',
-      //     this.formbuilder.control('')
-      //   );
-      //   this.flashcardTypeForm.addControl(
-      //     'teForm',
-      //     this.formbuilder.control('')
-      //   );
-      //   this.flashcardTypeForm.addControl(
-      //     'taForm',
-      //     this.formbuilder.control('')
-      //   );
-      //   break;
 
       default:
         console.error('Le type de la carte est inconnu');

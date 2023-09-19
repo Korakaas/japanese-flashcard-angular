@@ -1,19 +1,24 @@
 <div>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <div>
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email" formControlName="email">
-        </div>
-        <div>
-            <label for="pseudo">Pseudo</label>
-            <input type="text" name="pseudo" id="pseudo" formControlName="pseudo">
-        </div>
-        <div>
-            <label for="password">Mot de passe</label>
-            <input type="password" name="password" id="password" formControlName="password">
-        </div>
-        <div>
-            <button>Se connecter</button>
-        </div>
-    </form>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="email">Email</label>
+      <input type="text" name="email" id="email" formControlName="email" />
+    </div>
+    <div>
+      <label for="pseudo">Pseudo</label>
+      <input type="text" name="pseudo" id="pseudo" formControlName="pseudo" />
+    </div>
+    <div>
+      <label for="password">Mot de passe</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        formControlName="password"
+      />
+    </div>
+    <div>
+      <button>Se connecter</button>
+    </div>
+  </form>
 </div>

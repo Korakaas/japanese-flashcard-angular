@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
-  Flashcard,
   FlashcardGrammar,
   FlashcardKanji,
   FlashcardVocabulary,
@@ -9,10 +8,8 @@ import {
 } from 'src/app/models/flashcard.model';
 import { FlashcardsService } from 'src/app/_services/flashcard.service';
 import { Review, Test } from 'src/app/models/review.model';
-import { DailyStats } from 'src/app/models/dailyStats.model';
 import { DailyStatsService } from 'src/app/_services/daily-stats.service';
 import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
-
 
 @Component({
   selector: 'app-d-test',
@@ -86,9 +83,9 @@ export class DTestComponent {
           this.apiSuccessService.sendSuccess(message);
         });
 
-      this.dailyStatsService.addDailyStats(this.deckId, this.review).subscribe(
-        data => console.log(data)
-      );
+      this.dailyStatsService
+        .addDailyStats(this.deckId, this.review)
+        .subscribe((data) => console.log(data));
 
       this.display = false;
       this.flashcard = undefined;

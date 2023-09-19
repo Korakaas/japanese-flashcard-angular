@@ -7,18 +7,8 @@ import { FAddComponent } from './f-add/f-add.component';
 import { FEditComponent } from './f-edit/f-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
-
 @NgModule({
-  declarations: [
-    FIndexComponent,
-    FAddComponent,
-    FEditComponent,
-  ],
-  imports: [
-    CommonModule,
-    FlashcardsRoutingModule,
-    ReactiveFormsModule
-  ]
+  declarations: [FIndexComponent, FAddComponent, FEditComponent],
+  imports: [CommonModule, FlashcardsRoutingModule, ReactiveFormsModule],
 })
-export class FlashcardsModule { }
+export class FlashcardsModule {}

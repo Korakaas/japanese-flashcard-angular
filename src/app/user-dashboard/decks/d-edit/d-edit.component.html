@@ -2,7 +2,7 @@
   <form [formGroup]="deckForm" (ngSubmit)="onSubmit()">
     <label for="name">Nom du paquet </label>
     <input id="name" type="text" formControlName="name" />
-  
+
     <label for="description">Description</label>
     <textarea
       name="description"
@@ -11,22 +11,27 @@
       rows="10"
       formControlName="description"
     ></textarea>
-  
+
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="public" formControlName="public">
-      <label class="form-check-label" for="public ">
-        Public
-      </label>
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value=""
+        id="public"
+        formControlName="public"
+      />
+      <label class="form-check-label" for="public "> Public </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="reverse" formControlName="reverse">
-      <label class="form-check-label" for="reverse ">
-        Recto Verso
-      </label>
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value=""
+        id="reverse"
+        formControlName="reverse"
+      />
+      <label class="form-check-label" for="reverse "> Recto Verso </label>
     </div>
-    <button type="submit">
-      Save
-    </button>
+    <button type="submit">Save</button>
   </form>
 </div>
-

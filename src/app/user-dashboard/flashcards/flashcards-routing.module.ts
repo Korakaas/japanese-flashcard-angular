@@ -6,20 +6,21 @@ import { FAddComponent } from './f-add/f-add.component';
 
 const routes: Routes = [
   {
-    path:'', component:FIndexComponent,
-
+    path: '',
+    component: FIndexComponent,
   },
   {
-    path:'edit/:flashcardId', component:FEditComponent,
-
-  },{
-    path:'add', component:FAddComponent,
-
+    path: 'edit/:flashcardId',
+    component: FEditComponent,
+  },
+  {
+    path: 'add',
+    component: FAddComponent,
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class FlashcardsRoutingModule { }
+export class FlashcardsRoutingModule {}

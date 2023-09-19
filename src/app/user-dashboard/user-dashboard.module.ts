@@ -6,16 +6,8 @@ import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.co
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { UHeaderComponent } from './u-header/u-header.component';
 
-
 @NgModule({
-  declarations: [
-    DashboardLayoutComponent,
-    SidemenuComponent,
-    UHeaderComponent,
-  ],
-  imports: [
-    CommonModule,
-    UserDashboardRoutingModule
-  ]
+  declarations: [DashboardLayoutComponent, SidemenuComponent, UHeaderComponent],
+  imports: [CommonModule, UserDashboardRoutingModule],
 })
-export class UserDashboardModule { }
+export class UserDashboardModule {}

@@ -10,15 +10,12 @@ import { TokenService } from '../_services/token.service';
   providedIn: 'root',
 })
 export class AuthGuard {
-  constructor(private router:Router, private tokenService: TokenService) {}
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ) {
-    if(this.tokenService.isLogged()){
-      return true
+  constructor(private router: Router, private tokenService: TokenService) {}
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    if (this.tokenService.isLogged()) {
+      return true;
     }
 
-    return this.router.navigate(['auth/login'])
+    return this.router.navigate(['auth/login']);
   }
 }

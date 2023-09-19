@@ -1,28 +1,29 @@
 <div *ngIf="flashcard">
-
   <p>{{ flashcard.front }}</p>
-  <button name="answer"  type="button" (click)="displayBack()">Voir la réponse</button>
-  <p>Il reste {{totalCardCount}} à réviser</p>
-  <div id="card-back" [class.back]="display"> 
-  <p>{{ flashcard.back }}</p>
-  <p>{{ flashcard.example }}</p>
-  <p>{{ flashcard.furigana }}</p>
-  <p *ngIf="isFlashcardKanji(flashcard)">{{ flashcard.kunyomi }}</p>
-  <p *ngIf="isFlashcardKanji(flashcard)">{{ flashcard.onyomi }}</p>
-  <p *ngIf="isFlashcardKanji(flashcard)">{{ flashcard.mnemotic }}</p>
-  <!-- <p *ngIf="isFlashcardVocab(flashcard)">{{ flashcard.audio }}</p>
-  <p *ngIf="isFlashcardVocab(flashcard)">{{ flashcard.image }}</p> -->
-  <p *ngIf="isFlashcardVocab(flashcard)">{{ flashcard.synonym }}</p>
-  <p *ngIf="isFlashcardVocab(flashcard)">{{ flashcard.antonym }}</p>
-  <p *ngIf="isFlashcardGrammar(flashcard)">{{ flashcard.grammarConstruction }}</p>
-  <p *ngIf="isFlashcardGrammar(flashcard)">{{ flashcard.grammarNotes }}</p>
-  <button
-    name="result"
-    type="button"
-    *ngFor="let score of scores"
-    (click)="submitScore(score.value)"
-  >
-    {{ score.label }}
-  </button></div>
-
+  <button name="answer" type="button" (click)="displayBack()">
+    Voir la réponse
+  </button>
+  <p>Il reste {{ totalCardCount }} à réviser</p>
+  <div id="card-back" [class.back]="display">
+    <p>{{ flashcard.back }}</p>
+    <p>{{ flashcard.example }}</p>
+    <p>{{ flashcard.furigana }}</p>
+    <p *ngIf="isFlashcardKanji(flashcard)">{{ flashcard.kunyomi }}</p>
+    <p *ngIf="isFlashcardKanji(flashcard)">{{ flashcard.onyomi }}</p>
+    <p *ngIf="isFlashcardKanji(flashcard)">{{ flashcard.mnemotic }}</p>
+    <p *ngIf="isFlashcardVocab(flashcard)">{{ flashcard.synonym }}</p>
+    <p *ngIf="isFlashcardVocab(flashcard)">{{ flashcard.antonym }}</p>
+    <p *ngIf="isFlashcardGrammar(flashcard)">
+      {{ flashcard.grammarConstruction }}
+    </p>
+    <p *ngIf="isFlashcardGrammar(flashcard)">{{ flashcard.grammarNotes }}</p>
+    <button
+      name="result"
+      type="button"
+      *ngFor="let score of scores"
+      (click)="submitScore(score.value)"
+    >
+      {{ score.label }}
+    </button>
+  </div>
 </div>

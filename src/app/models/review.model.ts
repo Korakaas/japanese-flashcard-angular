@@ -1,10 +1,10 @@
-import { Flashcard } from "./flashcard.model";
+import { Flashcard } from './flashcard.model';
 
 export class Review {
-    score?:number;
+  score?: number;
 }
 
 export class Test {
-    totalCardCount?:number;
-    cards?:Flashcard
+  totalCardCount?: number;
+  cards?: Flashcard;
 }

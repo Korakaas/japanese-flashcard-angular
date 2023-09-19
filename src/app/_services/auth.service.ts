@@ -1,10 +1,6 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
 import { Credentials } from '../models/credentials.model';
@@ -17,11 +13,11 @@ import { User } from '../models/user.model';
 export class AuthService {
   constructor(private http: HttpClient, public router: Router) {}
 
-  login(credentials:Credentials):Observable<Token>{
-    return this.http.post<Token>(environment.api + 'login_check', credentials)
+  login(credentials: Credentials): Observable<Token> {
+    return this.http.post<Token>(environment.api + 'login_check', credentials);
   }
 
-  register(user:User):Observable<string>{
-    return this.http.post<string>(environment.api + 'register', user)
+  register(user: User): Observable<string> {
+    return this.http.post<string>(environment.api + 'register', user);
   }
 }

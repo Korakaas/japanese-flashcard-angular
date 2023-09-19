@@ -23,10 +23,6 @@
 
       <div formGroupName="flashcardTypeForm">
         <div *ngIf="type === 'vocabulary'">
-          <!-- <label for="audio">Audio</label>
-          <input type="text" id="audio" formControlName="audio" />
-          <label for="image">Image</label>
-          <input type="text" id="image" formControlName="image" /> -->
           <label for="synonym">Synonyme(s)</label>
           <input type="text" id="synonym" formControlName="synonym" />
           <label for="antonym">Antonyme(s)</label>
@@ -52,37 +48,6 @@
           <label for="grammarNotes">Notes</label>
           <input type="text" id="grammarNotes" formControlName="grammarNotes" />
         </div>
-
-        <!-- <div *ngIf="type === 'conjugation'">
-          <label for="polite">Forme polie</label>
-          <input type="text" id="polite" formControlName="polite" />
-          <label for="negative">Forme negative</label>
-          <input type="text" id="negative" formControlName="negative" />
-          <label for="conditionnalBa">Forme conditionelle en Ba</label>
-          <input
-            type="text"
-            id="conditionnalBa"
-            formControlName="conditionnalBa"
-          />
-          <label for="conditionnalTara">Forme conditionelle en Tara</label>
-          <input
-            type="text"
-            id="conditionnalTara"
-            formControlName="conditionnalTara"
-          />
-          <label for="imperative">forme impérative</label>
-          <input type="text" id="imperative" formControlName="imperative" />
-          <label for="volitional">Forme volitive</label>
-          <input type="text" id="volitional" formControlName="volitional" />
-          <label for="causative">Forme causative</label>
-          <input type="text" id="causative" formControlName="causative" />
-          <label for="potential">Forme potentielle</label>
-          <input type="text" id="potential" formControlName="potential" />
-          <label for="teForm">Form en te</label>
-          <input type="text" id="teForm" formControlName="teForm" />
-          <label for="taForm">Forme en ta</label>
-          <input type="text" id="taForm" formControlName="taForm" />
-        </div> -->
       </div>
     </div>
     <button type="submit">Submit</button>

@@ -76,14 +76,23 @@ export class FlashcardsService {
     );
   }
 
-   /*
+  /*
     Enregistre les résultats de la révision
     @route POST ['/user/decks/deckId/flashcards/flashcardId/review']
   */
-  reviewFlashcard(deckId: string, flashcardId: string, score: Review):Observable<string>
-  {
+  reviewFlashcard(
+    deckId: string,
+    flashcardId: string,
+    score: Review
+  ): Observable<string> {
     return this.http.post<string>(
-      environment.api + 'user/decks/' + deckId + '/flashcards/' + flashcardId + '/review', score
+      environment.api +
+        'user/decks/' +
+        deckId +
+        '/flashcards/' +
+        flashcardId +
+        '/review',
+      score
     );
   }
 }

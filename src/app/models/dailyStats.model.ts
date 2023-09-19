@@ -1,18 +1,17 @@
-
 export class DeckStats {
-    deckname?:string
-    dailyStats?:DailyStats[]
-    flashcards?:FlashcardStats
+  deckname?: string;
+  dailyStats?: DailyStats[];
+  flashcards?: FlashcardStats;
 }
 
 export class DailyStats {
-    date?: Date
-    reviewNumber?:number
-    correctAnswer?:number
+  date?: Date;
+  reviewNumber?: number;
+  correctAnswer?: number;
 }
 
 export class FlashcardStats {
-    known?:number
-    learning?:number
-    new?:number
+  known?: number;
+  learning?: number;
+  new?: number;
 }
