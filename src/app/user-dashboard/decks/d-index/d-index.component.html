@@ -1,20 +1,23 @@
-<a [routerLink]="['add']">Créer un paquet</a>
+<div class="card">
+  <i class="bi bi-plus-circle"></i>
+  <div class="container">
+    <a [routerLink]="['add']">Créer un paquet</a>
+  </div>
+</div>
 <div *ngFor="let deck of deckList">
-  <div *ngIf="deck">
-    <ul style="display: flex; justify-content: space-between">
-      <li>
-        <a [routerLink]="['edit', deck.id]">{{ deck.name }}</a>
-      </li>
-      <li><a (click)="delete(deck.id!)">Supprimer</a></li>
-      <li>
-        <a [routerLink]="['./', deck.id, 'flashcards']">Liste des cartes</a>
-      </li>
-      <li><a [routerLink]="['./', deck.id, 'test']">Réviser le paquet</a></li>
-      <li>
-        <a [routerLink]="['../stats/decks/', deck.id]"
-          >Voir les stats du paquet</a
-        >
-      </li>
-    </ul>
+  <div class="card" *ngIf="deck">
+    <div class="cardHeader">
+      <a [routerLink]="['./', deck.id, 'test']"
+        ><i class="bi bi-play-fill"></i></a
+      ><a [routerLink]="['edit', deck.id]"><i class="bi bi-pencil-fill"></i></a>
+      <a [routerLink]="['./', deck.id, 'flashcards']"
+        ><i class="bi bi-list-task"></i></a
+      ><a [routerLink]="['../stats/decks/', deck.id]"
+        ><i class="bi bi-pie-chart-fill"></i></a
+      ><a (click)="delete(deck.id!)"><i class="bi bi-trash-fill"></i></a>
+    </div>
+    <div>
+      <span>{{ deck.name }}</span>
+    </div>
   </div>
 </div>

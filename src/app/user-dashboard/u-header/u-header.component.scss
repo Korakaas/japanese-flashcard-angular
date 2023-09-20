@@ -1,6 +1,17 @@
 header{
-    background-color: aquamarine;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 10px;
 }
+
+img{
+    width: 50%;
+
+}
+
+#homeLink {
+    display: none;
+}
+
 

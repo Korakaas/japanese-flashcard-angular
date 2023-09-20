@@ -9,8 +9,10 @@ import { ApiSuccessService } from './_subjects/api-success.service';
 })
 export class AppComponent implements OnInit {
   title = 'japanese-flashcard-angular';
-  message: string = '';
-  display: boolean = false;
+  messageError: string = '';
+  messageSuccess: string = '';
+  displayError: boolean = false;
+  displaySuccess: boolean = false;
 
   constructor(
     private apiErrorService: ApiErrorService,
@@ -19,17 +21,22 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiErrorService.apiError.subscribe((data: string) => {
-      this.message = data;
-      this.display = true;
+      this.messageError = data;
+      this.displayError = true;
     });
     this.apiSuccesService.apiSuccess.subscribe((data: string) => {
-      this.message = data;
-      this.display = true;
+      this.messageSuccess = data;
+      this.displaySuccess = true;
     });
   }
 
-  clearMsg(): void {
-    this.message = '';
-    this.display = false;
+  clearMsgError(): void {
+    this.messageError = '';
+    this.displayError = false;
+  }
+
+  clearMsgSuccess(): void {
+    this.messageSuccess = '';
+    this.displaySuccess = false;
   }
 }

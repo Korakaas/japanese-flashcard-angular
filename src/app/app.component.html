@@ -1,7 +1,7 @@
-<div id="server-error" [class.error]="display">
-  <span (click)="clearMsg()">x</span>{{ message }}
+<div id="server-error" [class.error]="displayError">
+  <span (click)="clearMsgError()">x</span>{{ messageError }}
 </div>
-<div id="server-success" [class.success]="display">
-  <span (click)="clearMsg()">x</span>{{ message }}
+<div id="server-success" [class.success]="displaySuccess">
+  <span (click)="clearMsgSuccess()">x</span>{{ messageSuccess }}
 </div>
 <router-outlet></router-outlet>
