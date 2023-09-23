@@ -1,9 +1,12 @@
-nav{
-    padding-left: 10px;
-}
 
-.simple-link{
-    padding-bottom: 10px;
+#sidemenu {
+  margin-top: 20px;
+  display: none;
+  padding: 10px;
+  &.isOpen {
     display: block;
+  }
 }
-
+a {
+  color: #fff;
+}

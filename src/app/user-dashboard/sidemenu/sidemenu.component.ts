@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './sidemenu.component.html',
   styleUrls: ['./sidemenu.component.scss'],
 })
-export class SidemenuComponent {}
+export class SidemenuComponent {
+  isMenuOpen = false;
+
+  toggleMenu():void{
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+}

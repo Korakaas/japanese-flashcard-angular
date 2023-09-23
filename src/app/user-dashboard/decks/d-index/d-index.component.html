@@ -1,23 +1,44 @@
 <div class="card">
-  <i class="bi bi-plus-circle"></i>
-  <div class="container">
+  <div id="addCard" class="cardHeader"><i class="bi bi-plus-circle"></i></div>
+  <div class="cardBody">
     <a [routerLink]="['add']">Créer un paquet</a>
   </div>
 </div>
 <div *ngFor="let deck of deckList">
   <div class="card" *ngIf="deck">
     <div class="cardHeader">
-      <a [routerLink]="['./', deck.id, 'test']"
-        ><i class="bi bi-play-fill"></i></a
-      ><a [routerLink]="['edit', deck.id]"><i class="bi bi-pencil-fill"></i></a>
-      <a [routerLink]="['./', deck.id, 'flashcards']"
-        ><i class="bi bi-list-task"></i></a
-      ><a [routerLink]="['../stats/decks/', deck.id]"
-        ><i class="bi bi-pie-chart-fill"></i></a
-      ><a (click)="delete(deck.id!)"><i class="bi bi-trash-fill"></i></a>
+      <div class="tooltip">
+        <span class="tooltiptext" >Réviser le paquet</span>
+        <a [routerLink]="['./', deck.id, 'test']"
+          ><i class="bi bi-play-fill"></i
+        ></a>
+      </div>
+      <div class="tooltip">
+        <span class="tooltiptext" >Modifier le paquet</span>
+        <a [routerLink]="['edit', deck.id]"
+          ><i class="bi bi-pencil-fill"></i
+        ></a>
+      </div>
+      <div class="tooltip">
+        <span class="tooltiptext" >Liste des cartes du paquet</span>
+        <a [routerLink]="['./', deck.id, 'flashcards']"
+          ><i class="bi bi-list-task"></i
+        ></a>
+      </div>
+      <div class="tooltip">
+        <span class="tooltiptext" >Statistiques du paquet</span>
+        <a [routerLink]="['../stats/decks/', deck.id]"
+          ><i class="bi bi-pie-chart-fill"></i
+        ></a>
+      </div>
+      <div class="tooltip">
+        <span class="tooltiptext" >Supprimer le paquet</span>
+        <a (click)="delete(deck.id!)"><i class="bi bi-trash-fill"></i></a>
+      </div>
     </div>
-    <div>
+    <div class="cardBody">
       <span>{{ deck.name }}</span>
     </div>
   </div>
+  <div></div>
 </div>

@@ -1,5 +1,10 @@
 <nav>
-  <ul id="sidemenu">
+  <div (click)="toggleMenu()">
+    <a *ngIf="!isMenuOpen"><i class="bi bi-list"></i></a>
+    <a *ngIf="isMenuOpen"><i class="bi bi-x-lg"></i></a>
+  </div>
+
+  <ul id="sidemenu" [class.isOpen]="isMenuOpen">
     <li><a [routerLink]="['decks']">Mes paquets</a></li>
     <li><a [routerLink]="['stats']">Mes statisques</a></li>
   </ul>

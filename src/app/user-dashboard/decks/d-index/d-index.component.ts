@@ -9,11 +9,13 @@ import { Deck, PaginationDeck } from 'src/app/models/deck.model';
 })
 export class DIndexComponent implements OnInit {
   deckList: Deck[] = [];
+  currentPage:number|undefined = 1;
   constructor(private deckService: DeckService) {}
   ngOnInit(): void {
     this.deckService.getUserDecks().subscribe((data: PaginationDeck) => {
       this.deckList = data.decks;
-      console.log(this.deckList);
+      this.currentPage = data.page;
+      console.log(data);
     });
   }
 
@@ -23,5 +25,10 @@ export class DIndexComponent implements OnInit {
       this.deckList = data.decks;
       console.log(this.deckList);
     });
+  }
+
+  changePage(page:number):void
+  {
+
   }
 }
