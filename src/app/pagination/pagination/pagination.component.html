@@ -1,0 +1,24 @@
+<nav>
+  <ul>
+    <li>
+      <button [disabled]="currentPage === 1" (click)="onPrevious()">
+        Previous
+      </button>
+    </li>
+    <li *ngFor="let page of pages">
+      <a
+        [class.current]="page === currentPage"
+        tabindex="0"
+        (click)="onGoTo(page)"
+        (keyup.enter)="onGoTo(page)"
+      >
+        {{ page }}</a
+      >
+    </li>
+    <li>
+      <button [disabled]="currentPage === totalPages" (click)="onNext()">
+        Next
+      </button>
+    </li>
+  </ul>
+</nav>

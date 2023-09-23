@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Flashcard, PaginationFlashcard } from '../models/flashcard.model';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { Review, Test } from '../models/review.model';
 
@@ -15,9 +15,14 @@ export class FlashcardsService {
     Récupère toutes les cartes du paquet de l'utilisateur
     @route GET ['/user/decks/{id}/flashcards']
   */
-  getUserFlashcards(id: string): Observable<PaginationFlashcard> {
+  getUserFlashcards(
+    deckIdid: string,
+    page: number
+  ): Observable<PaginationFlashcard> {
+    const params = new HttpParams().set('page', page.toString());
     return this.http.get<PaginationFlashcard>(
-      environment.api + 'user/decks/' + id + '/flashcards'
+      environment.api + 'user/decks/' + deckIdid + '/flashcards',
+      { params }
     );
   }
 

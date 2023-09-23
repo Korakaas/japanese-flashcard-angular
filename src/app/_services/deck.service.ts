@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Deck, PaginationDeck } from '../models/deck.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -14,8 +14,9 @@ export class DeckService {
     Récupère tous les decks publics
     @route GET ['/decks']
   */
-  getPublicDecks(): Observable<PaginationDeck> {
-    return this.http.get<PaginationDeck>(environment.api + 'decks');
+  getPublicDecks(page:number): Observable<PaginationDeck> {
+    const params = new HttpParams().set('page', page.toString());
+    return this.http.get<PaginationDeck>(environment.api + 'decks', { params });
   }
 
   /*
@@ -30,8 +31,9 @@ export class DeckService {
     Récupère tous les decks de l'utilisateur
     @route GET ['/user/decks']
   */
-  getUserDecks(): Observable<PaginationDeck> {
-    return this.http.get<PaginationDeck>(environment.api + 'user/decks');
+  getUserDecks(page:number): Observable<PaginationDeck> {
+    const params = new HttpParams().set('page', page.toString());
+    return this.http.get<PaginationDeck>(environment.api + 'user/decks', { params });
   }
 
   /*

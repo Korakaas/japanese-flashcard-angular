@@ -7,6 +7,7 @@ import { DAddComponent } from './d-add/d-add.component';
 import { DEditComponent } from './d-edit/d-edit.component';
 import { DTestComponent } from './d-test/d-test.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PaginationModule } from 'src/app/pagination/pagination.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     DEditComponent,
     DTestComponent,
   ],
-  imports: [CommonModule, DecksRoutingModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    DecksRoutingModule,
+    ReactiveFormsModule,
+    PaginationModule,
+  ],
 })
 export class DecksModule {}

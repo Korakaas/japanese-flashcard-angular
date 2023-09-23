@@ -40,5 +40,9 @@
       <span>{{ deck.name }}</span>
     </div>
   </div>
-  <div></div>
 </div>
+<app-pagination [currentPage]="currentPage"
+[totalPages]="total"
+(goTo)="onGoTo($event)"
+(next)="onNext($event)"
+(previous)="onPrevious($event)"></app-pagination>
