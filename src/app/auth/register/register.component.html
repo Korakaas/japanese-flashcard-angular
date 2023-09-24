@@ -1,24 +1,31 @@
-<div>
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="email">Email</label>
-      <input type="text" name="email" id="email" formControlName="email" />
-    </div>
-    <div>
-      <label for="pseudo">Pseudo</label>
-      <input type="text" name="pseudo" id="pseudo" formControlName="pseudo" />
-    </div>
-    <div>
-      <label for="password">Mot de passe</label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        formControlName="password"
-      />
-    </div>
-    <div>
-      <button>Se connecter</button>
-    </div>
-  </form>
+<div class="container">
+  <a [routerLink]="['../../home']">Retour à l'accueil</a>
+  <div class="form-container">
+    <h1>S'enregistrer</h1>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" formControlName="email" />
+      </div>
+      <div>
+        <label for="pseudo">Pseudo</label>
+        <input type="text" name="pseudo" id="pseudo" formControlName="pseudo" />
+      </div>
+      <div>
+        <label for="password">Mot de passe</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          formControlName="password"
+        />
+      </div>
+      <div>
+        <button type="submit">Se connecter</button>
+      </div>
+    </form>
+    <a [routerLink]="['../login']"
+      >Vous possédez déjà un compte? Se connecter</a
+    >
+  </div>
 </div>

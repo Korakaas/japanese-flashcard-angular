@@ -1,6 +1,9 @@
-<div>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div>
+<div class="container">
+  <a [routerLink]="['../../home']">Retour à l'accueil</a>
+
+  <div class="form-container">
+    <h1>Se connecter</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <label for="username">Email</label>
       <input
         type="text"
@@ -8,8 +11,6 @@
         id="username"
         formControlName="username"
       />
-    </div>
-    <div>
       <label for="password">Mot de passe</label>
       <input
         type="password"
@@ -17,9 +18,10 @@
         id="password"
         formControlName="password"
       />
-    </div>
-    <div>
-      <button>Se connecter</button>
-    </div>
-  </form>
+      <button type="submit">Se connecter</button>
+    </form>
+    <a [routerLink]="['../register']"
+      >Pas encore de compte? S'enregistrer</a
+    >
+  </div>
 </div>
