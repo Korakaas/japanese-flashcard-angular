@@ -21,10 +21,9 @@ export class PaginationComponent implements OnChanges {
   @Output() previous: EventEmitter<number> = new EventEmitter<number>();
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     if (
-      (changes['currentPage'] && changes['currentPage'].currentValue) ||
-      (changes['totalPages'] && changes['totalPages'].currentValue)
+      (changes['currentPage']?.currentValue) ||
+      (changes['totalPages']?.currentValue)
     ) {
       this.pages = this.getPages(this.currentPage, this.totalPages);
     }
