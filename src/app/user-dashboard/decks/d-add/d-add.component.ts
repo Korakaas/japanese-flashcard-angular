@@ -12,7 +12,6 @@ import { Deck } from 'src/app/models/deck.model';
 export class DAddComponent {
   deck: Deck = new Deck();
   deckForm!: FormGroup;
-  message: string = '';
 
   constructor(
     private deckService: DeckService,
@@ -37,7 +36,6 @@ export class DAddComponent {
     };
 
     this.deckService.createUserDecks(this.deck).subscribe((message) => {
-      console.log(message);
       this.apiSuccessService.sendSuccess(message);
     });
   }

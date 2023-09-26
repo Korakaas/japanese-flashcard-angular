@@ -20,9 +20,9 @@ export class DTestComponent {
   flashcard!: Union | undefined;
   deckId: string | null = '';
   scores = [
-    { label: 'Très difficile', value: 1 },
+    { label: 'Revoir', value: 1 },
     { label: 'Difficile', value: 2 },
-    { label: 'Ok', value: 3 },
+    { label: 'Correct', value: 3 },
     { label: 'Facile', value: 4 },
     { label: 'Très facile', value: 5 },
   ];
@@ -55,6 +55,7 @@ export class DTestComponent {
           this.isFlashcardKanji = (
             flashcard: Union
           ): flashcard is FlashcardKanji => this.flashcard?.type === 'kanji';
+          console.log(this.flashcard?.type === 'kanji');
           this.isFlashcardVocab = (
             flashcard: Union
           ): flashcard is FlashcardVocabulary =>

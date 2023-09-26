@@ -1,16 +1,17 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css"; /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@100;300;400;500;700;800;900&display=swap");
+// styles.scss
 
-@import "~bootstrap-icons/font/bootstrap-icons.css";/* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@100;300;400;500;700;800;900&display=swap');
-*{
-    margin: 0px;
-    font-family: 'M PLUS 1p', sans-serif;
-    line-height: 1.7;
-    font-size: 16px;
+* {
+  margin: 0px;
+  font-family: "M PLUS 1p", sans-serif;
+  line-height: 1.7;
+  font-size: 16px;
 }
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
 
-li{
-    list-style: none;
+li {
+  list-style: none;
 }

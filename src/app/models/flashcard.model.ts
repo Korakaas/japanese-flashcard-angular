@@ -28,8 +28,8 @@ export class FlashcardKanji extends Flashcard {
 }
 
 export class FlashcardGrammar extends Flashcard {
-  grammarConstruction?: string;
-  grammarNotes?: string;
+  construction?: string;
+  grammarnotes?: string;
 }
 
 // export class FlashcardConjugation extends Flashcard{

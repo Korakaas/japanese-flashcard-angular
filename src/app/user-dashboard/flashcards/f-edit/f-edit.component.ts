@@ -84,11 +84,11 @@ export class FEditComponent implements OnInit {
         break;
       case 'grammar':
         this.flashcardTypeForm.addControl(
-          'grammarConstruction',
+          'construction',
           this.formbuilder.control('')
         );
         this.flashcardTypeForm.addControl(
-          'grammarNotes',
+          'grammarnotes',
           this.formbuilder.control('')
         );
         break;
@@ -135,8 +135,8 @@ export class FEditComponent implements OnInit {
         const flashcardGrammar: FlashcardGrammar = flashcard;
         this.flashcardForm.patchValue({
           flashcardTypeForm: {
-            grammarConstruction: flashcardGrammar.grammarConstruction,
-            grammarNotes: flashcardGrammar.grammarNotes,
+            construction: flashcardGrammar.construction,
+            grammarnotes: flashcardGrammar.grammarnotes,
           },
         });
         break;

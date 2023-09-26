@@ -1,3 +1,4 @@
+@import "../../../vars.scss";
 .container {
   max-width: 1170px;
   margin: auto;
@@ -8,7 +9,7 @@
 }
 
 .footer {
-  background-color: #256cb0;
+  background-color: $primary-color;
   padding: 30px 0;
   margin-top: 100px;
 }

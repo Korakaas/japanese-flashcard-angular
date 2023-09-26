@@ -1,3 +1,4 @@
+@import "../../../../vars.scss";
 .form-container {
   width: 80%;
   margin: auto;
@@ -10,7 +11,6 @@ select {
   padding: 10px 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 14px;
 }
 input[type="text"],
 textarea {
@@ -19,18 +19,14 @@ textarea {
   margin-bottom: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 14px;
 }
 
 .form-check {
   margin-bottom: 16px;
-  label {
-    font-size: 14px;
-  }
 }
 
 button[type="submit"] {
-  background-color: #256cb0;
+  background-color: $primary-color;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -38,6 +34,8 @@ button[type="submit"] {
   cursor: pointer;
   width: 100%;
 }
+
+
 
 // Styles pour les tablettes et les écrans plus larges (min-width : 768px)
 @media (min-width: 768px) {

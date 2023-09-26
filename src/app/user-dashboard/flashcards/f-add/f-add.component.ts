@@ -74,11 +74,11 @@ export class FAddComponent implements OnInit {
         break;
       case 'grammar':
         this.flashcardTypeForm.addControl(
-          'grammarConstruction',
+          'construction',
           this.formbuilder.control('')
         );
         this.flashcardTypeForm.addControl(
-          'grammarNotes',
+          'grammarnotes',
           this.formbuilder.control('')
         );
         break;

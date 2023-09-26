@@ -1,3 +1,4 @@
+@import "../../../../vars.scss";
 .form-container {
   width: 80%;
   margin: auto;
@@ -13,18 +14,14 @@ textarea {
   margin-bottom: 16px; 
   border: 1px solid #ccc; 
   border-radius: 4px; 
-  font-size: 14px;
 }
 
 .form-check {
   margin-bottom: 16px;
-  label {
-    font-size: 14px; 
-  }
 }
 
 button[type="submit"] {
-  background-color:#256cb0;
+  background-color:$primary-color;
   color: #fff; 
   border: none; 
   border-radius: 4px; 

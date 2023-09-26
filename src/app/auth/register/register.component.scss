@@ -1,9 +1,9 @@
-
+@import "../../../vars.scss";
 .container {
     padding: 10px;
   }
   h1 {
-    color: #256cb0;
+    color: $primary-color;
     font-size: 24px;
     margin: 20px;
   }
@@ -27,12 +27,11 @@
     margin-bottom: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 14px;
   }
   
   button[type="submit"] {
     margin: 20px 0;
-    background-color: #256cb0;
+    background-color: $primary-color;
     color: #fff;
     border: none;
     border-radius: 4px;
