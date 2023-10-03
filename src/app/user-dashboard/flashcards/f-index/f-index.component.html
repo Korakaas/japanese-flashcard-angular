@@ -1,25 +1,32 @@
-<a [routerLink]="['add']">Créer une carte</a>
+<div class="card"><a [routerLink]="['add']"><i class="bi bi-plus-circle"></i>Créer une carte</a></div>
 <div>
   <table>
-    <tr>
-      <th>Recto</th>
-      <th>Interval révison</th>
-      <th>Dernière révision</th>
-      <th>Niveau</th>
-    </tr>
-    <tr *ngFor="let flashcard of flashcardList">
-      <td>
-        <a [routerLink]="['edit', flashcard.id]">{{ flashcard.front }}</a>
-      </td>
-      <td>{{ flashcard.intervalReview }}</td>
-      <td>{{ flashcard.reviewedAt }}</td>
-      <td>{{ flashcard.knownLevel }}</td>
-      <td><a (click)="delete(flashcard.id!)">Supprimer</a></td>
-    </tr>
+    <thead>
+      <tr>
+        <th>Recto</th>
+        <th>Interval</th>
+        <th>Révisé le</th>
+        <th>Niveau</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="card" *ngFor="let flashcard of flashcardList">
+        <td data-label="Recto">
+          {{ flashcard.front }}
+        </td>
+        <td data-label="Interval">{{ flashcard.intervalReview }}</td>
+        <td data-label="Révisé le">{{ flashcard.reviewedAt  | date:"dd/MM/YY 'à' hh:mm" }}</td>
+        <td data-label="Niveau">{{ flashcard.knownLevel }}</td>
+        <td data-label="Action"><a [routerLink]="['edit', flashcard.id]"><i class="bi bi-pencil-fill"></i></a><a (click)="delete(flashcard.id!)"><i class="bi bi-trash-fill"></i></a></td>
+      </tr>
+    </tbody>
   </table>
 </div>
-<app-pagination [currentPage]="currentPage"
-[totalPages]="total"
-(goTo)="onGoTo($event)"
-(next)="onNext($event)"
-(previous)="onPrevious($event)"></app-pagination>
+<app-pagination
+  [currentPage]="currentPage"
+  [totalPages]="total"
+  (goTo)="onGoTo($event)"
+  (next)="onNext($event)"
+  (previous)="onPrevious($event)"
+></app-pagination>
