@@ -1,15 +1,16 @@
 @import "../../../vars.scss";
-.userdashboard-body{
-    display: flex;
+.userdashboard-body {
+  display: flex;
 }
 
-.menu{
-    flex-grow: 1;
-    background-color: $primary-color;
-    color: #fff;
-    padding: 10px;
+.menu {
+  flex-grow: 1;
+  background-color: $primary-color;
+  color: #fff;
+  padding: 10px;
 }
 
-.userdashboard-container{
-    flex-grow: 6;
+.userdashboard-container {
+  flex-grow: 6;
+  background-color: #f5f5f5;
 }

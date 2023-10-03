@@ -1,8 +1,13 @@
+@import '../../../../vars.scss';
+.container {
+  padding-top: 20px;;
+}
 a{
   color: #000;
 }
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #fff;
   transition: 0.3s;
   padding: 16px;
   border-radius: 10px;
@@ -37,7 +42,8 @@ a{
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  background-color: rgb(228, 223, 223);
+  background-color: $primary-color;
+  color: #fff;
   text-align: center;
   padding: 5px 0;
   border-radius: 6px;

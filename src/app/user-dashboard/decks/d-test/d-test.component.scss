@@ -1,6 +1,12 @@
 /* ---------- Structure de base ---------- */
 .container {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+
 }
 .font14 {
   font-size: 14px;
@@ -16,10 +22,11 @@ hr.solid {
 /* ---------- Carte ---------- */
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #fff;
   transition: 0.3s;
   padding: 16px;
   border-radius: 10px;
-  width: 60%;
+  width: 50vw;
   margin: 20px auto;
   text-align: center;
   &:first-of-type > p {

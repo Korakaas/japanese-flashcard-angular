@@ -1,9 +1,20 @@
 <header>
   <nav>
+    <div class="logo">
+      <a [routerLink]="['home']"
+        ><img src="../../../assets/logo.png" alt="JapaneseCard"
+      /></a>
+    </div>
     <ul>
-      <li><a [routerLink]="['home']">Accueil</a></li>
       <li><a [routerLink]="['decks']">Parcourir</a></li>
-      <li><a [routerLink]="['user']">Se connecter</a></li>
+      <li>
+        <a *ngIf="!isLogged; else elseBlock" [routerLink]="['user']"
+          >Se connecter</a
+        >
+        <ng-template #elseBlock
+          ><a [routerLink]="['user']">Mon compte</a></ng-template
+        >
+      </li>
     </ul>
   </nav>
 </header>

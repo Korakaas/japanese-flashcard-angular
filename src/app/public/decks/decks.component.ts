@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { DeckService } from 'src/app/_services/deck.service';
+import { TokenService } from 'src/app/_services/token.service';
 import { Deck, PaginationDeck } from 'src/app/models/deck.model';
 
 @Component({
@@ -13,11 +14,13 @@ export class DecksComponent {
   currentPage: number = 1;
   total: number = 0;
   perPage: number = 9;
+  isLogged:boolean = false;
   private destroy$!: Subject<boolean>;
-  constructor(private deckService: DeckService) {}
+  constructor(private deckService: DeckService, private tokenService: TokenService) {}
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
     this.getdeck();
+    this.isLogged = this.tokenService.isLogged()
   }
 
   duplicate(id: string) {
