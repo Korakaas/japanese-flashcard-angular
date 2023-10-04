@@ -18,7 +18,7 @@
         <td data-label="Interval">{{ flashcard.intervalReview }}</td>
         <td data-label="Révisé le">{{ flashcard.reviewedAt  | date:"dd/MM/YY 'à' hh:mm" }}</td>
         <td data-label="Niveau">{{ flashcard.knownLevel }}</td>
-        <td data-label="Action"><a [routerLink]="['edit', flashcard.id]"><i class="bi bi-pencil-fill"></i></a><a (click)="delete(flashcard.id!)"><i class="bi bi-trash-fill"></i></a></td>
+        <td data-label="Action"><a [routerLink]="['edit', flashcard.id]"><i class="bi bi-pencil-fill"></i></a><a (click)="confirmDelete(flashcard.id!)"><i class="bi bi-trash-fill"></i></a></td>
       </tr>
     </tbody>
   </table>

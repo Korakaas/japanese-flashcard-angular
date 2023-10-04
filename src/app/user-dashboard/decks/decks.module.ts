@@ -9,6 +9,7 @@ import { DTestComponent } from './d-test/d-test.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'src/app/pagination/pagination.module';
 
+
 @NgModule({
   declarations: [
     DIndexComponent,

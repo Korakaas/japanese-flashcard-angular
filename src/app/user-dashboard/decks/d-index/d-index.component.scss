@@ -1,15 +1,15 @@
-@import '../../../../vars.scss';
+@import "../../../../vars.scss";
 .container {
-  padding-top: 20px;;
+  padding-top: 20px;
 }
-a{
+a {
   color: #000;
 }
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background-color: #fff;
   transition: 0.3s;
-  padding: 16px;
+
   border-radius: 10px;
   width: 60%;
   margin: 20px auto;
@@ -20,16 +20,24 @@ a{
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-.cardHeader {
+header {
+  background-color: $primary-color;
+  padding: 10px;
+}
+.headerContainer {
   width: 90%;
   margin: auto;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+}
+
+.headerContainer a {
+  color: #fff;
 }
 
 .cardBody {
   margin: 20px;
+  padding: 16px;
 }
 
 #addCard {
@@ -42,19 +50,30 @@ a{
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  background-color: $primary-color;
-  color: #fff;
+  background-color: $secondary-color;
+  color: $primary-color;
   text-align: center;
   padding: 5px 0;
   border-radius: 6px;
   position: absolute;
   z-index: 1;
   width: 120px;
-    bottom: 100%;
-    left: 50%;
-    margin-left: -60px
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
 }
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+.card footer p {
+  font-size: 14px;
+}
+
+.deleteButton {
+  cursor: pointer;
+  background-color: #e31c3d;
+  padding: 5px;
+  border-radius: 5px;
 }

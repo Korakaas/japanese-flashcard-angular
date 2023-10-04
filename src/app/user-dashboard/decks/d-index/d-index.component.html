@@ -1,46 +1,59 @@
 <div class="container">
-  <div class="card">
+  <section class="card">
     <div id="addCard" class="cardHeader"><i class="bi bi-plus-circle"></i></div>
     <div class="cardBody">
       <a [routerLink]="['add']">Créer un paquet</a>
     </div>
-  </div>
+  </section>
   <div *ngFor="let deck of deckList">
-    <div class="card" *ngIf="deck">
-      <div class="cardHeader">
-        <div class="tooltip">
-          <span class="tooltiptext">Réviser le paquet</span>
-          <a [routerLink]="['./', deck.id, 'test']"
-            ><i class="bi bi-play-fill"></i
-          ></a>
+    <article class="card" *ngIf="deck">
+      <header>
+        <div class="headerContainer">
+          <div class="tooltip">
+            <span class="tooltiptext">Réviser le paquet</span>
+            <a [routerLink]="['./', deck.id, 'test']"
+              ><i class="bi bi-play-fill"></i
+            ></a>
+          </div>
+          <div class="tooltip">
+            <span class="tooltiptext">Modifier le paquet</span>
+            <a [routerLink]="['edit', deck.id]"
+              ><i class="bi bi-pencil-fill"></i
+            ></a>
+          </div>
+          <div class="tooltip">
+            <span class="tooltiptext">Liste des cartes du paquet</span>
+            <a [routerLink]="['./', deck.id, 'flashcards']"
+              ><i class="bi bi-list-task"></i
+            ></a>
+          </div>
+          <div class="tooltip">
+            <span class="tooltiptext">Statistiques du paquet</span>
+            <a [routerLink]="['../stats/decks/', deck.id]"
+              ><i class="bi bi-pie-chart-fill"></i
+            ></a>
+          </div>
+          <div class="tooltip">
+            <span class="tooltiptext">Supprimer le paquet</span>
+            <a class="deleteButton" (click)="confirmDelete(deck.id!)"
+              ><i class="bi bi-trash-fill"></i
+            ></a>
+          </div>
         </div>
-        <div class="tooltip">
-          <span class="tooltiptext">Modifier le paquet</span>
-          <a [routerLink]="['edit', deck.id]"
-            ><i class="bi bi-pencil-fill"></i
-          ></a>
-        </div>
-        <div class="tooltip">
-          <span class="tooltiptext">Liste des cartes du paquet</span>
-          <a [routerLink]="['./', deck.id, 'flashcards']"
-            ><i class="bi bi-list-task"></i
-          ></a>
-        </div>
-        <div class="tooltip">
-          <span class="tooltiptext">Statistiques du paquet</span>
-          <a [routerLink]="['../stats/decks/', deck.id]"
-            ><i class="bi bi-pie-chart-fill"></i
-          ></a>
-        </div>
-        <div class="tooltip">
-          <span class="tooltiptext">Supprimer le paquet</span>
-          <a (click)="delete(deck.id!)"><i class="bi bi-trash-fill"></i></a>
-        </div>
-      </div>
+      </header>
+
       <div class="cardBody">
-        <span>{{ deck.name }}</span>
+        <h2>{{ deck.name | titlecase  }}</h2>
+        <p>{{ deck.description }}</p>
       </div>
-    </div>
+      <footer>
+        <p>
+          Crée le {{ deck.createdAt | date : "dd/MM/YY" }} - Dernières
+          modifications: {{ deck.updatedAt | date : "dd/MM/YY" }}
+        </p>
+        <p *ngIf="deck.public">Public</p>
+      </footer>
+    </article>
   </div>
   <app-pagination
     [currentPage]="currentPage"

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { FlashcardsService } from 'src/app/_services/flashcard.service';
 import { Flashcard, PaginationFlashcard } from 'src/app/models/flashcard.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-f-index',
@@ -23,16 +24,28 @@ export class FIndexComponent {
   ) {}
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
-    this.getFlashcard()
-
+    this.getFlashcard();
+  }
+  confirmDelete(id: string) {
+    Swal.fire({
+      title: 'Etes-vous sûr de vouloir supprimer ce paquet?',
+      text: 'Le paquet et toutes les cartes associées setont supprimés définitivement',
+      showCancelButton: true,
+      confirmButtonText: 'Oui',
+      cancelButtonText: 'Non',
+      confirmButtonColor: '#256cb0',
+    }).then((result) => {
+      if (result.value) {
+        this.delete(id);
+      }
+    });
   }
 
-  delete(flashcardId: string) {
+  private delete(flashcardId: string) {
     if (this.deckId) {
       this.flashcardService
         .deleteFlashcard(this.deckId, flashcardId)
-        .subscribe((data) => console.log(data));
-      this.getFlashcard();
+        .subscribe((data) => this.getFlashcard());
     }
   }
 
@@ -62,14 +75,11 @@ export class FIndexComponent {
           this.flashcardList = data.flashcards;
           console.log(this.flashcardList);
           if (data.total_items)
-          this.total = Math.ceil(data.total_items / this.perPage);
-          console.log(data.total_items)
-          console.log(this.total)
-
-
+            this.total = Math.ceil(data.total_items / this.perPage);
+          console.log(data.total_items);
+          console.log(this.total);
         });
     }
-    
   }
   ngOnDestroy(): void {
     this.destroy$.next(true);
