@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
+import { ApiErrorService } from 'src/app/_subjects/api-error.service';
+import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
 import { User } from 'src/app/models/user.model';
 
 @Component({
@@ -16,7 +18,8 @@ export class RegisterComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private apiSuccessService: ApiSuccessService
   ) {}
 
   ngOnInit(): void {
@@ -41,7 +44,7 @@ export class RegisterComponent {
 
     this.authService.register(this.user).subscribe(
       (data: string) => {
-        console.log(data);
+        this.apiSuccessService.sendSuccess(data);
         this.router.navigate(['auth/login']);
       },
       (err) => console.log(err)
