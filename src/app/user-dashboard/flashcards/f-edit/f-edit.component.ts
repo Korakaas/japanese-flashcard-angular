@@ -114,8 +114,6 @@ export class FEditComponent implements OnInit {
         const flashcardVocab: FlashcardVocabulary = flashcard;
         this.flashcardForm.patchValue({
           flashcardTypeForm: {
-            // audio: flashcardVocab.audio,
-            // image: flashcardVocab.image,
             synonym: flashcardVocab.synonym,
             antonym: flashcardVocab.antonym,
           },
@@ -140,25 +138,6 @@ export class FEditComponent implements OnInit {
           },
         });
         break;
-      // case 'conjugation':
-      //   const flashcardConjugation: FlashcardConjugation = flashcard;
-      //   this.flashcardForm.patchValue({
-      //     flashcardTypeForm: {
-      //       dictionnary: flashcardConjugation.dictionnary,
-      //       polite: flashcardConjugation.polite,
-      //       negative: flashcardConjugation.negative,
-      //       conditionnalBa: flashcardConjugation.conditionnalBa,
-      //       conditionnalTara: flashcardConjugation.conditionnalTara,
-      //       imperative: flashcardConjugation.imperative,
-      //       volitional: flashcardConjugation.volitional,
-      //       causative: flashcardConjugation.causative,
-      //       potential: flashcardConjugation.potential,
-      //       teForm: flashcardConjugation.teForm,
-      //       taForm: flashcardConjugation.taForm,
-      //     },
-      //   });
-      //   break;
-
       default:
         console.error('Le type de la carte est inconnu');
         break;

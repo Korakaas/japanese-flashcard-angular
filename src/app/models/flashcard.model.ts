@@ -1,5 +1,3 @@
-import { Review } from './review.model';
-
 export class PaginationFlashcard {
   flashcards: Flashcard[] = [];
   page?: number;
@@ -31,24 +29,7 @@ export class FlashcardGrammar extends Flashcard {
   construction?: string;
   grammarnotes?: string;
 }
-
-// export class FlashcardConjugation extends Flashcard{
-//   polite?: string;
-//   dictionnary?: string;
-//   negative?: string;
-//   conditionnalBa?: string;
-//   conditionnalTara?: string;
-//   imperative?: string;
-//   volitional?: string;
-//   causative?: string;
-//   potential?: string;
-//   teForm?: string;
-//   taForm?: string;
-// }
-
 export class FlashcardVocabulary extends Flashcard {
-  // audio?: string;
-  // image?: string;
   synonym?: string;
   antonym?: string;
 }
@@ -57,7 +38,6 @@ export enum FlashcardType {
   Kanji = 'kanji',
   Vocabulary = 'vocabulary',
   Grammar = 'grammar',
-  // Conjugation = "conjugation"
 }
 
 export type Union = FlashcardVocabulary | FlashcardGrammar | FlashcardKanji;
