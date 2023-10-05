@@ -2,6 +2,10 @@
 .container {
   padding-top: 20px;
 }
+h1 {
+  font-size: 2rem;
+  margin: 20px;
+}
 a {
   color: #000;
 }
@@ -23,6 +27,7 @@ a {
 header {
   background-color: $primary-color;
   padding: 10px;
+  border-radius: 10px 10px 0 0;
 }
 .headerContainer {
   width: 90%;

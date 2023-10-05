@@ -14,4 +14,5 @@ export class Deck {
   createdAt?: Date;
   updatedAt?: Date;
   flashcards?: Flashcard[];
+  pseudo?:string;
 }

@@ -1,27 +1,119 @@
-#server-error {
+//style général du toast
+.toast {
   position: absolute;
-  background-color: red;
-  padding: 10px;
-  right: 10px;
-  top: 50px;
-  display: none;
+  top: 25px;
+  right: 30px;
+  border-radius: 5px;
+  padding: 10px 15px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transform: translateX(calc(100% + 30px));
+  transition: all 0.5s ease;
+  overflow: hidden;
 }
-#server-success {
+.toast_content {
+  display: flex;
+  align-items: center;
+}
+.toast_content i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 29px;
+  width: 35px;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 50%;
+}
+.toast_content .message {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+}
+.message .txt {
+  font-weight: 400;
+}
+.message .txt1 {
+  font-weight: 600;
+}
+.toast .close {
   position: absolute;
-  background-color: green;
-  padding: 10px;
-  right: 10px;
-  top: 50px;
-  display: none;
-}
-span {
+  top: 10px;
+  right: 15px;
+  padding: 5px;
   cursor: pointer;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
-.error {
-  display: block !important;
+//style barre de progression
+.progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+}
+.progress:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+}
+.progress.active::before {
+  animation: progress 10s linear forwards;
 }
 
-.success {
-  display: block !important;
+//transition pour faire apparaître le toast
+.active {
+  transform: translateX(0%);
+}
+
+// style toast erreur
+.toast.error {
+  border-left: 6px solid #e31c3d;
+}
+.toast.error .toast_content i {
+  background: #e31c3d;
+}
+.toast.error .progress:before {
+  background: #e31c3d;
+}
+
+// style toast succès
+.toast.success {
+  border-left: 6px solid #2e8540;
+}
+.toast.success .toast_content i {
+  background: #2e8540;
+}
+.toast.success .progress:before {
+  background: #2e8540;
+}
+
+//animation barre de progression
+@keyframes progress {
+  100% {
+    right: 100%;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .toast {
+    padding: 20px 25px;
+  }
+
+  .toast_content i {
+    height: 35px;
+    width: 35px;
+  }
+
+  .message .txt {
+    font-size: 20px;
+  }
 }

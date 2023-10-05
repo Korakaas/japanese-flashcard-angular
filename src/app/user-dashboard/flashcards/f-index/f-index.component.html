@@ -1,4 +1,7 @@
-<div class="card"><a [routerLink]="['add']"><i class="bi bi-plus-circle"></i>Créer une carte</a></div>
+<h1>Mes cartes</h1>
+<div class="card">
+  <a [routerLink]="['add']"><i class="bi bi-plus-circle"></i>Créer une carte</a>
+</div>
 <div>
   <table>
     <thead>
@@ -16,9 +19,24 @@
           {{ flashcard.front }}
         </td>
         <td data-label="Interval">{{ flashcard.intervalReview }}</td>
-        <td data-label="Révisé le">{{ flashcard.reviewedAt  | date:"dd/MM/YY 'à' hh:mm" }}</td>
+        <td data-label="Révisé le">
+          {{ flashcard.reviewedAt | date : "dd/MM/YY 'à' hh:mm" }}
+        </td>
         <td data-label="Niveau">{{ flashcard.knownLevel }}</td>
-        <td data-label="Action"><a [routerLink]="['edit', flashcard.id]"><i class="bi bi-pencil-fill"></i></a><a (click)="confirmDelete(flashcard.id!)"><i class="bi bi-trash-fill"></i></a></td>
+        <td data-label="Action">
+          <div class="tooltip">
+            <span class="tooltiptext">Modifier la carte</span>
+            <a [routerLink]="['edit', flashcard.id]"
+              ><i class="bi bi-pencil-fill"></i
+            ></a>
+          </div>
+          <div class="tooltip">
+            <span class="tooltiptext">Supprimer la carte</span>
+            <a class="deleteButton" (click)="confirmDelete(flashcard.id!)"
+              ><i class="bi bi-trash-fill"></i
+            ></a>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>

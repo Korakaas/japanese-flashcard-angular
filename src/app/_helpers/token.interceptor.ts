@@ -4,8 +4,11 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
+  HttpStatusCode,
+  HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { TokenService } from '../_services/token.service';
 import { Router } from '@angular/router';
 import { ApiErrorService } from '../_subjects/api-error.service';
@@ -23,26 +26,59 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     const token = this.tokenService.getToken();
+
     if (token !== null) {
-      let clone = request.clone({
-        headers: request.headers.set('Authorization', 'bearer ' + token),
-      });
-      console.log(clone);
-
-      return next.handle(clone).pipe(
-        catchError((error) => {
-          this.apiErrorService.sendError(error.error.message);
-          console.log(error.error)
-
-          if (error.status === 401) {
-            this.tokenService.clearToken();
-            this.router.navigate(['auth']);
-            return throwError(() => error);
-          }
-          return throwError(() => error);
-        })
-      );
+      request = this.addAuthorizationHeader(request, token);
     }
-    return next.handle(request);
+
+    return next.handle(request).pipe(
+      catchError((error) => {
+        this.handleHttpError(error);
+        return throwError(() => error);
+      })
+    );
+  }
+
+  private addAuthorizationHeader(
+    request: HttpRequest<unknown>,
+    token: string
+  ): HttpRequest<unknown> {
+    return request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  private handleHttpError(error: HttpErrorResponse): void {
+    let errorMessage:string = error.error.message.replace(/[\[\]"]/g, '');
+    let errorStatus:number = error.status;
+    const statusToRoute: { [key: number]: string } = {
+      [HttpStatusCode.Unauthorized]: 'auth',
+      [HttpStatusCode.InternalServerError]: 'serverError',
+      [HttpStatusCode.NotFound]: 'notFound',
+      [HttpStatusCode.Forbidden]: 'forbidden',
+      [HttpStatusCode.TooManyRequests]: 'manyRequests',
+      [HttpStatusCode.ServiceUnavailable]: 'unavailable',
+      [HttpStatusCode.GatewayTimeout]: 'timeOut',
+    };
+
+    if (statusToRoute[errorStatus]) {
+      this.tokenService.clearToken();
+      this.router.navigate([statusToRoute[errorStatus]]);
+    }
+
+    if (
+      errorStatus === HttpStatusCode.Unauthorized &&
+      errorMessage === 'Invalid credentials.'
+    ) {
+      errorMessage = "Le mot de passe ou l'adresse email est incorrect(e)";
+      this.apiErrorService.sendError(errorMessage);
+
+    }
+
+    if (!(errorStatus in statusToRoute)) {
+      this.apiErrorService.sendError(errorMessage);
+    }
   }
 }

@@ -1,24 +1,33 @@
-<div class="container" *ngFor="let deck of deckList">
-  <div class="card" *ngIf="deck">
-    <div class="cardHeader">
-      <div class="tooltip">
-        <span class="tooltiptext">Détails du paquet</span>
-        <a [routerLink]="['/decks-detail', deck.id]"><i class="bi bi-eye-fill"></i></a>
+<div class="container">
+  <h1>Paquets publiques</h1>
+  <div *ngFor="let deck of deckList">
+    <article class="card" *ngIf="deck">
+      <header>
+        <div class="headerContainer">
+          <div class="tooltip">
+            <span class="tooltiptext">Détails du paquet</span>
+            <a [routerLink]="['/decks-detail', deck.id]"
+              ><i class="bi bi-eye-fill"></i
+            ></a>
+          </div>
+          <div *ngIf="isLogged" class="tooltip">
+            <span class="tooltiptext">Ajouter à mes paquets</span>
+            <a (click)="duplicate(deck.id!)"><i class="bi bi-copy"></i></a>
+          </div>
+        </div>
+      </header>
+
+      <div class="cardBody">
+        <h2>{{ deck.name }}</h2>
+        <p>Crée par {{ deck.pseudo }}</p>
       </div>
-      <div *ngIf="isLogged" class="tooltip">
-        <span class="tooltiptext">Ajouter à mes paquets</span>
-        <a (click)="duplicate(deck.id!)"><i class="bi bi-copy"></i></a>
-      </div>
-    </div>
-    <div class="cardBody">
-      <span>{{ deck.name }}</span>
-    </div>
+    </article>
   </div>
+  <app-pagination
+    [currentPage]="currentPage"
+    [totalPages]="total"
+    (goTo)="onGoTo($event)"
+    (next)="onNext($event)"
+    (previous)="onPrevious($event)"
+  ></app-pagination>
 </div>
-<app-pagination
-  [currentPage]="currentPage"
-  [totalPages]="total"
-  (goTo)="onGoTo($event)"
-  (next)="onNext($event)"
-  (previous)="onPrevious($event)"
-></app-pagination>

@@ -1,77 +1,114 @@
 @import "../../../../vars.scss";
+h1 {
+  font-size: 2rem;
+  margin: 20px;
+}
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    background-color: #fff;
-    transition: 0.3s;
-    padding: 16px;
-    border-radius: 10px;
-    width: 95%;
-    margin: 20px auto;
-    text-align: center;
-  }
-  i {
-    margin-right: 1em;
-  }
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  transition: 0.3s;
+  padding: 16px;
+  border-radius: 10px;
+  width: 95%;
+  margin: 20px auto;
+  text-align: center;
+}
+i {
+  margin-right: 1em;
+}
 table {
-	width: 100%;
-	table-layout: fixed;
+  width: 100%;
+  table-layout: fixed;
 }
 
 thead {
-    display: none;
+  display: none;
 }
 
 tr {
-    display: block;
-    padding: 1em 1em .5em;
+  display: block;
+  padding: 1em 1em 0.5em;
 
-    & + tr {
-        margin-top: .625em;
-    }
+  & + tr {
+    margin-top: 0.625em;
+  }
 }
 
 td {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    &::before {
-        content: attr(data-label);
-        text-align: left;
-        max-width: 45%;
-        color: $primary-color;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
+  &::before {
+    content: attr(data-label);
+    text-align: left;
+    max-width: 45%;
+    color: $primary-color;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
 }
 
+a {
+  color: $primary-color;
+}
+.deleteButton {
+  cursor: pointer;
+  color: #e31c3d;
+  padding: 5px;
+  border-radius: 5px;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: $secondary-color;
+  color: $primary-color;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  width: 120px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
 
 @media screen and (min-width: 600px) {
-	table {
-		thead {
-			display: table-header-group;
-		}
+  table {
+    thead {
+      display: table-header-group;
+    }
 
-		tr {
-			display: table-row;
-			border: 0;
-		}
+    tr {
+      display: table-row;
+      border: 0;
+    }
 
-		th, td {
-			text-align: center;
-		}
+    th,
+    td {
+      text-align: center;
+    }
 
-		th {
-			text-transform: uppercase;
-            color: $primary-color;
-		}
+    th {
+      text-transform: uppercase;
+      color: $primary-color;
+    }
 
-		td {
-			display: table-cell;
+    td {
+      display: table-cell;
 
-			&:before {
-				display: none;
-			}
-		}
-	}
+      &:before {
+        display: none;
+      }
+    }
+  }
 }

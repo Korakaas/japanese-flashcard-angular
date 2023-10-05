@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ErrorComponent } from './_utils/error/error.component';
 import { AuthGuard } from './_helpers/auth.guard';
+import { NotFoundComponent } from './_utils/not-found/not-found.component';
+import { ServerErrorComponent } from './_utils/server-error/server-error.component';
+import { ForbiddenComponent } from './_utils/forbidden/forbidden.component';
+import { UnavailableComponent } from './_utils/unavailable/unavailable.component';
+import { TimeOutComponent } from './_utils/time-out/time-out.component';
+import { ManyRequestsComponent } from './_utils/many-requests/many-requests.component';
 
 const routes: Routes = [
   {
@@ -23,8 +28,32 @@ const routes: Routes = [
       import('./auth/auth.module').then((module) => module.AuthModule),
   },
   {
+    path: 'serverError',
+    component: ServerErrorComponent,
+  },
+  {
+    path: 'forbidden',
+    component: ForbiddenComponent,
+  },
+  {
+    path: 'unavalaible',
+    component: UnavailableComponent,
+  },
+  {
+    path: 'timeOut',
+    component: TimeOutComponent,
+  },
+  {
+    path: 'manyRequests',
+    component: ManyRequestsComponent,
+  },
+  {
+    path: 'notFound',
+    component: NotFoundComponent,
+  },
+  {
     path: '**',
-    component: ErrorComponent,
+    component: NotFoundComponent,
   },
 ];
 

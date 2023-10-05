@@ -1,7 +1,46 @@
-<div id="server-error" [class.error]="displayError">
-  <span (click)="clearMsgError()">x</span>{{ messageError }}
+<!-- <div [class.active]="displayError" class="toast">
+  <div class="toast-content">
+    <i class="bi bi-x"></i>
+    <div class="message">
+      <span class="message-text text-1">Success</span>
+      <span class="message-text text-2">Your changes has been saved</span>
+    </div>
+  </div>
+  <i class="bi bi-x-lg"></i>
+  <div [class.active]="displayError" class="progress"></div>
+</div> -->
+
+<div [class.active]="displayError" class="toast error">
+  <div class="toast_content">
+    <i class="bi bi-x"></i>
+    <div class="message">
+      <span class=" txt txt1">Erreur</span
+      ><span class="txt txt2">{{ messageError }}</span>
+    </div>
+  </div>
+  <a class="close" (click)="clearMsgError()"><i class="bi bi-x-lg"></i></a>
+  <div [class.active]="displayError" class="progress"></div>
+</div>
+
+<div [class.active]="displaySuccess" class="toast success">
+  <div class="toast_content">
+    <i class="bi bi-check"></i>
+    <div class="message">
+      <span class=" txt txt1">Succès</span
+      ><span class="txt txt2">{{ messageSuccess }}</span>
+    </div>
+  </div>
+  <a class="close" (click)="clearMsgSuccess()"><i class="bi bi-x-lg"></i></a>
+  <div [class.active]="displaySuccess" class="progress"></div>
+</div>
+
+<!-- <div id="server-error" [class.error]="displayError">
+  <span id="warningIcon"><i class="bi bi-exclamation-triangle"></i></span>
+  <span class="message">
+    <a (click)="clearMsgError()"><i class="bi bi-x-lg"></i></a
+  ></span>
 </div>
 <div id="server-success" [class.success]="displaySuccess">
   <span (click)="clearMsgSuccess()">x</span>{{ messageSuccess }}
-</div>
+</div>  -->
 <router-outlet></router-outlet>

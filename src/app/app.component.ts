@@ -23,10 +23,12 @@ export class AppComponent implements OnInit {
     this.apiErrorService.apiError.subscribe((data: string) => {
       this.messageError = data;
       this.displayError = true;
+      // this.clearMessagesAfterTimeout();
     });
     this.apiSuccesService.apiSuccess.subscribe((data: string) => {
       this.messageSuccess = data;
       this.displaySuccess = true;
+      this.clearMessagesAfterTimeout();
     });
   }
 
@@ -38,5 +40,12 @@ export class AppComponent implements OnInit {
   clearMsgSuccess(): void {
     this.messageSuccess = '';
     this.displaySuccess = false;
+  }
+
+  clearMessagesAfterTimeout() {
+    setTimeout(() => {
+      this.displayError = false;
+      this.displaySuccess = false;
+    }, 10000); 
   }
 }
