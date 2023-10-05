@@ -51,8 +51,11 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   private handleHttpError(error: HttpErrorResponse): void {
-    let errorMessage:string = error.error.message.replace(/[\[\]"]/g, '');
-    let errorStatus:number = error.status;
+    let errorMessage: string = error.error.message;
+    if (/\[|\]/.test(errorMessage)) {
+      errorMessage = error.error.message.replace(/[\[\]"]/g, '');
+    }
+    let errorStatus: number = error.status;
     const statusToRoute: { [key: number]: string } = {
       [HttpStatusCode.Unauthorized]: 'auth',
       [HttpStatusCode.InternalServerError]: 'serverError',
@@ -74,7 +77,6 @@ export class TokenInterceptor implements HttpInterceptor {
     ) {
       errorMessage = "Le mot de passe ou l'adresse email est incorrect(e)";
       this.apiErrorService.sendError(errorMessage);
-
     }
 
     if (!(errorStatus in statusToRoute)) {

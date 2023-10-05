@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { DeckService } from 'src/app/_services/deck.service';
 import { TokenService } from 'src/app/_services/token.service';
+import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
 import { Deck, PaginationDeck } from 'src/app/models/deck.model';
 
 @Component({
@@ -14,17 +15,23 @@ export class DecksComponent {
   currentPage: number = 1;
   total: number = 0;
   perPage: number = 9;
-  isLogged:boolean = false;
+  isLogged: boolean = false;
   private destroy$!: Subject<boolean>;
-  constructor(private deckService: DeckService, private tokenService: TokenService) {}
+  constructor(
+    private deckService: DeckService,
+    private tokenService: TokenService,
+    private apiSuccesService: ApiSuccessService
+  ) {}
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
     this.getdeck();
-    this.isLogged = this.tokenService.isLogged()
+    this.isLogged = this.tokenService.isLogged();
   }
 
   duplicate(id: string) {
-    this.deckService.duplicateDecks(id).subscribe((data) => console.log(data));
+    this.deckService
+      .duplicateDecks(id)
+      .subscribe((data:string) => this.apiSuccesService.sendSuccess(data));
   }
 
   public onGoTo(page: number): void {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { DeckService } from 'src/app/_services/deck.service';
+import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
 import { Deck, PaginationDeck } from 'src/app/models/deck.model';
 import Swal from 'sweetalert2';
 
@@ -16,7 +17,10 @@ export class DIndexComponent implements OnInit {
   perPage: number = 9;
   private destroy$!: Subject<boolean>;
 
-  constructor(private deckService: DeckService) {}
+  constructor(
+    private deckService: DeckService,
+    private apiSuccessService: ApiSuccessService
+  ) {}
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
     this.getdeck();
@@ -64,7 +68,10 @@ export class DIndexComponent implements OnInit {
   }
 
   private delete(id: string) {
-    this.deckService.deleteUserDecks(id).subscribe((data) => this.getdeck());
+    this.deckService.deleteUserDecks(id).subscribe((data:string) => {
+      this.apiSuccessService.sendSuccess(data)
+      this.getdeck();
+    });
   }
 
   ngOnDestroy(): void {

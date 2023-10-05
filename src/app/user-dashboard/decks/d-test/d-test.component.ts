@@ -10,6 +10,7 @@ import { FlashcardsService } from 'src/app/_services/flashcard.service';
 import { Review, Test } from 'src/app/models/review.model';
 import { DailyStatsService } from 'src/app/_services/daily-stats.service';
 import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
+import { Message } from 'src/app/models/message.model';
 
 @Component({
   selector: 'app-d-test',
@@ -33,6 +34,7 @@ export class DTestComponent {
   isFlashcardGrammar!: (flashcard: Union) => flashcard is FlashcardGrammar;
   review: Review = new Review();
   totalCardCount: number | undefined = undefined;
+  message:string|undefined='';
 
   constructor(
     private activated: ActivatedRoute,
@@ -47,26 +49,36 @@ export class DTestComponent {
     if (this.deckId) {
       this.flashcardService
         .getFlashcardForTest(this.deckId)
-        .subscribe((data: Test) => {
-          console.log(data);
+        .subscribe((data: Test|Message) => {
+          console.log(data instanceof Test);
 
-          this.flashcard = data.cards;
-          console.log(this.flashcard);
-          this.isFlashcardKanji = (
-            flashcard: Union
-          ): flashcard is FlashcardKanji => this.flashcard?.type === 'kanji';
-          console.log(this.flashcard?.type === 'kanji');
-          this.isFlashcardVocab = (
-            flashcard: Union
-          ): flashcard is FlashcardVocabulary =>
-            this.flashcard?.type === 'vocabulary';
-          this.isFlashcardGrammar = (
-            flashcard: Union
-          ): flashcard is FlashcardGrammar =>
-            this.flashcard?.type === 'grammar';
-          console.log(this.flashcard);
+          if('cards' in data)
+          {
+            this.flashcard = data.cards;
+            console.log(this.flashcard);
+            this.isFlashcardKanji = (
+              flashcard: Union
+            ): flashcard is FlashcardKanji => this.flashcard?.type === 'kanji';
+            console.log(this.flashcard?.type === 'kanji');
+            this.isFlashcardVocab = (
+              flashcard: Union
+            ): flashcard is FlashcardVocabulary =>
+              this.flashcard?.type === 'vocabulary';
+            this.isFlashcardGrammar = (
+              flashcard: Union
+            ): flashcard is FlashcardGrammar =>
+              this.flashcard?.type === 'grammar';
+            console.log(this.flashcard);
+  
+            this.totalCardCount = data.totalCardCount;
+          }
+          else {
+            console.log(data)
+            this.message = (data as Message).message;
+            console.log(this.message)
 
-          this.totalCardCount = data.totalCardCount;
+          }
+
         });
     }
   }

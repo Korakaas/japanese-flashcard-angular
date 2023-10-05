@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { FlashcardsService } from 'src/app/_services/flashcard.service';
+import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
 import { Flashcard, PaginationFlashcard } from 'src/app/models/flashcard.model';
 import Swal from 'sweetalert2';
 
@@ -20,7 +21,8 @@ export class FIndexComponent {
 
   constructor(
     private flashcardService: FlashcardsService,
-    private activated: ActivatedRoute
+    private activated: ActivatedRoute,
+    private apiSuccesService: ApiSuccessService
   ) {}
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
@@ -45,7 +47,10 @@ export class FIndexComponent {
     if (this.deckId) {
       this.flashcardService
         .deleteFlashcard(this.deckId, flashcardId)
-        .subscribe((data) => this.getFlashcard());
+        .subscribe((data:string) => {
+          this.apiSuccesService.sendSuccess(data)
+          this.getFlashcard();
+        });
     }
   }
 

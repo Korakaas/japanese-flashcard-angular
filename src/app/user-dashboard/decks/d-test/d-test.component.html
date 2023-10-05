@@ -1,59 +1,64 @@
-<div class="container" *ngIf="flashcard">
-  <div class="card" [class.front]="display">
-    <p>{{ flashcard.front }}</p>
-    <button name="answer" type="button" (click)="displayBack()">
-      Voir la réponse
-    </button>
-  </div>
-
-  <div class="card" id="card-back" [class.back]="display">
-    <h1>{{ flashcard.back }}</h1>
-    <hr class="solid" />
-    <div class="extraInfo">
-      <p><span class="labelInfo font14">Exemple:</span> {{ flashcard.example }}</p>
-      <p *ngIf="flashcard.furigana">
-        <span class="labelInfo">Furigana:</span> {{ flashcard.furigana }}
-      </p>
-      <p *ngIf="isFlashcardKanji(flashcard) && flashcard.kunyomi">
-        <span class="labelInfo">Kunyomi:</span> {{ flashcard.kunyomi }}
-      </p>
-      <p *ngIf="isFlashcardKanji(flashcard) && flashcard.onyomi">
-        <span class="labelInfo">Onyomi:</span> {{ flashcard.onyomi }}
-      </p>
-      <p *ngIf="isFlashcardKanji(flashcard) && flashcard.mnemotic">
-        <span class="labelInfo">Aide mémoire:</span> {{ flashcard.mnemotic }}
-      </p>
-      <p *ngIf="isFlashcardVocab(flashcard) && flashcard.synonym">
-        <span class="labelInfo">Synonyme:</span> {{ flashcard.synonym }}
-      </p>
-      <p *ngIf="isFlashcardVocab(flashcard) && flashcard.antonym">
-        <span class="labelInfo">Antonyme:</span> {{ flashcard.antonym }}
-      </p>
-      <p *ngIf="isFlashcardGrammar(flashcard) && flashcard.construction">
-        <span class="labelInfo">Construction:</span>
-        {{ flashcard.construction }}
-      </p>
-      <p *ngIf="isFlashcardGrammar(flashcard) && flashcard.grammarnotes">
-        <span class="labelInfo">Notes:</span> {{ flashcard.grammarnotes }}
-      </p>
-    </div>
-
-    <div class="resultButton">
-      <button
-      class="font14"
-        name="result"
-        type="button"
-        *ngFor="let score of scores"
-        (click)="submitScore(score.value)"
-        [class.again]="score.value === 1"
-        [class.hard]="score.value === 2"
-        [class.correct]="score.value === 3"
-        [class.easy]="score.value === 4"
-        [class.known]="score.value === 5"
-      >
-        {{ score.label }}
+<div class="container">
+  <p *ngIf="message">{{ message }}</p>
+  <div *ngIf="flashcard">
+    <div class="card" [class.front]="display">
+      <p>{{ flashcard.front }}</p>
+      <button name="answer" type="button" (click)="displayBack()">
+        Voir la réponse
       </button>
     </div>
+
+    <div class="card" id="card-back" [class.back]="display" *ngIf="flashcard">
+      <h1>{{ flashcard.back }}</h1>
+      <hr class="solid" />
+      <div class="extraInfo">
+        <p>
+          <span class="labelInfo font14">Exemple:</span> {{ flashcard.example }}
+        </p>
+        <p *ngIf="flashcard.furigana">
+          <span class="labelInfo">Furigana:</span> {{ flashcard.furigana }}
+        </p>
+        <p *ngIf="isFlashcardKanji(flashcard) && flashcard.kunyomi">
+          <span class="labelInfo">Kunyomi:</span> {{ flashcard.kunyomi }}
+        </p>
+        <p *ngIf="isFlashcardKanji(flashcard) && flashcard.onyomi">
+          <span class="labelInfo">Onyomi:</span> {{ flashcard.onyomi }}
+        </p>
+        <p *ngIf="isFlashcardKanji(flashcard) && flashcard.mnemotic">
+          <span class="labelInfo">Aide mémoire:</span> {{ flashcard.mnemotic }}
+        </p>
+        <p *ngIf="isFlashcardVocab(flashcard) && flashcard.synonym">
+          <span class="labelInfo">Synonyme:</span> {{ flashcard.synonym }}
+        </p>
+        <p *ngIf="isFlashcardVocab(flashcard) && flashcard.antonym">
+          <span class="labelInfo">Antonyme:</span> {{ flashcard.antonym }}
+        </p>
+        <p *ngIf="isFlashcardGrammar(flashcard) && flashcard.construction">
+          <span class="labelInfo">Construction:</span>
+          {{ flashcard.construction }}
+        </p>
+        <p *ngIf="isFlashcardGrammar(flashcard) && flashcard.grammarnotes">
+          <span class="labelInfo">Notes:</span> {{ flashcard.grammarnotes }}
+        </p>
+      </div>
+
+      <div class="resultButton">
+        <button
+          class="font14"
+          name="result"
+          type="button"
+          *ngFor="let score of scores"
+          (click)="submitScore(score.value)"
+          [class.again]="score.value === 1"
+          [class.hard]="score.value === 2"
+          [class.correct]="score.value === 3"
+          [class.easy]="score.value === 4"
+          [class.known]="score.value === 5"
+        >
+          {{ score.label }}
+        </button>
+      </div>
+    </div>
+    <p class="font14">Il reste {{ totalCardCount }} cartes à réviser</p>
   </div>
-  <p class="font14">Il reste {{ totalCardCount }} cartes à réviser</p>
 </div>

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { Review, Test } from '../models/review.model';
+import { Message } from '../models/message.model';
 
 @Injectable({
   providedIn: 'root',
@@ -75,7 +76,7 @@ export class FlashcardsService {
     Récupère une carte du deck prête pour la révision
     @route GET ['/user/decks/deckId/test']
   */
-  getFlashcardForTest(deckId: string): Observable<Test> {
+  getFlashcardForTest(deckId: string): Observable<Test | Message> {
     return this.http.get<Test>(
       environment.api + 'user/decks/' + deckId + '/test/'
     );
