@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
-  ValidationErrors,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { FlashcardsService } from 'src/app/_services/flashcard.service';
 import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
 import { Flashcard } from 'src/app/models/flashcard.model';
@@ -41,6 +39,7 @@ export class FAddComponent implements OnInit {
   construction = new FormControl('', Validators.maxLength(255));
   grammarnotes = new FormControl('', Validators.maxLength(255));
   deckId: string | null = '';
+  private destroy$!: Subject<boolean>;
 
   constructor(
     private activated: ActivatedRoute,
@@ -49,6 +48,7 @@ export class FAddComponent implements OnInit {
     private apiSuccesService: ApiSuccessService
   ) {}
   ngOnInit(): void {
+    this.destroy$ = new Subject<boolean>();
     this.flashcardForm = this.formbuilder.group({
       front: this.front,
       back: this.back,
@@ -97,10 +97,14 @@ export class FAddComponent implements OnInit {
       if (this.deckId) {
         this.flashcardService
           .createFlashcard(this.deckId, newFlashcard)
+          .pipe(takeUntil(this.destroy$))
           .subscribe((message: string) =>
             this.apiSuccesService.sendSuccess(message)
           );
       }
     }
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
   }
 }

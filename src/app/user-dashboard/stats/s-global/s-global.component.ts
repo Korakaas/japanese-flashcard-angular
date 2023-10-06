@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DailyStatsService } from 'src/app/_services/daily-stats.service';
 import { DeckStats } from 'src/app/models/dailyStats.model';
 import { Chart, registerables } from 'chart.js';
+import { Subject, takeUntil } from 'rxjs';
 Chart.register(...registerables);
 @Component({
   selector: 'app-s-global',
@@ -16,31 +17,37 @@ export class SGlobalComponent {
   flashcardsKnown: number = 0;
   flashcardsLearning: number = 0;
   flashcardsNew: number = 0;
+  private destroy$!: Subject<boolean>;
 
   constructor(private dailyStatsService: DailyStatsService) {}
   ngOnInit(): void {
-    this.dailyStatsService.getUserStats().subscribe((data: DeckStats[]) => {
-      this.globalStats = data;
-      console.log(this.globalStats);
-      this.globalStats.forEach((deckStats) => {
-        console.log(deckStats);
-        if (deckStats.flashcards?.known)
-          this.flashcardsKnown += deckStats.flashcards?.known;
-        if (deckStats.flashcards?.learning)
-          this.flashcardsLearning += deckStats.flashcards?.learning;
-        if (deckStats.flashcards?.new)
-          this.flashcardsNew += deckStats.flashcards?.new;
+    this.destroy$ = new Subject<boolean>();
 
-        deckStats.dailyStats?.forEach((dailyStat) => {
-          if (dailyStat.reviewNumber)
-            this.totalFlashcardsReviewed += dailyStat.reviewNumber;
-          if (dailyStat.correctAnswer)
-            this.totalCorrectAnswer += dailyStat.correctAnswer;
+    this.dailyStatsService
+      .getUserStats()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: DeckStats[]) => {
+        this.globalStats = data;
+        console.log(this.globalStats);
+        this.globalStats.forEach((deckStats) => {
+          console.log(deckStats);
+          if (deckStats.flashcards?.known)
+            this.flashcardsKnown += deckStats.flashcards?.known;
+          if (deckStats.flashcards?.learning)
+            this.flashcardsLearning += deckStats.flashcards?.learning;
+          if (deckStats.flashcards?.new)
+            this.flashcardsNew += deckStats.flashcards?.new;
+
+          deckStats.dailyStats?.forEach((dailyStat) => {
+            if (dailyStat.reviewNumber)
+              this.totalFlashcardsReviewed += dailyStat.reviewNumber;
+            if (dailyStat.correctAnswer)
+              this.totalCorrectAnswer += dailyStat.correctAnswer;
+          });
         });
-      });
 
-      this.renderChart();
-    });
+        this.renderChart();
+      });
   }
 
   renderChart() {
@@ -87,5 +94,8 @@ export class SGlobalComponent {
         ],
       },
     });
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
   }
 }

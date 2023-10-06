@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
+import { Subject, takeUntil } from 'rxjs';
 import { DailyStatsService } from 'src/app/_services/daily-stats.service';
 import { DeckStats } from 'src/app/models/dailyStats.model';
 Chart.register(...registerables);
@@ -18,17 +19,20 @@ export class SDeckComponent {
   flashcardsKnown: number = 0;
   flashcardsLearning: number = 0;
   flashcardsNew: number = 0;
+  private destroy$!: Subject<boolean>;
 
   constructor(
     private dailyStatsService: DailyStatsService,
     private activated: ActivatedRoute
   ) {}
   ngOnInit(): void {
+    this.destroy$ = new Subject<boolean>();
     console.log('hello');
     const deckId = this.activated.snapshot.paramMap.get('deckId');
     if (deckId)
       this.dailyStatsService
         .getDeckStats(deckId)
+        .pipe(takeUntil(this.destroy$))
         .subscribe((data: DeckStats) => {
           this.deckStats = data;
           console.log(this.deckStats);
@@ -95,5 +99,8 @@ export class SDeckComponent {
         ],
       },
     });
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
   }
 }

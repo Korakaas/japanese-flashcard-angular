@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { DeckService } from 'src/app/_services/deck.service';
 import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
 import { Deck } from 'src/app/models/deck.model';
@@ -21,6 +22,7 @@ export class DEditComponent implements OnInit {
   name = new FormControl('', [Validators.required, Validators.maxLength(40)]);
   description = new FormControl('');
   public = new FormControl(false);
+  private destroy$!: Subject<boolean>;
 
   constructor(
     private activated: ActivatedRoute,
@@ -30,6 +32,8 @@ export class DEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.destroy$ = new Subject<boolean>();
+
     this.deckForm = this.formbuilder.group({
       name: this.name,
       description: this.description,
@@ -38,7 +42,7 @@ export class DEditComponent implements OnInit {
     let id = this.activated.snapshot.paramMap.get('id');
     console.log(id);
     if (id) {
-      this.deckService.getUserDecksDetail(id).subscribe((data: Deck) => {
+      this.deckService.getUserDecksDetail(id).pipe(takeUntil(this.destroy$)).subscribe((data: Deck) => {
         this.deck = data;
         console.log(this.deck);
         this.initializeDeckForm(this.deck);
@@ -62,9 +66,14 @@ export class DEditComponent implements OnInit {
 
       this.deckService
         .updateUserDecks(this.deck)
+        .pipe(takeUntil(this.destroy$))
         .subscribe((message: string) =>
           this.apiSuccessService.sendSuccess(message)
         );
     }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
   }
 }

@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
 import { DeckService } from 'src/app/_services/deck.service';
 import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
 import { Deck } from 'src/app/models/deck.model';
@@ -20,6 +21,7 @@ export class DAddComponent {
   name = new FormControl('', [Validators.required, Validators.maxLength(40)]);
   description = new FormControl('');
   public = new FormControl(false);
+  private destroy$!: Subject<boolean>;
 
   constructor(
     private deckService: DeckService,
@@ -28,6 +30,7 @@ export class DAddComponent {
   ) {}
 
   ngOnInit(): void {
+    this.destroy$ = new Subject<boolean>();
     this.deckForm = this.formbuilder.group({
       name: this.name,
       description: this.description,
@@ -43,9 +46,16 @@ export class DAddComponent {
         public: this.deckForm.value.public,
       };
 
-      this.deckService.createUserDecks(this.deck).subscribe((message) => {
-        this.apiSuccessService.sendSuccess(message);
-      });
+      this.deckService
+        .createUserDecks(this.deck)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((message: string) => {
+          this.apiSuccessService.sendSuccess(message);
+        });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
   }
 }

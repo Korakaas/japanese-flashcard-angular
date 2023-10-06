@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { FlashcardsService } from 'src/app/_services/flashcard.service';
 import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
 import {
@@ -37,6 +38,7 @@ export class FEditComponent implements OnInit {
   kunyomi = new FormControl('', Validators.maxLength(60));
   construction = new FormControl('', Validators.maxLength(255));
   grammarnotes = new FormControl('', Validators.maxLength(255));
+  private destroy$!: Subject<boolean>;
 
   constructor(
     private activated: ActivatedRoute,
@@ -46,6 +48,7 @@ export class FEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.destroy$ = new Subject<boolean>();
     this.flashcardForm = this.formbuilder.group({
       front: this.front,
       back: this.back,
@@ -60,6 +63,7 @@ export class FEditComponent implements OnInit {
     if (this.deckId && flashcardId) {
       this.flashcardService
         .getUserDetailFlashcard(this.deckId, flashcardId)
+        .pipe(takeUntil(this.destroy$))
         .subscribe((data: Flashcard) => {
           this.flashcard = data;
           this.type = this.flashcard.type;
@@ -146,10 +150,14 @@ export class FEditComponent implements OnInit {
       if (this.deckId) {
         this.flashcardService
           .updatelFlashcard(this.deckId, this.flashcard)
+          .pipe(takeUntil(this.destroy$))
           .subscribe((message: string) =>
             this.apiSuccessService.sendSuccess(message)
           );
       }
     }
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
   }
 }

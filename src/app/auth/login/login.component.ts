@@ -6,6 +6,7 @@ import {
   FormControl,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 import { TokenService } from 'src/app/_services/token.service';
 import { Credentials } from 'src/app/models/credentials.model';
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
     Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])/),
   ]);
   credentials: Credentials = {};
+  private destroy$!: Subject<boolean>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,6 +40,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.destroy$ = new Subject<boolean>();
     this.loginForm = this.formBuilder.group({
       username: this.username,
       password: this.password,
@@ -49,11 +52,17 @@ export class LoginComponent implements OnInit {
       this.credentials.username = this.loginForm.value.username;
       this.credentials.password = this.loginForm.value.password;
 
-      this.authService.login(this.credentials).subscribe((data: Token) => {
-        console.log(data.token);
-        this.tokenService.saveToken(data.token);
-        this.router.navigate(['user/decks']);
-      });
+      this.authService
+        .login(this.credentials)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((data: Token) => {
+          console.log(data.token);
+          this.tokenService.saveToken(data.token);
+          this.router.navigate(['user/decks']);
+        });
     }
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
   }
 }

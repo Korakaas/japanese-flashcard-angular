@@ -11,6 +11,7 @@ import { Review, Test } from 'src/app/models/review.model';
 import { DailyStatsService } from 'src/app/_services/daily-stats.service';
 import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
 import { Message } from 'src/app/models/message.model';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-d-test',
@@ -34,7 +35,8 @@ export class DTestComponent {
   isFlashcardGrammar!: (flashcard: Union) => flashcard is FlashcardGrammar;
   review: Review = new Review();
   totalCardCount: number | undefined = undefined;
-  message:string|undefined='';
+  message: string | undefined = '';
+  private destroy$!: Subject<boolean>;
 
   constructor(
     private activated: ActivatedRoute,
@@ -44,16 +46,17 @@ export class DTestComponent {
   ) {}
 
   ngOnInit(): void {
+    this.destroy$ = new Subject<boolean>();
     this.deckId = this.activated.snapshot.paramMap.get('id');
     console.log(this.deckId);
     if (this.deckId) {
       this.flashcardService
         .getFlashcardForTest(this.deckId)
-        .subscribe((data: Test|Message) => {
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((data: Test | Message) => {
           console.log(data instanceof Test);
 
-          if('cards' in data)
-          {
+          if ('cards' in data) {
             this.flashcard = data.cards;
             console.log(this.flashcard);
             this.isFlashcardKanji = (
@@ -69,16 +72,13 @@ export class DTestComponent {
             ): flashcard is FlashcardGrammar =>
               this.flashcard?.type === 'grammar';
             console.log(this.flashcard);
-  
+
             this.totalCardCount = data.totalCardCount;
-          }
-          else {
-            console.log(data)
+          } else {
+            console.log(data);
             this.message = (data as Message).message;
-            console.log(this.message)
-
+            console.log(this.message);
           }
-
         });
     }
   }
@@ -91,6 +91,7 @@ export class DTestComponent {
     if (this.deckId && this.flashcard?.id) {
       this.flashcardService
         .reviewFlashcard(this.deckId, this.flashcard.id, this.review)
+        .pipe(takeUntil(this.destroy$))
         .subscribe((message: string) => {
           console.log(message);
           this.apiSuccessService.sendSuccess(message);
@@ -98,11 +99,15 @@ export class DTestComponent {
 
       this.dailyStatsService
         .addDailyStats(this.deckId, this.review)
+        .pipe(takeUntil(this.destroy$))
         .subscribe((data) => console.log(data));
 
       this.display = false;
       this.flashcard = undefined;
       this.ngOnInit();
     }
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
   }
 }
