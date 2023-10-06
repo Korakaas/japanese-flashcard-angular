@@ -13,6 +13,6 @@ export class Deck {
   public?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
-  flashcards?: Flashcard[];
+  flashcards?: Flashcard;
   pseudo?:string;
 }

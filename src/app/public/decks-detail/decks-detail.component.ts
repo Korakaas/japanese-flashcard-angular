@@ -3,6 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { DeckService } from 'src/app/_services/deck.service';
 import { Deck } from 'src/app/models/deck.model';
+import {
+  Flashcard,
+  FlashcardGrammar,
+  FlashcardKanji,
+  FlashcardVocabulary,
+  Union,
+} from 'src/app/models/flashcard.model';
 
 @Component({
   selector: 'app-decks-detail',
@@ -11,6 +18,18 @@ import { Deck } from 'src/app/models/deck.model';
 })
 export class DecksDetailComponent {
   deck!: Deck;
+  flashcard!: Union | undefined;
+  display: boolean = false;
+  scores = [
+    { label: 'Revoir', value: 1 },
+    { label: 'Difficile', value: 2 },
+    { label: 'Correct', value: 3 },
+    { label: 'Facile', value: 4 },
+    { label: 'Très facile', value: 5 },
+  ];
+  isFlashcardKanji!: (flashcard: Union) => flashcard is FlashcardKanji;
+  isFlashcardVocab!: (flashcard: Union) => flashcard is FlashcardVocabulary;
+  isFlashcardGrammar!: (flashcard: Union) => flashcard is FlashcardGrammar;
   private destroy$!: Subject<boolean>;
 
   constructor(
@@ -27,10 +46,30 @@ export class DecksDetailComponent {
         .getDecksDetail(id)
         .pipe(takeUntil(this.destroy$))
         .subscribe((data: Deck) => {
-          this.deck = data;
-          console.log(this.deck);
+          {
+            this.deck = data;
+            this.flashcard = this.deck.flashcards;
+            this.isFlashcardKanji = (
+              flashcard: Union
+            ): flashcard is FlashcardKanji => flashcard.type === 'kanji';
+            console.log(this.flashcard?.type === 'kanji');
+            this.isFlashcardVocab = (
+              flashcard: Union
+            ): flashcard is FlashcardVocabulary =>
+              flashcard.type === 'vocabulary';
+            this.isFlashcardGrammar = (
+              flashcard: Union
+            ): flashcard is FlashcardGrammar => flashcard.type === 'grammar';
+            console.log(this.flashcard?.type === 'kanji');
+
+            console.log(this.flashcard);
+          }
         });
     }
+  }
+  displayBack() {
+    this.display = !this.display;
+    console.log(this.display);
   }
   ngOnDestroy(): void {
     this.destroy$.next(true);

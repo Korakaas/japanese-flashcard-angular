@@ -1,8 +1,83 @@
-<div>
-  <p>{{ deck.name }}</p>
-  <p>{{ deck.description }}</p>
-  <p>{{ deck.public }}</p>
-  <p>{{ deck.createdAt }}</p>
-  <p>{{ deck.updatedAt }}</p>
-  <p>{{ deck.flashcards | json }}</p>
+<div class="container">
+  <h1>Détail du paquet {{ deck.name }}</h1>
+  <article class="card" *ngIf="deck">
+    <div class="cardBody">
+      <h3>{{ deck.name | titlecase }}</h3>
+      <p>{{ deck.description }}</p>
+      <p>Auteur: {{ deck.pseudo }}</p>
+    </div>
+    <footer>
+      <p>
+        Crée le {{ deck.createdAt | date : "dd/MM/YY" }} - Dernières
+        modifications: {{ deck.updatedAt | date : "dd/MM/YY" }}
+      </p>
+      <p *ngIf="deck.public">Public</p>
+    </footer>
+  </article>
+  <div>
+    <h2>Exemple de carte</h2>
+
+    <div *ngIf="flashcard">
+      <div class="card" [class.front]="display">
+        <p>{{ flashcard.front }}</p>
+        <button name="answer" type="button" (click)="displayBack()">
+          Voir la réponse
+        </button>
+      </div>
+
+      <div class="card" id="card-back" [class.back]="display" *ngIf="flashcard">
+        <h3>{{ flashcard.back }}</h3>
+        <hr class="solid" />
+        <div class="extraInfo">
+          <p>
+            <span class="labelInfo font14">Exemple:</span>
+            {{ flashcard.example }}
+          </p>
+          <p *ngIf="flashcard.furigana">
+            <span class="labelInfo">Furigana:</span> {{ flashcard.furigana }}
+          </p>
+          <p *ngIf="isFlashcardKanji(flashcard) && flashcard.kunyomi">
+            <span class="labelInfo">Kunyomi:</span> {{ flashcard.kunyomi }}
+          </p>
+          <p *ngIf="isFlashcardKanji(flashcard) && flashcard.onyomi">
+            <span class="labelInfo">Onyomi:</span> {{ flashcard.onyomi }}
+          </p>
+          <p *ngIf="isFlashcardKanji(flashcard) && flashcard.mnemotic">
+            <span class="labelInfo">Aide mémoire:</span>
+            {{ flashcard.mnemotic }}
+          </p>
+          <p *ngIf="isFlashcardVocab(flashcard) && flashcard.synonym">
+            <span class="labelInfo">Synonyme:</span> {{ flashcard.synonym }}
+          </p>
+          <p *ngIf="isFlashcardVocab(flashcard) && flashcard.antonym">
+            <span class="labelInfo">Antonyme:</span> {{ flashcard.antonym }}
+          </p>
+          <p *ngIf="isFlashcardGrammar(flashcard) && flashcard.construction">
+            <span class="labelInfo">Construction:</span>
+            {{ flashcard.construction }}
+          </p>
+          <p *ngIf="isFlashcardGrammar(flashcard) && flashcard.grammarnotes">
+            <span class="labelInfo">Notes:</span> {{ flashcard.grammarnotes }}
+          </p>
+        </div>
+
+        <div class="resultButton">
+          <button
+            class="font14"
+            name="result"
+            type="button"
+            *ngFor="let score of scores"
+            (click)="displayBack()"
+            [class.again]="score.value === 1"
+            [class.hard]="score.value === 2"
+            [class.correct]="score.value === 3"
+            [class.easy]="score.value === 4"
+            [class.known]="score.value === 5"
+          >
+            {{ score.label }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
