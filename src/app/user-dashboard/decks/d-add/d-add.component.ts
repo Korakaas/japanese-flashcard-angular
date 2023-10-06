@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { DeckService } from 'src/app/_services/deck.service';
 import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
 import { Deck } from 'src/app/models/deck.model';
@@ -12,6 +17,9 @@ import { Deck } from 'src/app/models/deck.model';
 export class DAddComponent {
   deck: Deck = new Deck();
   deckForm!: FormGroup;
+  name = new FormControl('', [Validators.required, Validators.maxLength(40)]);
+  description = new FormControl('');
+  public = new FormControl(false);
 
   constructor(
     private deckService: DeckService,
@@ -21,22 +29,23 @@ export class DAddComponent {
 
   ngOnInit(): void {
     this.deckForm = this.formbuilder.group({
-      name: new FormControl(''),
-      description: new FormControl(''),
-      public: new FormControl(false),
+      name: this.name,
+      description: this.description,
+      public: this.public,
     });
   }
 
   onSubmit() {
-    console.log(this.deckForm.value);
-    this.deck = {
-      name: this.deckForm.value.name,
-      description: this.deckForm.value.description,
-      public: this.deckForm.value.public,
-    };
+    if (this.deckForm.valid) {
+      this.deck = {
+        name: this.deckForm.value.name,
+        description: this.deckForm.value.description,
+        public: this.deckForm.value.public,
+      };
 
-    this.deckService.createUserDecks(this.deck).subscribe((message) => {
-      this.apiSuccessService.sendSuccess(message);
-    });
+      this.deckService.createUserDecks(this.deck).subscribe((message) => {
+        this.apiSuccessService.sendSuccess(message);
+      });
+    }
   }
 }

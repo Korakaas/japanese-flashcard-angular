@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DeckService } from 'src/app/_services/deck.service';
 import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
@@ -13,6 +18,9 @@ import { Deck } from 'src/app/models/deck.model';
 export class DEditComponent implements OnInit {
   deck!: Deck;
   deckForm!: FormGroup;
+  name = new FormControl('', [Validators.required, Validators.maxLength(40)]);
+  description = new FormControl('');
+  public = new FormControl(false);
 
   constructor(
     private activated: ActivatedRoute,
@@ -23,10 +31,9 @@ export class DEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.deckForm = this.formbuilder.group({
-      name: new FormControl(''),
-      description: new FormControl(''),
-      public: new FormControl(false),
-      reverse: new FormControl(false),
+      name: this.name,
+      description: this.description,
+      public: this.public,
     });
     let id = this.activated.snapshot.paramMap.get('id');
     console.log(id);
@@ -48,14 +55,16 @@ export class DEditComponent implements OnInit {
   }
 
   onSubmit() {
-    this.deck.name = this.deckForm.value.name;
-    this.deck.description = this.deckForm.value.description;
-    this.deck.public = this.deckForm.value.public;
+    if (this.deckForm.valid) {
+      this.deck.name = this.deckForm.value.name;
+      this.deck.description = this.deckForm.value.description;
+      this.deck.public = this.deckForm.value.public;
 
-    this.deckService
-      .updateUserDecks(this.deck)
-      .subscribe((message: string) =>
-        this.apiSuccessService.sendSuccess(message)
-      );
+      this.deckService
+        .updateUserDecks(this.deck)
+        .subscribe((message: string) =>
+          this.apiSuccessService.sendSuccess(message)
+        );
+    }
   }
 }

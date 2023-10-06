@@ -3,25 +3,68 @@
   <div class="form-container">
     <h1>S'enregistrer</h1>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <div>
+      <div class="inputContainer">
         <label for="email">Email</label>
-        <input type="text" name="email" id="email" formControlName="email" />
+        <input
+          type="text"
+          name="email"
+          id="email"
+          formControlName="email"
+          [class.error]="!email.valid && !email.untouched"
+        />
+        <div class="errorMessage" [hidden]="email.valid || email.untouched">
+          <p [hidden]="!email.hasError('maxlength')">
+            L'email ne peux pas faire plus de 180 caractères.
+          </p>
+          <p [hidden]="!email.hasError('required')">
+            L'email est obligatoire.
+          </p>
+          <p [hidden]="!email.hasError('email')">
+            L'email n'est pas valide.
+          </p>
+        </div>
       </div>
-      <div>
+      <div class="inputContainer">
         <label for="pseudo">Pseudo</label>
-        <input type="text" name="pseudo" id="pseudo" formControlName="pseudo" />
+        <input
+          type="text"
+          name="pseudo"
+          id="pseudo"
+          formControlName="pseudo"
+          [class.error]="!pseudo.valid && !pseudo.untouched"
+        />
+        <div class="errorMessage" [hidden]="pseudo.valid || pseudo.untouched">
+          <p [hidden]="!pseudo.hasError('maxlength')">
+            Le pseudo ne peut pas contenir plus de 40 caractères
+          </p>
+        </div>
       </div>
-      <div>
+      <div class="inputContainer">
         <label for="password">Mot de passe</label>
         <input
           type="password"
           name="password"
           id="password"
           formControlName="password"
+          [class.error]="!password.valid && !password.untouched"
         />
+        <div class="errorMessage" [hidden]="password.valid || password.untouched">
+          <p [hidden]="!password.hasError('minlength')">
+            Le mot de passe doit contenit au minimum 8 caractères.
+          </p>
+          <p [hidden]="!password.hasError('required')">
+            Le mot de passe est obligatoire.
+          </p>
+          <p [hidden]="!password.hasError('pattern')">
+            Le mot de passe doit contenir au moins un chiffre, un caractère
+            spécial et une majuscule.
+          </p>
+        </div>
       </div>
       <div>
-        <button type="submit">Se connecter</button>
+        <button type="submit" [disabled]="!registerForm.valid">
+          Se connecter
+        </button>
       </div>
     </form>
     <a [routerLink]="['../login']"

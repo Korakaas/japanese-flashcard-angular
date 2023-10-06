@@ -4,21 +4,50 @@
   <div class="form-container">
     <h1>Se connecter</h1>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <label for="username">Email</label>
-      <input
-        type="text"
-        name="username"
-        id="username"
-        formControlName="username"
-      />
-      <label for="password">Mot de passe</label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        formControlName="password"
-      />
-      <button type="submit">Se connecter</button>
+      <div class="inputContainer">
+        <label for="username">Email</label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          formControlName="username"
+          [class.error]="!username.valid && !username.untouched"
+        />
+        <div class="errorMessage" [hidden]="username.valid || username.untouched">
+          <p [hidden]="!username.hasError('maxlength')">
+            L'email ne peux pas faire plus de 180 caractères.
+          </p>
+          <p [hidden]="!username.hasError('required')">
+            L'email est obligatoire.
+          </p>
+          <p [hidden]="!username.hasError('email')">
+            L'email n'est pas valide.
+          </p>
+        </div>
+      </div>
+      <div class="inputContainer">
+        <label for="password">Mot de passe</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          formControlName="password"
+          [class.error]="!password.valid && !password.untouched"
+        />
+        <div class="errorMessage" [hidden]="password.valid || password.untouched">
+          <p [hidden]="!password.hasError('minlength')">
+            Le mot de passe doit contenit au minimum 8 caractères.
+          </p>
+          <p [hidden]="!password.hasError('required')">
+            Le mot de passe est obligatoire.
+          </p>
+          <p [hidden]="!password.hasError('pattern')">
+            Le mot de passe doit contenir au moins un chiffre, un caractère
+            spécial et une majuscule.
+          </p>
+        </div>
+      </div>
+      <button type="submit" [disabled]="!loginForm.valid">Se connecter</button>
     </form>
     <a [routerLink]="['../register']"
       >Pas encore de compte? S'enregistrer</a

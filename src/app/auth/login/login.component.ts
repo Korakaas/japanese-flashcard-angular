@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import {
+  FormGroup,
+  Validators,
+  FormBuilder,
+  FormControl,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
 import { TokenService } from 'src/app/_services/token.service';
@@ -12,17 +17,17 @@ import { Token } from 'src/app/models/token.model';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup = this.formBuilder.group({
-    username: ['', [Validators.required, Validators.email]],
-    password: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])/),
-      ],
-    ],
-  });
+  loginForm!: FormGroup;
+  username = new FormControl('', [
+    Validators.required,
+    Validators.email,
+    Validators.maxLength(180),
+  ]);
+  password = new FormControl('', [
+    Validators.required,
+    Validators.minLength(8),
+    Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])/),
+  ]);
   credentials: Credentials = {};
 
   constructor(
@@ -32,19 +37,23 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      username: this.username,
+      password: this.password,
+    });
+  }
 
   onSubmit(): void {
-    this.credentials.username = this.loginForm.value.username;
-    this.credentials.password = this.loginForm.value.password;
+    if (this.loginForm.valid) {
+      this.credentials.username = this.loginForm.value.username;
+      this.credentials.password = this.loginForm.value.password;
 
-    this.authService.login(this.credentials).subscribe(
-      (data: Token) => {
+      this.authService.login(this.credentials).subscribe((data: Token) => {
         console.log(data.token);
         this.tokenService.saveToken(data.token);
         this.router.navigate(['user/decks']);
-      },
-      (err) => console.log(err)
-    );
+      });
+    }
   }
 }

@@ -2,55 +2,201 @@
 <div class="form-container">
   <form [formGroup]="flashcardForm" (ngSubmit)="onSubmit()">
     <h2>RECTO</h2>
-    <div>
+    <div class="inputContainer">
       <label for="front">Word</label>
-      <input type="text" id="front" formControlName="front" />
+      <input
+        type="text"
+        id="front"
+        formControlName="front"
+        [class.error]="!front.valid && !front.untouched"
+      />
+      <div class="errorMessage" [hidden]="front.valid || front.untouched">
+        <p [hidden]="!front.hasError('maxlength')">
+          Le recto nne peux pas faire plus de 255 caractères.
+        </p>
+        <p [hidden]="!front.hasError('required')">Le recto est obligatoire.</p>
+      </div>
     </div>
     <div>
       <h2>VERSO</h2>
-      <div>
+      <div class="inputContainer">
         <label for="back">Traduction</label>
-        <input type="text" id="back" formControlName="back" />
+        <input
+          type="text"
+          id="back"
+          formControlName="back"
+          [class.error]="!back.valid && !back.untouched"
+        />
+        <div class="errorMessage" [hidden]="back.valid || back.untouched">
+          <p [hidden]="!back.hasError('maxlength')">
+            Le verso ne peux pas faire plus de 255 caractères.
+          </p>
+          <p [hidden]="!back.hasError('required')">Le verso est obligatoire.</p>
+        </div>
       </div>
 
-      <div>
+      <div class="inputContainer">
         <label for="example">Exemple</label>
-        <input type="text" id="example" formControlName="example" />
+        <input
+          type="text"
+          id="example"
+          formControlName="example"
+          [class.error]="!example.valid && !example.untouched"
+        />
+        <div class="errorMessage" [hidden]="example.valid || example.untouched">
+          <p [hidden]="!example.hasError('maxlength')">
+            L'exemple ne peux pas faire plus de 255 caractères.
+          </p>
+        </div>
       </div>
-      <div>
+      <div class="inputContainer">
         <label for="furigana">Furigana</label>
-        <input type="text" id="furigana" formControlName="furigana" />
+        <input
+          type="text"
+          id="furigana"
+          formControlName="furigana"
+          [class.error]="!furigana.valid && !furigana.untouched"
+        />
+        <div
+          class="errorMessage"
+          [hidden]="furigana.valid || furigana.untouched"
+        >
+          <p [hidden]="!furigana.hasError('maxlength')">
+            Le champ furigana ne peux pas faire plus de 255 caractères.
+          </p>
+        </div>
       </div>
 
       <div formGroupName="flashcardTypeForm">
         <div *ngIf="type === 'vocabulary'">
-          <label for="synonym">Synonyme(s)</label>
-          <input type="text" id="synonym" formControlName="synonym" />
-          <label for="antonym">Antonyme(s)</label>
-          <input type="text" id="antonym" formControlName="antonym" />
+          <div class="inputContainer">
+            <label for="synonym">Synonyme(s)</label>
+            <input
+              type="text"
+              id="synonym"
+              formControlName="synonym"
+              [class.error]="!synonym.valid && !synonym.untouched"
+            />
+            <div
+              class="errorMessage"
+              [hidden]="synonym.valid || synonym.untouched"
+            >
+              <p [hidden]="!synonym.hasError('maxlength')">
+                Le champ synonyme ne peux pas faire plus de 255 caractères.
+              </p>
+            </div>
+          </div>
+          <div class="inputContainer">
+            <label for="antonym">Antonyme(s)</label>
+            <input
+              type="text"
+              id="antonym"
+              formControlName="antonym"
+              [class.error]="!antonym.valid && !antonym.untouched"
+            />
+            <div
+              class="errorMessage"
+              [hidden]="antonym.valid || antonym.untouched"
+            >
+              <p [hidden]="!antonym.hasError('maxlength')">
+                Le champ antonym ne peux pas faire plus de 255 caractères.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div *ngIf="type === 'kanji'">
-          <label for="onyomi">Lecture onyomi</label>
-          <input type="text" id="onyomi" formControlName="onyomi" />
-          <label for="kunyomi">Lecture kunyomi</label>
-          <input type="text" id="kunyomi" formControlName="kunyomi" />
-          <label for="mnemotic">Aide mnémotechnique</label>
-          <input type="text" id="mnemotic" formControlName="mnemotic" />
+          <div class="inputContainer">
+            <label for="onyomi">Lecture onyomi</label>
+            <input
+              type="text"
+              id="onyomi"
+              formControlName="onyomi"
+              [class.error]="!onyomi.valid && !onyomi.untouched"
+            />
+            <div
+              class="errorMessage"
+              [hidden]="onyomi.valid || onyomi.untouched"
+            >
+              <p [hidden]="!onyomi.hasError('maxlength')">
+                Le champ onyomi ne peux pas faire plus de 60 caractères.
+              </p>
+            </div>
+          </div>
+          <div class="inputContainer">
+            <label for="kunyomi">Lecture kunyomi</label>
+            <input
+              type="text"
+              id="kunyomi"
+              formControlName="kunyomi"
+              [class.error]="!kunyomi.valid && !kunyomi.untouched"
+            />
+            <div
+              class="errorMessage"
+              [hidden]="kunyomi.valid || kunyomi.untouched"
+            >
+              <p [hidden]="!kunyomi.hasError('maxlength')">
+                Le champ kunyomi ne peux pas faire plus de 60 caractères.
+              </p>
+            </div>
+          </div>
+          <div class="inputContainer">
+            <label for="mnemotic">Aide mnémotechnique</label>
+            <input
+              type="text"
+              id="mnemotic"
+              formControlName="mnemotic"
+              [class.error]="!mnemotic.valid && !mnemotic.untouched"
+            />
+            <div
+              class="errorMessage"
+              [hidden]="mnemotic.valid || mnemotic.untouched"
+            >
+              <p [hidden]="!mnemotic.hasError('maxlength')">
+                L'aide mnemotechnique ne peux pas faire plus de 255 caractères.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div *ngIf="type === 'grammar'">
-          <label for="construction">Construction grammaire</label>
-          <input
-            type="text"
-            id="construction"
-            formControlName="construction"
-          />
-          <label for="grammarnotes">Notes</label>
-          <input type="text" id="grammarnotes" formControlName="grammarnotes" />
+          <div class="inputContainer">
+            <label for="construction">Construction grammaire</label>
+            <input
+              type="text"
+              id="construction"
+              formControlName="construction"
+              [class.error]="!construction.valid && !construction.untouched"
+            />
+            <div
+              class="errorMessage"
+              [hidden]="construction.valid || construction.untouched"
+            >
+              <p [hidden]="!construction.hasError('maxlength')">
+                Le champ construction ne peux pas faire plus de 255 caractères.
+              </p>
+            </div>
+          </div>
+          <div class="inputContainer">
+            <label for="grammarnotes">Notes</label>
+            <input
+              type="text"
+              id="grammarnotes"
+              formControlName="grammarnotes"
+              [class.error]="!grammarnotes.valid && !grammarnotes.untouched"
+            />
+            <div
+              class="errorMessage"
+              [hidden]="grammarnotes.valid || grammarnotes.untouched"
+            >
+              <p [hidden]="!grammarnotes.hasError('maxlength')">
+                Le champ notes ne peux pas faire plus de 255 caractères.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <button type="submit">Sauvegarder</button>
+    <button type="submit" [disabled]="!flashcardForm.valid">Sauvegarder</button>
   </form>
 </div>

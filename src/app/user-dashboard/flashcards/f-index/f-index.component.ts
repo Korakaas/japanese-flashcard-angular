@@ -5,12 +5,18 @@ import { FlashcardsService } from 'src/app/_services/flashcard.service';
 import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
 import { Flashcard, PaginationFlashcard } from 'src/app/models/flashcard.model';
 import Swal from 'sweetalert2';
+interface FormatedInterval {
+  day: number;
+  hour: number;
+  minute: number;
+}
 
 @Component({
   selector: 'app-f-index',
   templateUrl: './f-index.component.html',
   styleUrls: ['./f-index.component.scss'],
 })
+
 export class FIndexComponent {
   flashcardList: Flashcard[] = [];
   deckId: string | null = '';
@@ -28,6 +34,7 @@ export class FIndexComponent {
     this.destroy$ = new Subject<boolean>();
     this.getFlashcard();
   }
+
   confirmDelete(id: string) {
     Swal.fire({
       title: 'Etes-vous sûr de vouloir supprimer ce paquet?',
@@ -47,8 +54,8 @@ export class FIndexComponent {
     if (this.deckId) {
       this.flashcardService
         .deleteFlashcard(this.deckId, flashcardId)
-        .subscribe((data:string) => {
-          this.apiSuccesService.sendSuccess(data)
+        .subscribe((data: string) => {
+          this.apiSuccesService.sendSuccess(data);
           this.getFlashcard();
         });
     }
@@ -73,18 +80,40 @@ export class FIndexComponent {
     this.deckId = this.activated.snapshot.paramMap.get('deckId');
 
     if (this.deckId) {
+      let formatedInterval!: FormatedInterval;
       this.flashcardService
         .getUserFlashcards(this.deckId, this.currentPage)
         .pipe(takeUntil(this.destroy$))
         .subscribe((data: PaginationFlashcard) => {
           this.flashcardList = data.flashcards;
+          this.flashcardList.forEach((flashcard) => {
+            if (flashcard.knownLevel) {
+              if ((flashcard.knownLevel as number) < 3) {
+                flashcard.knownLevel = 'Nouvelle';
+              } else if ((flashcard.knownLevel as number) < 8) {
+                flashcard.knownLevel = 'En cours';
+              } else {
+                flashcard.knownLevel = 'Su';
+              }
+            }
+            if (flashcard.intervalReview) {
+              formatedInterval = this.formatInterval(flashcard.intervalReview as number);
+              flashcard.intervalReview = `${formatedInterval.day}j ${formatedInterval.hour}h  ${formatedInterval.minute}min  `;
+              console.log(flashcard.intervalReview)
+            }
+          });
           console.log(this.flashcardList);
           if (data.total_items)
             this.total = Math.ceil(data.total_items / this.perPage);
-          console.log(data.total_items);
-          console.log(this.total);
         });
     }
+  }
+  private formatInterval(interval: number) {
+    const day = Math.floor(interval);
+    const hour = Math.floor((interval - day) * 24);
+    const minute = Math.floor(((interval - day) * 24 - hour) * 60);
+
+    return { day, hour, minute };
   }
   ngOnDestroy(): void {
     this.destroy$.next(true);

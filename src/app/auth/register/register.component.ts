@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
-import { ApiErrorService } from 'src/app/_subjects/api-error.service';
+
 import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
 import { User } from 'src/app/models/user.model';
 
@@ -13,6 +18,17 @@ import { User } from 'src/app/models/user.model';
 })
 export class RegisterComponent {
   registerForm!: FormGroup;
+  email = new FormControl('', [
+    Validators.required,
+    Validators.email,
+    Validators.maxLength(180),
+  ]);
+  pseudo = new FormControl('', Validators.maxLength(40));
+  password = new FormControl('', [
+    Validators.required,
+    Validators.minLength(8),
+    Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])/),
+  ]);
   user: User = {};
 
   constructor(
@@ -24,30 +40,22 @@ export class RegisterComponent {
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      pseudo: [''],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])/),
-        ],
-      ],
+      email: this.email,
+      pseudo: this.pseudo,
+      password: this.password,
     });
   }
 
   onSubmit(): void {
-    this.user.email = this.registerForm.value.email;
-    this.user.pseudo = this.registerForm.value.pseudo;
-    this.user.password = this.registerForm.value.password;
+    if (this.registerForm.valid) {
+      this.user.email = this.registerForm.value.email;
+      this.user.pseudo = this.registerForm.value.pseudo;
+      this.user.password = this.registerForm.value.password;
 
-    this.authService.register(this.user).subscribe(
-      (data: string) => {
+      this.authService.register(this.user).subscribe((data: string) => {
         this.apiSuccessService.sendSuccess(data);
         this.router.navigate(['auth/login']);
-      },
-      (err) => console.log(err)
-    );
+      });
+    }
   }
 }

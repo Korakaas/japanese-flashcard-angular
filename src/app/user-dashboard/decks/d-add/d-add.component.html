@@ -1,9 +1,23 @@
 <h1>Créer un paquet</h1>
 <div class="form-container">
   <form [formGroup]="deckForm" (ngSubmit)="onSubmit()">
-    <label for="name">Nom du paquet </label>
-    <input id="name" type="text" formControlName="name" />
-
+    <div class="inputContainer">
+      <label for="name">Nom du paquet </label>
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        [class.error]="!name.valid && !name.untouched"
+      />
+      <div class="errorMessage" [hidden]="name.valid || name.untouched">
+        <p [hidden]="!name.hasError('maxlength')">
+          Le nom ne peux pas faire plus de 40 caractères.
+        </p>
+        <p [hidden]="!name.hasError('required')">
+          Le nom est obligatoire
+        </p>
+      </div>
+    </div>
     <label for="description">Description</label>
     <textarea
       name="description"
@@ -23,6 +37,6 @@
       />
       <label class="form-check-label" for="public "> Public </label>
     </div>
-    <button type="submit">Créer</button>
+    <button type="submit" [disabled]="!deckForm.valid">Créer</button>
   </form>
 </div>

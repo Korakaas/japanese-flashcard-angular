@@ -7,6 +7,9 @@ h1 {
   width: 80%;
   margin: auto;
 }
+.inputContainer{
+  margin-top: 16px;
+}
 label {
   margin-bottom: 8px;
 }
@@ -16,11 +19,9 @@ select {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-input[type="text"],
-textarea {
+input[type="text"]{
   width: 100%;
   padding: 10px 5px;
-  margin-bottom: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -37,9 +38,20 @@ button[type="submit"] {
   padding: 10px 20px;
   cursor: pointer;
   width: 100%;
+  &:disabled {
+    opacity: 0.7;
+    cursor:default;
+  }
 }
 
+input[type="text"].error {
+  border: 1px solid #e31c3d;
+}
 
+.errorMessage p{
+  font-size: 12px;
+  color:#e31c3d;
+}
 
 // Styles pour les tablettes et les écrans plus larges (min-width : 768px)
 @media (min-width: 768px) {

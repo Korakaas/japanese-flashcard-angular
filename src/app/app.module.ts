@@ -14,7 +14,15 @@ import { UnavailableComponent } from './_utils/unavailable/unavailable.component
 import { ManyRequestsComponent } from './_utils/many-requests/many-requests.component';
 
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent, ServerErrorComponent, ForbiddenComponent, TimeOutComponent, UnavailableComponent, ManyRequestsComponent],
+  declarations: [
+    AppComponent,
+    NotFoundComponent,
+    ServerErrorComponent,
+    ForbiddenComponent,
+    TimeOutComponent,
+    UnavailableComponent,
+    ManyRequestsComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

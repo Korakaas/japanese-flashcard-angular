@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FlashcardsService } from 'src/app/_services/flashcard.service';
 import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
@@ -21,6 +26,17 @@ export class FEditComponent implements OnInit {
   flashcardTypeForm!: FormGroup;
   type: string | undefined = '';
   deckId: string | null = '';
+  front = new FormControl('', [Validators.required, Validators.maxLength(255)]);
+  back = new FormControl('', [Validators.required, Validators.maxLength(255)]);
+  example = new FormControl('', Validators.maxLength(255));
+  furigana = new FormControl('', Validators.maxLength(255));
+  synonym = new FormControl('', Validators.maxLength(255));
+  antonym = new FormControl('', Validators.maxLength(255));
+  mnemotic = new FormControl('', Validators.maxLength(255));
+  onyomi = new FormControl('', Validators.maxLength(60));
+  kunyomi = new FormControl('', Validators.maxLength(60));
+  construction = new FormControl('', Validators.maxLength(255));
+  grammarnotes = new FormControl('', Validators.maxLength(255));
 
   constructor(
     private activated: ActivatedRoute,
@@ -31,10 +47,10 @@ export class FEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.flashcardForm = this.formbuilder.group({
-      front: '',
-      back: '',
-      example: '',
-      furigana: '',
+      front: this.front,
+      back: this.back,
+      example: this.example,
+      furigana: this.example,
       flashcardTypeForm: this.formbuilder.group({}),
     });
 
@@ -59,38 +75,17 @@ export class FEditComponent implements OnInit {
 
     switch (this.type) {
       case 'vocabulary':
-        this.flashcardTypeForm.addControl(
-          'synonym',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'antonym',
-          this.formbuilder.control('')
-        );
+        this.flashcardTypeForm.addControl('synonym', this.synonym);
+        this.flashcardTypeForm.addControl('antonym', this.antonym);
         break;
       case 'kanji':
-        this.flashcardTypeForm.addControl(
-          'mnemotic',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'onyomi',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'kunyomi',
-          this.formbuilder.control('')
-        );
+        this.flashcardTypeForm.addControl('mnemotic', this.mnemotic);
+        this.flashcardTypeForm.addControl('onyomi', this.onyomi);
+        this.flashcardTypeForm.addControl('kunyomi', this.kunyomi);
         break;
       case 'grammar':
-        this.flashcardTypeForm.addControl(
-          'construction',
-          this.formbuilder.control('')
-        );
-        this.flashcardTypeForm.addControl(
-          'grammarnotes',
-          this.formbuilder.control('')
-        );
+        this.flashcardTypeForm.addControl('construction', this.construction);
+        this.flashcardTypeForm.addControl('grammarnotes', this.grammarnotes);
         break;
 
       default:
@@ -145,14 +140,16 @@ export class FEditComponent implements OnInit {
   }
 
   onSubmit() {
-    Object.assign(this.flashcard, this.flashcardForm.value);
-    Object.assign(this.flashcard, this.flashcardForm.value.flashcardTypeForm);
-    if (this.deckId) {
-      this.flashcardService
-        .updatelFlashcard(this.deckId, this.flashcard)
-        .subscribe((message: string) =>
-          this.apiSuccessService.sendSuccess(message)
-        );
+    if (this.flashcardForm.valid) {
+      Object.assign(this.flashcard, this.flashcardForm.value);
+      Object.assign(this.flashcard, this.flashcardForm.value.flashcardTypeForm);
+      if (this.deckId) {
+        this.flashcardService
+          .updatelFlashcard(this.deckId, this.flashcard)
+          .subscribe((message: string) =>
+            this.apiSuccessService.sendSuccess(message)
+          );
+      }
     }
   }
 }
