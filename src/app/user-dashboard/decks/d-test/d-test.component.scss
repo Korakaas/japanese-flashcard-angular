@@ -1,3 +1,5 @@
+
+@import '../../../../vars.scss';
 /* ---------- Structure de base ---------- */
 .container {
   text-align: center;
@@ -15,14 +17,14 @@ h1 {
   font-size: 18px;
 }
 hr.solid {
-  border-top: 1px solid #000;
+  border-top: 1px solid $noir;
   margin: 20px;
 }
 
 /* ---------- Carte ---------- */
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  background-color: #fff;
+  background-color: $secondary-color;
   transition: 0.3s;
   padding: 16px;
   border-radius: 10px;
@@ -59,7 +61,7 @@ button {
   padding: 5px;
   border: 1px solid #ccc;
   color: #0c458d;
-  background-color: #f9dd8e;
+  background-color: $yellow;
 }
 .resultButton {
   display: flex;
@@ -68,17 +70,17 @@ button {
   gap: 5px;
   margin: 10px 0;
   & > button {
-    color: #fff;
+    color: $secondary-color;
   }
 }
 .again {
   background-color: #333333;
 }
 .hard {
-  background-color: #e31c3d;
+  background-color: $red;
 }
 .correct {
-  background-color: #2e8540;
+  background-color: $green;
 }
 .easy {
   background-color: #0071bc;

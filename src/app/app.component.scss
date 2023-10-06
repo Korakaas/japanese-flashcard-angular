@@ -1,3 +1,4 @@
+@import '../vars.scss';
 //style général du toast
 .toast {
   position: absolute;
@@ -6,7 +7,7 @@
   border-radius: 5px;
   padding: 10px 15px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color: $secondary-color;
   transform: translateX(calc(100% + 30px));
   transition: all 0.5s ease;
   overflow: hidden;
@@ -21,7 +22,7 @@
   justify-content: center;
   height: 29px;
   width: 35px;
-  color: #fff;
+  color: $secondary-color;
   font-size: 20px;
   border-radius: 50%;
 }
@@ -76,24 +77,24 @@
 
 // style toast erreur
 .toast.error {
-  border-left: 6px solid #e31c3d;
+  border-left: 6px solid $red;
 }
 .toast.error .toast_content i {
-  background: #e31c3d;
+  background: $red;
 }
 .toast.error .progress:before {
-  background: #e31c3d;
+  background: $red;
 }
 
 // style toast succès
 .toast.success {
-  border-left: 6px solid #2e8540;
+  border-left: 6px solid $green;
 }
 .toast.success .toast_content i {
-  background: #2e8540;
+  background: $green;
 }
 .toast.success .progress:before {
-  background: #2e8540;
+  background: $green;
 }
 
 //animation barre de progression

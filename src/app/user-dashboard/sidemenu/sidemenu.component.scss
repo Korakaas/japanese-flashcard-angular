@@ -1,4 +1,4 @@
-
+@import '../../../vars.scss';
 #sidemenu {
   margin-top: 20px;
   display: none;
@@ -8,5 +8,5 @@
   }
 }
 a {
-  color: #fff;
+  color: $secondary-color;
 }

@@ -51,6 +51,7 @@ export class DAddComponent {
         .pipe(takeUntil(this.destroy$))
         .subscribe((message: string) => {
           this.apiSuccessService.sendSuccess(message);
+          this.deckForm.reset();
         });
     }
   }

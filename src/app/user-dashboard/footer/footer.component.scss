@@ -19,7 +19,7 @@
 }
 .footer-col h4 {
   font-size: 18px;
-  color: #ffffff;
+  color: $secondary-color;
   text-transform: capitalize;
   margin-bottom: 35px;
   font-weight: 500;
@@ -30,7 +30,7 @@
   position: absolute;
   left: 0;
   bottom: -10px;
-  background-color: #f9dd8e;
+  background-color: $yellow;
   height: 2px;
   box-sizing: border-box;
   width: 50px;
@@ -41,14 +41,14 @@
 .footer-col ul li a {
   font-size: 16px;
   text-transform: capitalize;
-  color: #ffffff;
+  color: $secondary-color;
   text-decoration: none;
   font-weight: 300;
   display: block;
   transition: all 0.3s ease;
 }
 .footer-col ul li a:hover {
-  color: #ffffff;
+  color: $secondary-color;
   padding-left: 8px;
 }
 

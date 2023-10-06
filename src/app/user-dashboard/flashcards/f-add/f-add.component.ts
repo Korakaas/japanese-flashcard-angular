@@ -98,9 +98,10 @@ export class FAddComponent implements OnInit {
         this.flashcardService
           .createFlashcard(this.deckId, newFlashcard)
           .pipe(takeUntil(this.destroy$))
-          .subscribe((message: string) =>
-            this.apiSuccesService.sendSuccess(message)
-          );
+          .subscribe((message: string) => {
+            this.apiSuccesService.sendSuccess(message);
+            this.flashcardForm.reset();
+          });
       }
     }
   }

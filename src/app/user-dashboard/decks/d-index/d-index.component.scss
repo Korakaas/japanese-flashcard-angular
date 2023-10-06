@@ -7,11 +7,11 @@ h1 {
   margin: 20px;
 }
 a {
-  color: #000;
+  color: $noir;
 }
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  background-color: #fff;
+  background-color: $secondary-color;
   transition: 0.3s;
 
   border-radius: 10px;
@@ -37,7 +37,7 @@ header {
 }
 
 .headerContainer a {
-  color: #fff;
+  color: $secondary-color;
 }
 
 .cardBody {
@@ -55,7 +55,7 @@ header {
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  background-color: $secondary-color;
+  background-color: $yellow;
   color: $primary-color;
   text-align: center;
   padding: 5px 0;
@@ -78,7 +78,7 @@ header {
 
 .deleteButton {
   cursor: pointer;
-  background-color: #e31c3d;
+  background-color: $red;
   padding: 5px;
   border-radius: 5px;
 }

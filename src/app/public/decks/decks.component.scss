@@ -8,7 +8,7 @@ h1 {
   margin-bottom: 20px;
 }
 a {
-  color: #000;
+  color: $noir;
 }
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -17,7 +17,7 @@ a {
   width: 60%;
   margin: 10px auto;
   text-align: center;
-  background-color: #fff;
+  background-color: $secondary-color;
 }
 
 .card:hover {
@@ -37,7 +37,7 @@ header {
 }
 
 .headerContainer a {
-  color: #fff;
+  color: $secondary-color;
   cursor: pointer;
 }
 
@@ -55,7 +55,7 @@ header {
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  background-color: $secondary-color;
+  background-color: $yellow;
   color: $primary-color;
   text-align: center;
   padding: 5px 0;

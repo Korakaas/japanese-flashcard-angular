@@ -23,7 +23,7 @@
     <div *ngIf="typeFlashcard">
       <h2>Recto</h2>
       <div class="inputContainer">
-        <label for="front">Word</label>
+        <label for="front">A deviner</label>
         <input
           type="text"
           id="front"
@@ -32,7 +32,7 @@
         />
         <div class="errorMessage" [hidden]="front.valid || front.untouched">
           <p [hidden]="!front.hasError('maxlength')">
-            Le recto nne peux pas faire plus de 255 caractères.
+            Le recto ne peux pas faire plus de 255 caractères.
           </p>
           <p [hidden]="!front.hasError('required')">
             Le recto est obligatoire.
@@ -42,7 +42,7 @@
       <div>
         <h2>Verso</h2>
         <div class="inputContainer">
-          <label for="back">Traduction</label>
+          <label for="back">Réponse</label>
           <input
             type="text"
             id="back"
@@ -51,10 +51,10 @@
           />
           <div class="errorMessage" [hidden]="back.valid || back.untouched">
             <p [hidden]="!back.hasError('maxlength')">
-              Le verso ne peux pas faire plus de 255 caractères.
+             La réponse ne peux pas faire plus de 255 caractères.
             </p>
             <p [hidden]="!back.hasError('required')">
-              Le verso est obligatoire.
+              La réponse est obligatoire.
             </p>
           </div>
         </div>

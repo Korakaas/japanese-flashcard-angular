@@ -32,7 +32,7 @@ input[type="text"]{
 
 button[type="submit"] {
   background-color: $primary-color;
-  color: #fff;
+  color: $secondary-color;
   border: none;
   border-radius: 4px;
   padding: 10px 20px;
@@ -45,12 +45,12 @@ button[type="submit"] {
 }
 
 input[type="text"].error {
-  border: 1px solid #e31c3d;
+  border: 1px solid $red;
 }
 
 .errorMessage p{
   font-size: 12px;
-  color:#e31c3d;
+  color:$red;
 }
 
 // Styles pour les tablettes et les écrans plus larges (min-width : 768px)
