@@ -3,8 +3,7 @@
   <form [formGroup]="flashcardForm" (ngSubmit)="onSubmit()">
     <div class="inputContainer">
       <select
-        name=""
-        id=""
+        name="type"
         (change)="onselectchange($event)"
         formControlName="type"
         [class.error]="!type.valid && !type.untouched"
