@@ -3,26 +3,28 @@
 footer {
   padding: 20px;
   background-color: $primary-color;
-  margin-top:20px;
+  margin-top: 20px;
 }
 ul {
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
   align-items: center;
-
 }
 
 a {
   color: $secondary-color;
+  &:hover {
+    color: $yellow;
+    font-weight: 600;
+  }
 }
 
-@media screen and (min-width:700px) {
-    ul {
-        display: flex;
-        justify-content: space-evenly;
-        flex-direction: row;
-        align-items: center;
-      
-      }
+@media screen and (min-width: 700px) {
+  ul {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    align-items: center;
+  }
 }

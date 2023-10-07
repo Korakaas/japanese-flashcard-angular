@@ -1,3 +1,5 @@
+@import '../../../vars.scss';
+
 header{
     display: flex;
     justify-content: space-between;
@@ -7,6 +9,18 @@ header{
 
 img{
     width: 50%;
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+ a {
+    cursor:pointer;
+    color:$noir;
+    &:hover{
+        color:$primary-color;
+        font-weight: 600;
+    }
 }
 
 

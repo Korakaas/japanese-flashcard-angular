@@ -9,4 +9,8 @@
 }
 a {
   color: $secondary-color;
+  &:hover {
+    color:$yellow;
+    font-weight:600;
+  }
 }

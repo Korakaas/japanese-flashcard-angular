@@ -1,11 +1,13 @@
 <div class="container">
   <h1>Mes paquets</h1>
-  <section class="card">
-    <div id="addCard" class="cardHeader"><i class="bi bi-plus-circle"></i></div>
-    <div class="cardBody">
-      <a [routerLink]="['add']">Créer un paquet</a>
-    </div>
-  </section>
+  <a [routerLink]="['add']">
+    <section class="card">
+      <div id="addCard" class="cardHeader">
+        <i class="bi bi-plus-circle"></i>
+      </div>
+      <div class="cardBody">Créer un paquet</div>
+    </section>
+  </a>
   <div *ngFor="let deck of deckList">
     <article class="card" *ngIf="deck">
       <header>
@@ -44,7 +46,7 @@
       </header>
 
       <div class="cardBody">
-        <h2>{{ deck.name | titlecase  }}</h2>
+        <h2>{{ deck.name | titlecase }}</h2>
         <p>{{ deck.description }}</p>
       </div>
       <footer>

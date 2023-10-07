@@ -13,6 +13,10 @@ h1 {
   margin: 20px auto;
   text-align: center;
 }
+#addCard:hover {
+  background-color: $primary-color;
+  color: $secondary-color;
+}
 i {
   margin-right: 1em;
 }
@@ -51,6 +55,11 @@ td {
 
 a {
   color: $primary-color;
+  text-align: center;
+  &:hover {
+    color: $noir;
+    font-weight: 600;
+  }
 }
 .deleteButton {
   cursor: pointer;

@@ -6,9 +6,6 @@ h1 {
   font-size: 2rem;
   margin: 20px;
 }
-a {
-  color: $noir;
-}
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background-color: $secondary-color;
@@ -38,6 +35,9 @@ header {
 
 .headerContainer a {
   color: $secondary-color;
+  &:hover {
+    color: $yellow;
+  }
 }
 
 .cardBody {
@@ -47,6 +47,11 @@ header {
 
 #addCard {
   justify-content: center;
+}
+
+a:hover section {
+  background-color: $primary-color;
+  color: $secondary-color;
 }
 .tooltip {
   position: relative;
@@ -76,9 +81,13 @@ header {
   font-size: 14px;
 }
 
-.deleteButton {
+.headerContainer .deleteButton {
   cursor: pointer;
   background-color: $red;
   padding: 5px;
   border-radius: 5px;
+  &:hover {
+    background-color: $secondary-color;
+    color: $red;
+  }
 }
