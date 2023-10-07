@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 import { Subject, takeUntil } from 'rxjs';
@@ -23,8 +24,21 @@ export class SDeckComponent {
 
   constructor(
     private dailyStatsService: DailyStatsService,
-    private activated: ActivatedRoute
-  ) {}
+    private activated: ActivatedRoute,
+    private meta: Meta,
+    private title: Title
+   ) {
+     this.meta.updateTag(
+       {
+         name: 'description',
+         content: "Mes statistiques de révision du japonais par paquet",
+       },
+     );
+     this.setTitle('Mes stats par parquet-JapaneseFlashcard');
+   }
+   setTitle(newTitle: string) {
+    this.title.setTitle(newTitle);
+  }
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
     console.log('hello');

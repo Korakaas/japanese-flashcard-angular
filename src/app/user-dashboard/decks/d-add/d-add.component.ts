@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Meta, Title } from '@angular/platform-browser';
 import { Subject, takeUntil } from 'rxjs';
 import { DeckService } from 'src/app/_services/deck.service';
 import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
@@ -26,9 +27,21 @@ export class DAddComponent {
   constructor(
     private deckService: DeckService,
     private formbuilder: FormBuilder,
-    private apiSuccessService: ApiSuccessService
-  ) {}
-
+    private apiSuccessService: ApiSuccessService,
+    private meta: Meta,
+   private title: Title
+  ) {
+    this.meta.updateTag(
+      {
+        name: 'description',
+        content: "Créer un paquet de carte de révision du japonais",
+      },
+    );
+    this.setTitle('Créer paquet-JapaneseFlashcard');
+  }
+  setTitle(newTitle: string) {
+    this.title.setTitle(newTitle);
+  }
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
     this.deckForm = this.formbuilder.group({

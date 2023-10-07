@@ -1,42 +1,42 @@
-<h1>Créer un paquet</h1>
-<div class="form-container">
-  <form [formGroup]="deckForm" (ngSubmit)="onSubmit()">
-    <div class="inputContainer">
-      <label for="name">Nom du paquet </label>
-      <input
-        id="name"
-        type="text"
-        formControlName="name"
-        [class.error]="!name.valid && !name.untouched"
-      />
-      <div class="errorMessage" [hidden]="name.valid || name.untouched">
-        <p [hidden]="!name.hasError('maxlength')">
-          Le nom ne peux pas faire plus de 40 caractères.
-        </p>
-        <p [hidden]="!name.hasError('required')">
-          Le nom est obligatoire
-        </p>
+<div class="container">
+  <h1>Créer un paquet</h1>
+  <div class="form-container">
+    <form [formGroup]="deckForm" (ngSubmit)="onSubmit()">
+      <div class="inputContainer">
+        <label for="name">Nom du paquet </label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          [class.error]="!name.valid && !name.untouched"
+        />
+        <div class="errorMessage" [hidden]="name.valid || name.untouched">
+          <p [hidden]="!name.hasError('maxlength')">
+            Le nom ne peux pas faire plus de 40 caractères.
+          </p>
+          <p [hidden]="!name.hasError('required')">Le nom est obligatoire</p>
+        </div>
       </div>
-    </div>
-    <label for="description">Description</label>
-    <textarea
-      name="description"
-      id="description"
-      cols="30"
-      rows="10"
-      formControlName="description"
-    ></textarea>
+      <label for="description">Description</label>
+      <textarea
+        name="description"
+        id="description"
+        cols="30"
+        rows="10"
+        formControlName="description"
+      ></textarea>
 
-    <div class="form-check">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        value=""
-        id="public"
-        formControlName="public"
-      />
-      <label class="form-check-label" for="public"> Public </label>
-    </div>
-    <button type="submit" [disabled]="!deckForm.valid">Créer</button>
-  </form>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="public"
+          formControlName="public"
+        />
+        <label class="form-check-label" for="public"> Public </label>
+      </div>
+      <button type="submit" [disabled]="!deckForm.valid">Créer</button>
+    </form>
+  </div>
 </div>

@@ -1,63 +1,67 @@
 <div class="container">
   <h1>Mes paquets</h1>
-  <a [routerLink]="['add']">
-    <section class="card">
+  <section class="card">
+    <a [routerLink]="['add']">
       <div id="addCard" class="cardHeader">
         <i class="bi bi-plus-circle"></i>
       </div>
       <h2 class="cardBody">Créer un paquet</h2>
-    </section>
-  </a>
-  <div *ngFor="let deck of deckList">
-    <article class="card" *ngIf="deck">
-      <header>
-        <div class="headerContainer">
-          <div class="tooltip">
-            <span class="tooltiptext">Réviser le paquet</span>
-            <a [routerLink]="['./', deck.id, 'test']"
-              ><i class="bi bi-play-fill"></i
-            ></a>
-          </div>
-          <div class="tooltip">
-            <span class="tooltiptext">Modifier le paquet</span>
-            <a [routerLink]="['edit', deck.id]"
-              ><i class="bi bi-pencil-fill"></i
-            ></a>
-          </div>
-          <div class="tooltip">
-            <span class="tooltiptext">Liste des cartes du paquet</span>
-            <a [routerLink]="['./', deck.id, 'flashcards']"
-              ><i class="bi bi-list-task"></i
-            ></a>
-          </div>
-          <div class="tooltip">
-            <span class="tooltiptext">Statistiques du paquet</span>
-            <a [routerLink]="['../stats/decks/', deck.id]"
-              ><i class="bi bi-pie-chart-fill"></i
-            ></a>
-          </div>
-          <div class="tooltip">
-            <span class="tooltiptext">Supprimer le paquet</span>
-            <a class="deleteButton" (click)="confirmDelete(deck.id!)"
-              ><i class="bi bi-trash-fill"></i
-            ></a>
-          </div>
-        </div>
-      </header>
+    </a>
+  </section>
 
-      <div class="cardBody">
-        <h2>{{ deck.name | titlecase }}</h2>
-        <p>{{ deck.description }}</p>
-      </div>
-      <footer>
-        <p>
-          Crée le {{ deck.createdAt | date : "dd/MM/YY" }} - Dernières
-          modifications: {{ deck.updatedAt | date : "dd/MM/YY" }}
-        </p>
-        <p *ngIf="deck.public">Public</p>
-      </footer>
-    </article>
+  <div class="cardContainer">
+    <div *ngFor="let deck of deckList">
+      <article class="card" *ngIf="deck">
+        <header>
+          <div class="headerContainer">
+            <div class="tooltip">
+              <span class="tooltiptext">Réviser le paquet</span>
+              <a [routerLink]="['./', deck.id, 'test']"
+                ><i class="bi bi-play-fill"></i
+              ></a>
+            </div>
+            <div class="tooltip">
+              <span class="tooltiptext">Modifier le paquet</span>
+              <a [routerLink]="['edit', deck.id]"
+                ><i class="bi bi-pencil-fill"></i
+              ></a>
+            </div>
+            <div class="tooltip">
+              <span class="tooltiptext">Liste des cartes du paquet</span>
+              <a [routerLink]="['./', deck.id, 'flashcards']"
+                ><i class="bi bi-list-task"></i
+              ></a>
+            </div>
+            <div class="tooltip">
+              <span class="tooltiptext">Statistiques du paquet</span>
+              <a [routerLink]="['../stats/decks/', deck.id]"
+                ><i class="bi bi-pie-chart-fill"></i
+              ></a>
+            </div>
+            <div class="tooltip">
+              <span class="tooltiptext">Supprimer le paquet</span>
+              <a class="deleteButton" (click)="confirmDelete(deck.id!)"
+                ><i class="bi bi-trash-fill"></i
+              ></a>
+            </div>
+          </div>
+        </header>
+
+        <div class="cardBody">
+          <h2>{{ deck.name | titlecase }}</h2>
+          <p>{{ deck.description }}</p>
+        </div>
+        <footer>
+          <p>
+            Crée le {{ deck.createdAt | date : "dd/MM/YY" }} - Dernières
+            modifications: {{ deck.updatedAt | date : "dd/MM/YY" }}
+          </p>
+          <p *ngIf="deck.public">Public</p>
+        </footer>
+      </article>
+    </div>
   </div>
+
   <app-pagination
     [currentPage]="currentPage"
     [totalPages]="total"

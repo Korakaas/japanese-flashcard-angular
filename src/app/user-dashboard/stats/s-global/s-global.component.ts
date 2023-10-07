@@ -3,6 +3,7 @@ import { DailyStatsService } from 'src/app/_services/daily-stats.service';
 import { DeckStats } from 'src/app/models/dailyStats.model';
 import { Chart, registerables } from 'chart.js';
 import { Subject, takeUntil } from 'rxjs';
+import { Meta, Title } from '@angular/platform-browser';
 Chart.register(...registerables);
 @Component({
   selector: 'app-s-global',
@@ -19,7 +20,20 @@ export class SGlobalComponent {
   flashcardsNew: number = 0;
   private destroy$!: Subject<boolean>;
 
-  constructor(private dailyStatsService: DailyStatsService) {}
+  constructor(
+    private dailyStatsService: DailyStatsService,
+    private meta: Meta,
+    private title: Title
+  ) {
+    this.meta.updateTag({
+      name: 'description',
+      content: 'Mes statistiques de révision du japonais globales',
+    });
+    this.setTitle('Mes stats-JapaneseFlashcard');
+  }
+  setTitle(newTitle: string) {
+    this.title.setTitle(newTitle);
+  }
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
 

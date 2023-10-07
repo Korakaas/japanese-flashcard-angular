@@ -47,10 +47,12 @@ header {
 
 #addCard {
   justify-content: center;
+  padding: 10px;
 }
-
-a:hover section {
+section:hover {
   background-color: $primary-color;
+}
+ section:hover a{
   color: $secondary-color;
 }
 .tooltip {
@@ -90,4 +92,15 @@ a:hover section {
     background-color: $secondary-color;
     color: $red;
   }
+}
+
+@media screen and (min-width:700px) {
+
+  .cardContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 1240px;
+    margin: 20px auto;
+  }
+
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,8 +8,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  constructor(private route: Router) {}
-
+  constructor(private route: Router, private meta: Meta, private title: Title) {
+    this.meta.updateTag({
+      name: 'description',
+      content: "Page d'accueil de l'application JapaneseCArd",
+    });
+    this.meta.updateTag({
+      name: 'keywords',
+      content: 'Japonais, Flashcard, SRS, Vocabulaire, Grammaire, Kanji',
+    });
+    this.setTitle('Accueil-JapaneseFlashcard');
+  }
+  setTitle(newTitle: string) {
+    this.title.setTitle(newTitle);
+  }
   goToDecks() {
     this.route.navigate(['/decks']);
   }

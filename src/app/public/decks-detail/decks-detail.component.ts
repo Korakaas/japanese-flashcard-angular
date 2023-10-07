@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { DeckService } from 'src/app/_services/deck.service';
@@ -34,8 +35,22 @@ export class DecksDetailComponent {
 
   constructor(
     private activated: ActivatedRoute,
-    private deckService: DeckService
-  ) {}
+    private deckService: DeckService,
+    private meta: Meta
+    , private title: Title
+  ) {
+    this.meta.updateTag(
+      {
+        name: 'description',
+        content: "Détail d'un paquet public avec un exemple de carte",
+      },
+    );
+    this.setTitle('Détail paquet-JapaneseFlashcard');
+  }
+
+  setTitle(newTitle: string) {
+    this.title.setTitle(newTitle);
+  }
 
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();

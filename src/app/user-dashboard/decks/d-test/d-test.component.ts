@@ -12,6 +12,7 @@ import { DailyStatsService } from 'src/app/_services/daily-stats.service';
 import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
 import { Message } from 'src/app/models/message.model';
 import { Subject, takeUntil } from 'rxjs';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-d-test',
@@ -42,8 +43,21 @@ export class DTestComponent {
     private activated: ActivatedRoute,
     private flashcardService: FlashcardsService,
     private dailyStatsService: DailyStatsService,
-    private apiSuccessService: ApiSuccessService
-  ) {}
+    private apiSuccessService: ApiSuccessService,
+    private meta: Meta,
+    private title: Title
+   ) {
+     this.meta.updateTag(
+       {
+         name: 'description',
+         content: "Révision du japonais",
+       },
+     );
+     this.setTitle('Révision-JapaneseFlashcard');
+   }
+   setTitle(newTitle: string) {
+     this.title.setTitle(newTitle);
+   }
 
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();

@@ -9,13 +9,12 @@
   justify-content: center;
   text-align: center;
 }
-
 h1 {
   font-size: 32px;
   margin-bottom: 60px;
 }
-p{
-    margin-bottom: 20px;
+p {
+  margin-bottom: 20px;
 }
 button {
   margin: 20px;
@@ -23,10 +22,10 @@ button {
   background-color: $secondary-color;
   color: $primary-color;
   padding: 10px;
-  cursor:pointer;
+  cursor: pointer;
   &:hover {
     background-color: $yellow;
-    color:$noir;
+    color: $noir;
   }
 }
 

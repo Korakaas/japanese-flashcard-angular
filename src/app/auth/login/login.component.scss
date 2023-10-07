@@ -22,6 +22,10 @@ label {
 }
 .inputContainer {
   margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 input {
   width: 90%;
@@ -42,6 +46,10 @@ button[type="submit"] {
     &:disabled {
     opacity: 0.7;
     cursor: default;
+  }
+  &:hover {
+    background-color: $secondary-color;
+    color:$primary-color;
   }
 }
 .error {

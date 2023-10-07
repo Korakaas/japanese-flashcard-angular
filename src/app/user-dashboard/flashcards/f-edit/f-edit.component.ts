@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { FlashcardsService } from 'src/app/_services/flashcard.service';
@@ -44,9 +45,21 @@ export class FEditComponent implements OnInit {
     private activated: ActivatedRoute,
     private flashcardService: FlashcardsService,
     private formbuilder: FormBuilder,
-    private apiSuccessService: ApiSuccessService
-  ) {}
-
+    private apiSuccessService: ApiSuccessService,
+    private meta: Meta,
+    private title: Title
+   ) {
+     this.meta.updateTag(
+       {
+         name: 'description',
+         content: "Modifier une carte de type vocabulaire, grammaire ou kanji",
+       },
+     );
+     this.setTitle('Modifier une carte-JapaneseFlashcard');
+   }
+   setTitle(newTitle: string) {
+    this.title.setTitle(newTitle);
+  }
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
     this.flashcardForm = this.formbuilder.group({

@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { FlashcardsService } from 'src/app/_services/flashcard.service';
@@ -45,8 +46,21 @@ export class FAddComponent implements OnInit {
     private activated: ActivatedRoute,
     private flashcardService: FlashcardsService,
     private formbuilder: FormBuilder,
-    private apiSuccesService: ApiSuccessService
-  ) {}
+    private apiSuccesService: ApiSuccessService,
+    private meta: Meta,
+    private title: Title
+   ) {
+     this.meta.updateTag(
+       {
+         name: 'description',
+         content: "Ajouter une carte de type vocabulaire, grammaire ou kanji",
+       },
+     );
+     this.setTitle('Ajouter une carte-JapaneseFlashcard');
+   }
+   setTitle(newTitle: string) {
+     this.title.setTitle(newTitle);
+   }
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
     this.flashcardForm = this.formbuilder.group({

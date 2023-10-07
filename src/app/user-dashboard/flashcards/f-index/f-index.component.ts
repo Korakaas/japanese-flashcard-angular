@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { FlashcardsService } from 'src/app/_services/flashcard.service';
@@ -28,8 +29,21 @@ export class FIndexComponent {
   constructor(
     private flashcardService: FlashcardsService,
     private activated: ActivatedRoute,
-    private apiSuccesService: ApiSuccessService
-  ) {}
+    private apiSuccesService: ApiSuccessService,
+    private meta: Meta,
+    private title: Title
+   ) {
+     this.meta.updateTag(
+       {
+         name: 'description',
+         content: "Liste des cartes personnelles de type vocabulaire, grammaire ou kanji",
+       },
+     );
+     this.setTitle('Mes cartes-JapaneseFlashcard');
+   }
+   setTitle(newTitle: string) {
+    this.title.setTitle(newTitle);
+  }
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
     this.getFlashcard();

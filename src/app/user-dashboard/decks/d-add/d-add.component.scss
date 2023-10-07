@@ -1,11 +1,14 @@
 @import "../../../../vars.scss";
+.container {
+  height: 100vh;
+}
 h1 {
   font-size: 2rem;
   margin: 20px;
 }
 .form-container {
   width: 80%;
-  margin: auto;
+  margin: 20px auto;
 }
 label {
   margin-bottom: 8px;
@@ -55,7 +58,6 @@ input[type="text"].error {
 @media (min-width: 768px) {
   .form-container {
     width: 50%;
-    margin: auto;
   }
 
   label {

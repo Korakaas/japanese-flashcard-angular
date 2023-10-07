@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { Subject, takeUntil } from 'rxjs';
 import { DeckService } from 'src/app/_services/deck.service';
 import { TokenService } from 'src/app/_services/token.service';
@@ -20,8 +21,22 @@ export class DecksComponent {
   constructor(
     private deckService: DeckService,
     private tokenService: TokenService,
-    private apiSuccesService: ApiSuccessService
-  ) {}
+    private apiSuccesService: ApiSuccessService,
+    private meta: Meta
+    , private title: Title
+  ) {
+    this.meta.updateTag(
+      {
+        name: 'description',
+        content: "Liste des paquets publics",
+      },
+    );
+    this.setTitle('Paquets Publics-JapaneseFlashcard');
+  }
+
+  setTitle(newTitle: string) {
+    this.title.setTitle(newTitle);
+  }
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
     this.getdeck();

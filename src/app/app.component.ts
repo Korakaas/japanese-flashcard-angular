@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiErrorService } from './_subjects/api-error.service';
 import { ApiSuccessService } from './_subjects/api-success.service';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { ApiSuccessService } from './_subjects/api-success.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'japanese-flashcard-angular';
+
   messageError: string = '';
   messageSuccess: string = '';
   displayError: boolean = false;
@@ -16,8 +17,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private apiErrorService: ApiErrorService,
-    private apiSuccesService: ApiSuccessService
-  ) {}
+    private apiSuccesService: ApiSuccessService){}
 
   ngOnInit(): void {
     this.apiErrorService.apiError.subscribe((data: string) => {

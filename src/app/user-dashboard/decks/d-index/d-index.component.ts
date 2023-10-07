@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { Subject, takeUntil } from 'rxjs';
 import { DeckService } from 'src/app/_services/deck.service';
 import { ApiSuccessService } from 'src/app/_subjects/api-success.service';
@@ -19,8 +20,21 @@ export class DIndexComponent implements OnInit {
 
   constructor(
     private deckService: DeckService,
-    private apiSuccessService: ApiSuccessService
-  ) {}
+    private apiSuccessService: ApiSuccessService,
+    private meta: Meta,
+    private title: Title
+   ) {
+     this.meta.updateTag(
+       {
+         name: 'description',
+         content: "Liste des paquets personnels de cartes de révision du japonais",
+       },
+     );
+     this.setTitle('Mes paquets-JapaneseFlashcard');
+   }
+   setTitle(newTitle: string) {
+     this.title.setTitle(newTitle);
+   }
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
     this.getdeck();
