@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     this.apiErrorService.apiError.subscribe((data: string) => {
       this.messageError = data;
       this.displayError = true;
-      // this.clearMessagesAfterTimeout();
+      this.clearMessagesAfterTimeout();
     });
     this.apiSuccesService.apiSuccess.subscribe((data: string) => {
       this.messageSuccess = data;
@@ -46,6 +46,6 @@ export class AppComponent implements OnInit {
     setTimeout(() => {
       this.displayError = false;
       this.displaySuccess = false;
-    }, 10000); 
+    }, 5000); 
   }
 }

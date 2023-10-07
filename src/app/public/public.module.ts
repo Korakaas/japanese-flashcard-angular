@@ -7,6 +7,7 @@ import { PublicRoutingModule } from './public-routing.module';
 import { LayoutComponent } from './layout/layout.component';
 import { PHeaderComponent } from './p-header/p-header.component';
 import { PaginationModule } from '../pagination/pagination.module';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { PaginationModule } from '../pagination/pagination.module';
     DecksDetailComponent,
     LayoutComponent,
     PHeaderComponent,
+    FooterComponent,
   ],
   imports: [CommonModule, PublicRoutingModule, PaginationModule],
 })

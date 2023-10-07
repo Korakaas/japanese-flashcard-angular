@@ -1,1 +1,37 @@
-@import '../../../vars.scss';
+@import "../../../vars.scss";
+
+.container {
+  background-color: $primary-color;
+  color: $secondary-color;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 60px;
+}
+p{
+    margin-bottom: 20px;
+}
+button {
+  margin: 20px;
+  border-radius: 5px;
+  background-color: $secondary-color;
+  color: $primary-color;
+  padding: 10px;
+  cursor:pointer;
+}
+
+@media screen and (min-width: 700px) {
+  p {
+    width: 80vw;
+  }
+
+  .container {
+    text-align: left;
+  }
+}

@@ -1,4 +1,4 @@
-@import '../vars.scss';
+@import "../vars.scss";
 //style général du toast
 .toast {
   position: absolute;
@@ -8,9 +8,9 @@
   padding: 10px 15px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   background-color: $secondary-color;
-  transform: translateX(calc(100% + 30px));
-  transition: all 0.5s ease;
-  overflow: hidden;
+  transition: transform 150ms ease-in-out;
+  transform-origin: top right;
+  transform: scale(0, 1);
 }
 .toast_content {
   display: flex;
@@ -67,12 +67,12 @@
   width: 100%;
 }
 .progress.active::before {
-  animation: progress 10s linear forwards;
+  animation: progress 5s linear forwards;
 }
 
 //transition pour faire apparaître le toast
 .active {
-  transform: translateX(0%);
+  transform: scale(1, 1);
 }
 
 // style toast erreur

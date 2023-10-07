@@ -106,6 +106,7 @@ export class FAddComponent implements OnInit {
     }
   }
   ngOnDestroy(): void {
+   
     this.destroy$.next(true);
   }
 }
