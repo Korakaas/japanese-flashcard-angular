@@ -29,13 +29,20 @@
           <td data-label="Action">
             <div class="tooltip">
               <span class="tooltiptext">Modifier la carte</span>
-              <a [routerLink]="['edit', flashcard.id]"
+              <a
+                [routerLink]="['edit', flashcard.id]"
+                aria-label="Modifier la carte"
                 ><i class="bi bi-pencil-fill"></i
               ></a>
             </div>
             <div class="tooltip">
               <span class="tooltiptext">Supprimer la carte</span>
-              <a class="deleteButton" (click)="confirmDelete(flashcard.id!)"
+              <a
+                class="deleteButton"
+                (click)="confirmDelete(flashcard.id!)"
+                tabindex="0"
+                (keydown.enter)="confirmDelete(flashcard.id!)"
+                aria-label="Supprimer la carte"
                 ><i class="bi bi-trash-fill"></i
               ></a>
             </div>

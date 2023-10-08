@@ -39,10 +39,11 @@ button[type="submit"] {
   cursor: pointer;
   width: 100%;
   &:disabled {
-    opacity: 0.7;
+    background-color:#6395C4 ;
     cursor:default;
+    color:#1f2c36;
   }
-  &:hover {
+  &:enabled:hover {
     background-color: $secondary-color;
     color: $primary-color;
     border:1px solid $primary-color

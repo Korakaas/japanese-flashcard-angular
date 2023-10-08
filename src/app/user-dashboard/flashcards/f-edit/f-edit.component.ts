@@ -66,7 +66,7 @@ export class FEditComponent implements OnInit {
       front: this.front,
       back: this.back,
       example: this.example,
-      furigana: this.example,
+      furigana: this.furigana,
       flashcardTypeForm: this.formbuilder.group({}),
     });
 
@@ -161,6 +161,7 @@ export class FEditComponent implements OnInit {
       Object.assign(this.flashcard, this.flashcardForm.value);
       Object.assign(this.flashcard, this.flashcardForm.value.flashcardTypeForm);
       if (this.deckId) {
+        console.log(this.flashcard);
         this.flashcardService
           .updatelFlashcard(this.deckId, this.flashcard)
           .pipe(takeUntil(this.destroy$))

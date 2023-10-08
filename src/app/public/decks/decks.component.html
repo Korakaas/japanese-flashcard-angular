@@ -6,13 +6,21 @@
         <div class="headerContainer">
           <div class="tooltip">
             <span class="tooltiptext">Détails du paquet</span>
-            <a [routerLink]="['/decks-detail', deck.id]"
+            <a
+              [routerLink]="['/decks-detail', deck.id]"
+              aria-label="Détails du paquet"
               ><i class="bi bi-eye-fill"></i
             ></a>
           </div>
           <div *ngIf="isLogged" class="tooltip">
             <span class="tooltiptext">Ajouter à mes paquets</span>
-            <a (click)="duplicate(deck.id!)"><i class="bi bi-copy"></i></a>
+            <a
+              (click)="duplicate(deck.id!)"
+              (keydown.enter)="duplicate(deck.id!)"
+              aria-label="Ajouter à mes paquets"
+              tabindex="0"
+              ><i class="bi bi-copy"></i
+            ></a>
           </div>
         </div>
       </header>

@@ -52,12 +52,12 @@ export class FIndexComponent {
   confirmDelete(id: string) {
     Swal.fire({
       title: 'Etes-vous sûr de vouloir supprimer ce paquet?',
-      text: 'Le paquet et toutes les cartes associées setont supprimés définitivement',
+      text: 'Le paquet et toutes les cartes associées seront supprimés définitivement',
       showCancelButton: true,
       confirmButtonText: 'Oui',
       cancelButtonText: 'Non',
-      confirmButtonColor: '#256cb0',
-    }).then((result) => {
+      confirmButtonColor: '#256cb0', 
+    }).then((result) => {   
       if (result.value) {
         this.delete(id);
       }
