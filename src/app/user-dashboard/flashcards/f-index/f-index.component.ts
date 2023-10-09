@@ -130,7 +130,19 @@ export class FIndexComponent {
               formatedInterval = this.formatInterval(
                 flashcard.intervalReview as number
               );
-              flashcard.intervalReview = `${formatedInterval.day}j ${formatedInterval.hour}h  ${formatedInterval.minute}min  `;
+              flashcard.intervalReview ='';
+              if(formatedInterval.day)
+              {
+                flashcard.intervalReview =`${formatedInterval.day}j`;
+              }
+              if(formatedInterval.hour)
+              {
+                flashcard.intervalReview +=` ${formatedInterval.hour}h`;
+              }
+              if(formatedInterval.minute)
+              {
+                flashcard.intervalReview +=` ${formatedInterval.minute}min`;
+              }
             }
           });
           if (data.total_items)
