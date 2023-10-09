@@ -76,8 +76,6 @@ export class FEditComponent implements OnInit {
         .subscribe((data: Flashcard) => {
           this.flashcard = data;
           this.type = this.flashcard.type;
-          console.log(this.flashcard);
-
           this.initializeFlashcardForm(this.flashcard);
         });
     }

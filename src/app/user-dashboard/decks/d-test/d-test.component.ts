@@ -88,7 +88,6 @@ export class DTestComponent {
    */
   displayBack(): void {
     this.display = true;
-    console.log(this.display);
   }
 
   /**
@@ -109,7 +108,7 @@ export class DTestComponent {
       this.dailyStatsService
         .addDailyStats(this.deckId, this.review)
         .pipe(takeUntil(this.destroy$))
-        .subscribe((data) => console.log(data));
+        .subscribe();
 
       this.display = false;
       this.flashcard = undefined;

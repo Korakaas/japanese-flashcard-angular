@@ -77,7 +77,6 @@ export class DecksComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: PaginationDeck) => {
         this.deckList = data.decks;
-        console.log(this.deckList);
         if (data.total_items)
           this.total = Math.ceil(data.total_items / this.perPage);
       });

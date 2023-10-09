@@ -59,7 +59,6 @@ export class LoginComponent implements OnInit {
         .login(this.credentials)
         .pipe(takeUntil(this.destroy$))
         .subscribe((data: Token) => {
-          console.log(data.token);
           this.tokenService.saveToken(data.token);
           this.router.navigate(['user/decks']);
         });
