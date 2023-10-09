@@ -11,6 +11,7 @@ h1 {
   margin: 20px;
 }
 
+//style des cartes
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
@@ -40,20 +41,16 @@ header {
 .headerContainer a {
   color: $secondary-color;
   cursor: pointer;
-  &:hover{
-    color:$yellow
+  &:hover {
+    color: $yellow;
   }
 }
-
-
 
 .cardBody {
   margin: 20px;
 }
 
-#addCard {
-  justify-content: center;
-}
+//style tooltip
 .tooltip {
   position: relative;
   display: inline-block;
@@ -85,5 +82,4 @@ header {
     max-width: 1240px;
     margin: 20px auto;
   }
-
 }

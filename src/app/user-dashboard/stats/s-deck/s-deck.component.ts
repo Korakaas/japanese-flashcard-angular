@@ -27,21 +27,16 @@ export class SDeckComponent {
     private activated: ActivatedRoute,
     private meta: Meta,
     private title: Title
-   ) {
-     this.meta.updateTag(
-       {
-         name: 'description',
-         content: "Mes statistiques de révision du japonais par paquet",
-       },
-     );
-     this.setTitle('Mes stats par parquet-JapaneseFlashcard');
-   }
-   setTitle(newTitle: string) {
-    this.title.setTitle(newTitle);
+  ) {
+    this.meta.updateTag({
+      name: 'description',
+      content: 'Mes statistiques de révision du japonais par paquet',
+    });
+    this.setTitle('Mes stats par parquet-JapaneseFlashcard');
   }
+
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
-    console.log('hello');
     const deckId = this.activated.snapshot.paramMap.get('deckId');
     if (deckId)
       this.dailyStatsService
@@ -49,8 +44,6 @@ export class SDeckComponent {
         .pipe(takeUntil(this.destroy$))
         .subscribe((data: DeckStats) => {
           this.deckStats = data;
-          console.log(this.deckStats);
-          console.log(this.deckStats);
           if (this.deckStats.flashcards?.known)
             this.flashcardsKnown += this.deckStats.flashcards?.known;
           if (this.deckStats.flashcards?.learning)
@@ -69,52 +62,62 @@ export class SDeckComponent {
         });
   }
 
-  renderChart() {
-    console.log(this.totalFlashcardsReviewed, this.totalCorrectAnswer);
-    console.log(
-      this.flashcardsKnown,
-      this.flashcardsLearning,
-      this.flashcardsNew
-    );
-    const piechartAnswer = new Chart('piechartAnswer', {
-      type: 'pie',
-      data: {
-        labels: ['Mauvaises réponses', 'Bonnes réponses'],
-        datasets: [
-          {
-            label: 'Dataset 1',
-            data: [
-              this.totalFlashcardsReviewed - this.totalCorrectAnswer,
-              this.totalCorrectAnswer,
-            ],
-            backgroundColor: ['rgba(255, 99,132,0.2)', 'rgba(0, 128, 0, 0.2) '],
-          },
-        ],
-      },
-    });
-    const piechartLevel = new Chart('piechartLevel', {
-      type: 'pie',
-      data: {
-        labels: ['Connu', 'En apprentissage', 'Nouvelle'],
-        datasets: [
-          {
-            label: 'Dataset 1',
-            data: [
-              this.flashcardsKnown,
-              this.flashcardsLearning,
-              this.flashcardsNew,
-            ],
-            backgroundColor: [
-              'rgba(255, 99,132,0.2)',
-              'rgba(0, 128, 0, 0.2) ',
-              ' rgba(0, 0, 255, 0.2)',
-            ],
-          },
-        ],
-      },
-    });
-  }
   ngOnDestroy(): void {
     this.destroy$.next(true);
+  }
+  
+  /**
+   * Génère les stats sous forme de camembert
+   */
+  private renderChart(): void {
+    if (this.totalFlashcardsReviewed) {
+      const piechartAnswer = new Chart('piechartAnswer', {
+        type: 'pie',
+        data: {
+          labels: ['Mauvaises réponses', 'Bonnes réponses'],
+          datasets: [
+            {
+              label: 'Dataset 1',
+              data: [
+                this.totalFlashcardsReviewed - this.totalCorrectAnswer,
+                this.totalCorrectAnswer,
+              ],
+              backgroundColor: [
+                'rgba(255, 99,132,0.2)',
+                'rgba(0, 128, 0, 0.2) ',
+              ],
+            },
+          ],
+        },
+      });
+    }
+
+    if (this.flashcardsKnown || this.flashcardsLearning || this.flashcardsNew) {
+      const piechartLevel = new Chart('piechartLevel', {
+        type: 'pie',
+        data: {
+          labels: ['Connu', 'En apprentissage', 'Nouvelle'],
+          datasets: [
+            {
+              label: 'Dataset 1',
+              data: [
+                this.flashcardsKnown,
+                this.flashcardsLearning,
+                this.flashcardsNew,
+              ],
+              backgroundColor: [
+                'rgba(255, 99,132,0.2)',
+                'rgba(0, 128, 0, 0.2) ',
+                ' rgba(0, 0, 255, 0.2)',
+              ],
+            },
+          ],
+        },
+      });
+    }
+  }
+
+  private setTitle(newTitle: string): void {
+    this.title.setTitle(newTitle);
   }
 }

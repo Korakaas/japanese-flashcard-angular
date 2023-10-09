@@ -19,13 +19,15 @@ export class HomeComponent {
     });
     this.setTitle('Accueil-JapaneseFlashcard');
   }
-  setTitle(newTitle: string) {
-    this.title.setTitle(newTitle);
-  }
+
   goToDecks() {
     this.route.navigate(['/decks']);
   }
   goToUser() {
     this.route.navigate(['/user']);
+  }
+
+  private setTitle(newTitle: string) {
+    this.title.setTitle(newTitle);
   }
 }

@@ -9,6 +9,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'src/app/pagination/pagination.module';
 @NgModule({
   declarations: [FIndexComponent, FAddComponent, FEditComponent],
-  imports: [CommonModule, FlashcardsRoutingModule, ReactiveFormsModule, PaginationModule],
+  imports: [
+    CommonModule,
+    FlashcardsRoutingModule,
+    ReactiveFormsModule,
+    PaginationModule,
+  ],
 })
 export class FlashcardsModule {}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChange } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -49,18 +49,14 @@ export class FAddComponent implements OnInit {
     private apiSuccesService: ApiSuccessService,
     private meta: Meta,
     private title: Title
-   ) {
-     this.meta.updateTag(
-       {
-         name: 'description',
-         content: "Ajouter une carte de type vocabulaire, grammaire ou kanji",
-       },
-     );
-     this.setTitle('Ajouter une carte-JapaneseFlashcard');
-   }
-   setTitle(newTitle: string) {
-     this.title.setTitle(newTitle);
-   }
+  ) {
+    this.meta.updateTag({
+      name: 'description',
+      content: 'Ajouter une carte de type vocabulaire, grammaire ou kanji',
+    });
+    this.setTitle('Ajouter une carte-JapaneseFlashcard');
+  }
+
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
     this.flashcardForm = this.formbuilder.group({
@@ -74,11 +70,45 @@ export class FAddComponent implements OnInit {
     });
     this.deckId = this.activated.snapshot.paramMap.get('deckId');
   }
-  onselectchange(test: any) {
-    this.typeFlashcard = test.target.value;
+
+  /**
+   * On charge le formulaire en fonction du type de carte sélectionné
+   * @param test
+   */
+  onselectchange(test: Event): void {
+    if (test.target instanceof HTMLSelectElement)
+      this.typeFlashcard = test.target.value;
     this.initializeFlashcardForm();
   }
-  initializeFlashcardForm() {
+
+  /**
+   * Ajoute une carte si le formulaire est valide
+   */
+  onSubmit(): void {
+    if (this.flashcardForm.valid) {
+      const newFlashcard: Flashcard = {};
+      Object.assign(newFlashcard, this.flashcardForm.value);
+      Object.assign(newFlashcard, this.flashcardForm.value.flashcardTypeForm);
+      if (this.deckId) {
+        this.flashcardService
+          .createFlashcard(this.deckId, newFlashcard)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((message: string) => {
+            this.apiSuccesService.sendSuccess(message);
+            this.flashcardForm.reset();
+          });
+      }
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+  }
+
+  /**
+   * Créer un formulaire selon le type de carte
+   */
+  private initializeFlashcardForm(): void {
     this.flashcardTypeForm = this.formbuilder.group({});
 
     switch (this.typeFlashcard) {
@@ -103,24 +133,8 @@ export class FAddComponent implements OnInit {
 
     this.flashcardForm.setControl('flashcardTypeForm', this.flashcardTypeForm);
   }
-  onSubmit() {
-    if (this.flashcardForm.valid) {
-      const newFlashcard: Flashcard = {};
-      Object.assign(newFlashcard, this.flashcardForm.value);
-      Object.assign(newFlashcard, this.flashcardForm.value.flashcardTypeForm);
-      if (this.deckId) {
-        this.flashcardService
-          .createFlashcard(this.deckId, newFlashcard)
-          .pipe(takeUntil(this.destroy$))
-          .subscribe((message: string) => {
-            this.apiSuccesService.sendSuccess(message);
-            this.flashcardForm.reset();
-          });
-      }
-    }
-  }
-  ngOnDestroy(): void {
-   
-    this.destroy$.next(true);
+
+  private setTitle(newTitle: string) {
+    this.title.setTitle(newTitle);
   }
 }

@@ -4,6 +4,7 @@ h1 {
   font-size: 2rem;
   margin: 20px;
 }
+//style des cartes
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background-color: $secondary-color;
@@ -21,6 +22,8 @@ h1 {
 i {
   margin-right: 1em;
 }
+
+//style tavle
 table {
   width: 100%;
   table-layout: fixed;
@@ -69,6 +72,8 @@ a {
   padding: 5px;
   border-radius: 5px;
 }
+
+//style des tooltip
 .tooltip {
   position: relative;
   display: inline-block;
@@ -93,7 +98,7 @@ a {
   visibility: visible;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 700px) {
   .card {
     box-shadow: none;
   }
@@ -107,10 +112,8 @@ a {
 
     tr {
       display: table-row;
-      border: 0;
       border-radius: 5px;
       border:10px solid #f5f5f5;
-
     }
 
     th,

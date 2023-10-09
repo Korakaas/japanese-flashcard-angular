@@ -3,9 +3,18 @@
   padding-top: 20px;
   margin: 20px;
 }
+/* ---------- Typology ---------- */
 h1 {
   font-size: 2rem;
 }
+.font14 {
+  font-size: 14px;
+}
+.labelInfo {
+  font-style: italic;
+}
+
+/* ---------- Cartes ---------- */
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background-color: $secondary-color;
@@ -26,10 +35,6 @@ h1 {
 }
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-.font14 {
-  font-size: 14px;
 }
 
 hr.solid {
@@ -53,9 +58,7 @@ hr.solid {
   padding: 0 20px;
   gap: 10px;
 }
-.labelInfo {
-  font-style: italic;
-}
+
 /* ---------- Boutons ---------- */
 button {
   border-radius: 4px;

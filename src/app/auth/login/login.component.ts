@@ -47,6 +47,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /**
+   * Vérifie que le couple utilisateur/mot de passe est correct
+   */
   onSubmit(): void {
     if (this.loginForm.valid) {
       this.credentials.username = this.loginForm.value.username;

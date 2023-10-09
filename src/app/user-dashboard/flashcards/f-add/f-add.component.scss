@@ -3,11 +3,13 @@ h1 {
   font-size: 2rem;
   margin: 20px;
 }
+
+//style du formulaire
 .form-container {
   width: 80%;
   margin: auto;
 }
-.inputContainer{
+.inputContainer {
   margin-top: 16px;
 }
 label {
@@ -19,7 +21,7 @@ select {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-input[type="text"]{
+input[type="text"] {
   width: 100%;
   padding: 10px 5px;
   border: 1px solid #ccc;
@@ -39,14 +41,14 @@ button[type="submit"] {
   cursor: pointer;
   width: 100%;
   &:disabled {
-    background-color:#6395C4 ;
-    cursor:default;
-    color:#1f2c36;
+    background-color: #6395c4;
+    cursor: default;
+    color: #1f2c36;
   }
   &:enabled:hover {
     background-color: $secondary-color;
     color: $primary-color;
-    border:1px solid $primary-color
+    border: 1px solid $primary-color;
   }
 }
 
@@ -54,13 +56,12 @@ input[type="text"].error {
   border: 1px solid $red;
 }
 
-.errorMessage p{
+.errorMessage p {
   font-size: 12px;
-  color:$red;
+  color: $red;
 }
 
-// Styles pour les tablettes et les écrans plus larges (min-width : 768px)
-@media (min-width: 768px) {
+@media (min-width: 700px) {
   .form-container {
     width: 50%;
     margin: auto;

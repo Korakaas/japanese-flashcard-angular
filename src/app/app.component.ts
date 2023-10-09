@@ -9,7 +9,6 @@ import { Meta, Title } from '@angular/platform-browser';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-
   messageError: string = '';
   messageSuccess: string = '';
   displayError: boolean = false;
@@ -17,7 +16,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private apiErrorService: ApiErrorService,
-    private apiSuccesService: ApiSuccessService){}
+    private apiSuccesService: ApiSuccessService
+  ) {}
 
   ngOnInit(): void {
     this.apiErrorService.apiError.subscribe((data: string) => {
@@ -42,10 +42,13 @@ export class AppComponent implements OnInit {
     this.displaySuccess = false;
   }
 
-  clearMessagesAfterTimeout() {
+  /**
+   * cache le toast après 5 secondes
+   */
+  private clearMessagesAfterTimeout(): void {
     setTimeout(() => {
       this.displayError = false;
       this.displaySuccess = false;
-    }, 5000); 
+    }, 5000);
   }
 }

@@ -14,8 +14,8 @@ export class Flashcard {
   updatedAt?: Date;
   createdAt?: Date;
   reverse?: Boolean;
-  knownLevel?: number|string;
-  intervalReview?: number|string;
+  knownLevel?: number | string;
+  intervalReview?: number | string;
   reviewedAt?: Date;
 }
 

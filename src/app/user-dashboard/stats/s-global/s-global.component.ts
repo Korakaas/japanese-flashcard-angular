@@ -42,9 +42,7 @@ export class SGlobalComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: DeckStats[]) => {
         this.globalStats = data;
-        console.log(this.globalStats);
         this.globalStats.forEach((deckStats) => {
-          console.log(deckStats);
           if (deckStats.flashcards?.known)
             this.flashcardsKnown += deckStats.flashcards?.known;
           if (deckStats.flashcards?.learning)
@@ -64,52 +62,57 @@ export class SGlobalComponent {
       });
   }
 
-  renderChart() {
-    console.log(this.totalFlashcardsReviewed, this.totalCorrectAnswer);
-    console.log(
-      this.flashcardsKnown,
-      this.flashcardsLearning,
-      this.flashcardsNew
-    );
-    const piechartAnswer = new Chart('piechartAnswer', {
-      type: 'pie',
-      data: {
-        labels: ['Mauvaises réponses', 'Bonnes réponses'],
-        datasets: [
-          {
-            label: 'Dataset 1',
-            data: [
-              this.totalFlashcardsReviewed - this.totalCorrectAnswer,
-              this.totalCorrectAnswer,
-            ],
-            backgroundColor: ['rgba(255, 99,132,0.2)', 'rgba(0, 128, 0, 0.2) '],
-          },
-        ],
-      },
-    });
-    const piechartLevel = new Chart('piechartLevel', {
-      type: 'pie',
-      data: {
-        labels: ['Connu', 'En apprentissage', 'Nouvelle'],
-        datasets: [
-          {
-            label: 'Dataset 1',
-            data: [
-              this.flashcardsKnown,
-              this.flashcardsLearning,
-              this.flashcardsNew,
-            ],
-            backgroundColor: [
-              'rgba(255, 99,132,0.2)',
-              'rgba(0, 128, 0, 0.2) ',
-              ' rgba(0, 0, 255, 0.2)',
-            ],
-          },
-        ],
-      },
-    });
-  }
   ngOnDestroy(): void {
     this.destroy$.next(true);
+  }
+
+  /**
+   * Génère les stats sous forme de camembert
+   */
+  private renderChart(): void {
+    if (this.totalFlashcardsReviewed) {
+      const piechartAnswer = new Chart('piechartAnswer', {
+        type: 'pie',
+        data: {
+          labels: ['Mauvaises réponses', 'Bonnes réponses'],
+          datasets: [
+            {
+              label: 'Dataset 1',
+              data: [
+                this.totalFlashcardsReviewed - this.totalCorrectAnswer,
+                this.totalCorrectAnswer,
+              ],
+              backgroundColor: [
+                'rgba(255, 99,132,0.2)',
+                'rgba(0, 128, 0, 0.2) ',
+              ],
+            },
+          ],
+        },
+      });
+    }
+    if (this.flashcardsKnown || this.flashcardsLearning || this.flashcardsNew) {
+      const piechartLevel = new Chart('piechartLevel', {
+        type: 'pie',
+        data: {
+          labels: ['Connu', 'En apprentissage', 'Nouvelle'],
+          datasets: [
+            {
+              label: 'Dataset 1',
+              data: [
+                this.flashcardsKnown,
+                this.flashcardsLearning,
+                this.flashcardsNew,
+              ],
+              backgroundColor: [
+                'rgba(255, 99,132,0.2)',
+                'rgba(0, 128, 0, 0.2) ',
+                ' rgba(0, 0, 255, 0.2)',
+              ],
+            },
+          ],
+        },
+      });
+    }
   }
 }

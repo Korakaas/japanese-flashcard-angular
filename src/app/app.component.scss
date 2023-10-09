@@ -11,6 +11,7 @@
   transition: transform 150ms ease-in-out;
   transform-origin: top right;
   transform: scale(0, 1);
+  overflow: hidden;
 }
 .toast_content {
   display: flex;

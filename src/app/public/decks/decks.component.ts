@@ -22,33 +22,33 @@ export class DecksComponent {
     private deckService: DeckService,
     private tokenService: TokenService,
     private apiSuccesService: ApiSuccessService,
-    private meta: Meta
-    , private title: Title
+    private meta: Meta,
+    private title: Title
   ) {
-    this.meta.updateTag(
-      {
-        name: 'description',
-        content: "Liste des paquets publics",
-      },
-    );
+    this.meta.updateTag({
+      name: 'description',
+      content: 'Liste des paquets publics',
+    });
     this.setTitle('Paquets Publics-JapaneseFlashcard');
   }
 
-  setTitle(newTitle: string) {
-    this.title.setTitle(newTitle);
-  }
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
     this.getdeck();
     this.isLogged = this.tokenService.isLogged();
   }
 
-  duplicate(id: string) {
+  /**
+   * Copie un deck publique et l'ajoute au deck de l'utilisateur
+   * @param deckId l'id du paquet à dupliquer
+   */
+  duplicate(deckId: string): void {
     this.deckService
-      .duplicateDecks(id)
-      .subscribe((data:string) => this.apiSuccesService.sendSuccess(data));
+      .duplicateDecks(deckId)
+      .subscribe((data: string) => this.apiSuccesService.sendSuccess(data));
   }
 
+  //pagination
   public onGoTo(page: number): void {
     this.currentPage = page;
     this.getdeck();
@@ -64,9 +64,14 @@ export class DecksComponent {
     this.getdeck();
   }
 
-  private getdeck(): void {
-    console.log(this.deckList);
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+  }
 
+  /**
+   * Récupère les paquets publiques
+   */
+  private getdeck(): void {
     this.deckService
       .getPublicDecks(this.currentPage)
       .pipe(takeUntil(this.destroy$))
@@ -77,7 +82,8 @@ export class DecksComponent {
           this.total = Math.ceil(data.total_items / this.perPage);
       });
   }
-  ngOnDestroy(): void {
-    this.destroy$.next(true);
+
+  private setTitle(newTitle: string): void {
+    this.title.setTitle(newTitle);
   }
 }

@@ -17,7 +17,6 @@ interface FormatedInterval {
   templateUrl: './f-index.component.html',
   styleUrls: ['./f-index.component.scss'],
 })
-
 export class FIndexComponent {
   flashcardList: Flashcard[] = [];
   deckId: string | null = '';
@@ -32,49 +31,40 @@ export class FIndexComponent {
     private apiSuccesService: ApiSuccessService,
     private meta: Meta,
     private title: Title
-   ) {
-     this.meta.updateTag(
-       {
-         name: 'description',
-         content: "Liste des cartes personnelles de type vocabulaire, grammaire ou kanji",
-       },
-     );
-     this.setTitle('Mes cartes-JapaneseFlashcard');
-   }
-   setTitle(newTitle: string) {
-    this.title.setTitle(newTitle);
+  ) {
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'Liste des cartes personnelles de type vocabulaire, grammaire ou kanji',
+    });
+    this.setTitle('Mes cartes-JapaneseFlashcard');
   }
+
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
     this.getFlashcard();
   }
 
-  confirmDelete(id: string) {
+  /**
+   * Affiche une pop de confirmation de suppression
+   * @param id id de la carte à supprimer
+   */
+  confirmDelete(id: string): void {
     Swal.fire({
       title: 'Etes-vous sûr de vouloir supprimer ce paquet?',
       text: 'Le paquet et toutes les cartes associées seront supprimés définitivement',
       showCancelButton: true,
       confirmButtonText: 'Oui',
       cancelButtonText: 'Non',
-      confirmButtonColor: '#256cb0', 
-    }).then((result) => {   
+      confirmButtonColor: '#256cb0',
+    }).then((result) => {
       if (result.value) {
         this.delete(id);
       }
     });
   }
 
-  private delete(flashcardId: string) {
-    if (this.deckId) {
-      this.flashcardService
-        .deleteFlashcard(this.deckId, flashcardId)
-        .subscribe((data: string) => {
-          this.apiSuccesService.sendSuccess(data);
-          this.getFlashcard();
-        });
-    }
-  }
-
+  //pagination
   public onGoTo(page: number): void {
     this.currentPage = page;
     this.getFlashcard();
@@ -90,6 +80,32 @@ export class FIndexComponent {
     this.getFlashcard();
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+  }
+
+  /**
+   * Supprime une carte
+   * @param flashcardId id de la carte à supprimer
+   */
+  private delete(flashcardId: string): void {
+    if (this.deckId) {
+      this.flashcardService
+        .deleteFlashcard(this.deckId, flashcardId)
+        .subscribe((data: string) => {
+          this.apiSuccesService.sendSuccess(data);
+          this.getFlashcard();
+        });
+    }
+  }
+
+  private setTitle(newTitle: string): void {
+    this.title.setTitle(newTitle);
+  }
+
+  /**
+   * Récupère les cartes du paquet
+   */
   private getFlashcard(): void {
     this.deckId = this.activated.snapshot.paramMap.get('deckId');
 
@@ -101,8 +117,8 @@ export class FIndexComponent {
         .subscribe((data: PaginationFlashcard) => {
           this.flashcardList = data.flashcards;
           this.flashcardList.forEach((flashcard) => {
-            if (flashcard.knownLevel) {
-              if ((flashcard.knownLevel as number) < 3) {
+            if (flashcard.knownLevel || (flashcard.knownLevel as number) === 0) {
+              if ( (flashcard.knownLevel as number) < 3 || (flashcard.knownLevel as number) === 0) {
                 flashcard.knownLevel = 'Nouvelle';
               } else if ((flashcard.knownLevel as number) < 8) {
                 flashcard.knownLevel = 'En cours';
@@ -111,25 +127,28 @@ export class FIndexComponent {
               }
             }
             if (flashcard.intervalReview) {
-              formatedInterval = this.formatInterval(flashcard.intervalReview as number);
+              formatedInterval = this.formatInterval(
+                flashcard.intervalReview as number
+              );
               flashcard.intervalReview = `${formatedInterval.day}j ${formatedInterval.hour}h  ${formatedInterval.minute}min  `;
-              console.log(flashcard.intervalReview)
             }
           });
-          console.log(this.flashcardList);
           if (data.total_items)
             this.total = Math.ceil(data.total_items / this.perPage);
         });
     }
   }
-  private formatInterval(interval: number) {
+
+  /**
+   * Formatte la durée de l'interval en jour, heure et minutes
+   * @param interval
+   * @returns FormatedInterval
+   */
+  private formatInterval(interval: number): FormatedInterval {
     const day = Math.floor(interval);
     const hour = Math.floor((interval - day) * 24);
     const minute = Math.floor(((interval - day) * 24 - hour) * 60);
 
     return { day, hour, minute };
-  }
-  ngOnDestroy(): void {
-    this.destroy$.next(true);
   }
 }

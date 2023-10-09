@@ -32,18 +32,13 @@ export class DEditComponent implements OnInit {
     private apiSuccessService: ApiSuccessService,
     private meta: Meta,
     private title: Title
-   ) {
-     this.meta.updateTag(
-       {
-         name: 'description',
-         content: "Modifier un paquet de cartes de révision du japonais",
-       },
-     );
-     this.setTitle('Modifier paquet-JapaneseFlashcard');
-   }
-   setTitle(newTitle: string) {
-     this.title.setTitle(newTitle);
-   }
+  ) {
+    this.meta.updateTag({
+      name: 'description',
+      content: 'Modifier un paquet de cartes de révision du japonais',
+    });
+    this.setTitle('Modifier paquet-JapaneseFlashcard');
+  }
 
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
@@ -54,17 +49,22 @@ export class DEditComponent implements OnInit {
       public: this.public,
     });
     let id = this.activated.snapshot.paramMap.get('id');
-    console.log(id);
     if (id) {
-      this.deckService.getUserDecksDetail(id).pipe(takeUntil(this.destroy$)).subscribe((data: Deck) => {
-        this.deck = data;
-        console.log(this.deck);
-        this.initializeDeckForm(this.deck);
-      });
+      this.deckService
+        .getUserDecksDetail(id)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((data: Deck) => {
+          this.deck = data;
+          this.initializeDeckForm(this.deck);
+        });
     }
   }
 
-  initializeDeckForm(deck: Deck) {
+  /**
+   * Remplit le formulaire avec les données du paquet
+   * @param deck
+   */
+  initializeDeckForm(deck: Deck): void {
     this.deckForm.patchValue({
       name: deck.name,
       description: deck.description,
@@ -72,7 +72,10 @@ export class DEditComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  /**
+   * Modification du paquet si formulaire valide
+   */
+  onSubmit(): void {
     if (this.deckForm.valid) {
       this.deck.name = this.deckForm.value.name;
       this.deck.description = this.deckForm.value.description;
@@ -89,5 +92,9 @@ export class DEditComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
+  }
+
+  private setTitle(newTitle: string): void {
+    this.title.setTitle(newTitle);
   }
 }

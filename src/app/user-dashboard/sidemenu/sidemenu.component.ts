@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class SidemenuComponent {
   isMenuOpen = false;
 
-  toggleMenu():void{
+  toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
   }
 }

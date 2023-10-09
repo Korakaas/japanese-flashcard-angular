@@ -1,3 +1,3 @@
 export class Message {
-    message?:string;
+  message?: string;
 }

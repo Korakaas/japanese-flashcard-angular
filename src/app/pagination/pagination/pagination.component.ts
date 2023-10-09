@@ -13,6 +13,7 @@ import {
   styleUrls: ['./pagination.component.scss'],
 })
 export class PaginationComponent implements OnChanges {
+  public pages: number[] = [];
   @Input() currentPage: number = 1;
   @Input() totalPages: number = 0;
 
@@ -22,14 +23,12 @@ export class PaginationComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (
-      (changes['currentPage']?.currentValue) ||
-      (changes['totalPages']?.currentValue)
+      changes['currentPage']?.currentValue ||
+      changes['totalPages']?.currentValue
     ) {
       this.pages = this.getPages(this.currentPage, this.totalPages);
     }
   }
-
-  public pages: number[] = [];
 
   public onGoTo(page: number): void {
     this.goTo.emit(page);
@@ -41,19 +40,33 @@ export class PaginationComponent implements OnChanges {
     this.previous.next(this.currentPage);
   }
 
+  /**
+   * En fonction du nombre total de pages, retourne un tableau de nombre correspondant aux page à afficher
+   * @param current la page actuelle
+   * @param totalPages le nombre total de pages
+   * @returns
+   */
   private getPages(current: number, totalPages: number): number[] {
     if (totalPages <= 7) {
-      return [...Array(totalPages).keys()].map(x => ++x)
+      return [...Array(totalPages).keys()].map((x) => ++x);
     }
 
     if (current > 5) {
       if (current >= totalPages - 4) {
-        return [1, -1, totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages]
+        return [
+          1,
+          -1,
+          totalPages - 4,
+          totalPages - 3,
+          totalPages - 2,
+          totalPages - 1,
+          totalPages,
+        ];
       } else {
-        return [1, -1, current - 1, current, current + 1, -1, totalPages]
+        return [1, -1, current - 1, current, current + 1, -1, totalPages];
       }
     }
 
-    return [1, 2, 3, 4, 5, -1, totalPages]
+    return [1, 2, 3, 4, 5, -1, totalPages];
   }
 }

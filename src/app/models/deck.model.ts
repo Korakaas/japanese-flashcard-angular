@@ -1,11 +1,9 @@
 import { Flashcard } from './flashcard.model';
-
 export class PaginationDeck {
   decks: Deck[] = [];
   page?: number;
   total_items?: number;
 }
-
 export class Deck {
   id?: string;
   name?: string;
@@ -14,5 +12,5 @@ export class Deck {
   createdAt?: Date;
   updatedAt?: Date;
   flashcards?: Flashcard;
-  pseudo?:string;
+  pseudo?: string;
 }

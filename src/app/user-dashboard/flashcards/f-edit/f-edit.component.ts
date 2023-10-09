@@ -48,18 +48,14 @@ export class FEditComponent implements OnInit {
     private apiSuccessService: ApiSuccessService,
     private meta: Meta,
     private title: Title
-   ) {
-     this.meta.updateTag(
-       {
-         name: 'description',
-         content: "Modifier une carte de type vocabulaire, grammaire ou kanji",
-       },
-     );
-     this.setTitle('Modifier une carte-JapaneseFlashcard');
-   }
-   setTitle(newTitle: string) {
-    this.title.setTitle(newTitle);
+  ) {
+    this.meta.updateTag({
+      name: 'description',
+      content: 'Modifier une carte de type vocabulaire, grammaire ou kanji',
+    });
+    this.setTitle('Modifier une carte-JapaneseFlashcard');
   }
+
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
     this.flashcardForm = this.formbuilder.group({
@@ -87,40 +83,36 @@ export class FEditComponent implements OnInit {
     }
   }
 
-  initializeFlashcardForm(flashcard: Flashcard) {
-    this.flashcardTypeForm = this.formbuilder.group({});
-
-    switch (this.type) {
-      case 'vocabulary':
-        this.flashcardTypeForm.addControl('synonym', this.synonym);
-        this.flashcardTypeForm.addControl('antonym', this.antonym);
-        break;
-      case 'kanji':
-        this.flashcardTypeForm.addControl('mnemotic', this.mnemotic);
-        this.flashcardTypeForm.addControl('onyomi', this.onyomi);
-        this.flashcardTypeForm.addControl('kunyomi', this.kunyomi);
-        break;
-      case 'grammar':
-        this.flashcardTypeForm.addControl('construction', this.construction);
-        this.flashcardTypeForm.addControl('grammarnotes', this.grammarnotes);
-        break;
-
-      default:
-        console.error('Le type de la carte est inconnu');
-        break;
+  /**
+   * Modifie la carte si le formulaire est correcte
+   */
+  onSubmit(): void {
+    if (this.flashcardForm.valid) {
+      Object.assign(this.flashcard, this.flashcardForm.value);
+      Object.assign(this.flashcard, this.flashcardForm.value.flashcardTypeForm);
+      if (this.deckId) {
+        this.flashcardService
+          .updatelFlashcard(this.deckId, this.flashcard)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((message: string) =>
+            this.apiSuccessService.sendSuccess(message)
+          );
+      }
     }
-
-    this.flashcardForm.setControl('flashcardTypeForm', this.flashcardTypeForm);
-    this.flashcardForm.patchValue({
-      front: flashcard.front,
-      back: flashcard.back,
-      example: flashcard.example,
-      furigana: flashcard.furigana,
-    });
-    this.patchValueFlashcardTypeForm(flashcard);
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
   }
 
-  patchValueFlashcardTypeForm(flashcard: Flashcard) {
+  private setTitle(newTitle: string): void {
+    this.title.setTitle(newTitle);
+  }
+
+  /**
+   * Remplit le formulaire avec les données de la carte en fonction de son type
+   * @param flashcard la carte
+   */
+  private patchValueFlashcardTypeForm(flashcard: Flashcard): void {
     switch (this.type) {
       case 'vocabulary':
         const flashcardVocab: FlashcardVocabulary = flashcard;
@@ -156,22 +148,40 @@ export class FEditComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    if (this.flashcardForm.valid) {
-      Object.assign(this.flashcard, this.flashcardForm.value);
-      Object.assign(this.flashcard, this.flashcardForm.value.flashcardTypeForm);
-      if (this.deckId) {
-        console.log(this.flashcard);
-        this.flashcardService
-          .updatelFlashcard(this.deckId, this.flashcard)
-          .pipe(takeUntil(this.destroy$))
-          .subscribe((message: string) =>
-            this.apiSuccessService.sendSuccess(message)
-          );
-      }
+  /**
+   * Initilalise le formulaire en fonction du type de carte
+   * @param flashcard
+   */
+  private initializeFlashcardForm(flashcard: Flashcard): void {
+    this.flashcardTypeForm = this.formbuilder.group({});
+
+    switch (this.type) {
+      case 'vocabulary':
+        this.flashcardTypeForm.addControl('synonym', this.synonym);
+        this.flashcardTypeForm.addControl('antonym', this.antonym);
+        break;
+      case 'kanji':
+        this.flashcardTypeForm.addControl('mnemotic', this.mnemotic);
+        this.flashcardTypeForm.addControl('onyomi', this.onyomi);
+        this.flashcardTypeForm.addControl('kunyomi', this.kunyomi);
+        break;
+      case 'grammar':
+        this.flashcardTypeForm.addControl('construction', this.construction);
+        this.flashcardTypeForm.addControl('grammarnotes', this.grammarnotes);
+        break;
+
+      default:
+        console.error('Le type de la carte est inconnu');
+        break;
     }
-  }
-  ngOnDestroy(): void {
-    this.destroy$.next(true);
+
+    this.flashcardForm.setControl('flashcardTypeForm', this.flashcardTypeForm);
+    this.flashcardForm.patchValue({
+      front: flashcard.front,
+      back: flashcard.back,
+      example: flashcard.example,
+      furigana: flashcard.furigana,
+    });
+    this.patchValueFlashcardTypeForm(flashcard);
   }
 }

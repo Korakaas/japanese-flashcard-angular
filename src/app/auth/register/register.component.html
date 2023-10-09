@@ -16,12 +16,8 @@
           <p [hidden]="!email.hasError('maxlength')">
             L'email ne peux pas faire plus de 180 caractères.
           </p>
-          <p [hidden]="!email.hasError('required')">
-            L'email est obligatoire.
-          </p>
-          <p [hidden]="!email.hasError('email')">
-            L'email n'est pas valide.
-          </p>
+          <p [hidden]="!email.hasError('required')">L'email est obligatoire.</p>
+          <p [hidden]="!email.hasError('email')">L'email n'est pas valide.</p>
         </div>
       </div>
       <div class="inputContainer">
@@ -48,7 +44,10 @@
           formControlName="password"
           [class.error]="!password.valid && !password.untouched"
         />
-        <div class="errorMessage" [hidden]="password.valid || password.untouched">
+        <div
+          class="errorMessage"
+          [hidden]="password.valid || password.untouched"
+        >
           <p [hidden]="!password.hasError('minlength')">
             Le mot de passe doit contenit au minimum 8 caractères.
           </p>

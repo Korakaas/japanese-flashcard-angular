@@ -49,6 +49,9 @@ export class RegisterComponent {
     });
   }
 
+  /**
+   * Ajoute un nouvel utilisateur si le formulaire est valide
+   */
   onSubmit(): void {
     if (this.registerForm.valid) {
       this.user.email = this.registerForm.value.email;

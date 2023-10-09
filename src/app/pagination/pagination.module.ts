@@ -4,17 +4,9 @@ import { CommonModule } from '@angular/common';
 import { PaginationRoutingModule } from './pagination-routing.module';
 import { PaginationComponent } from './pagination/pagination.component';
 
-
 @NgModule({
-  declarations: [
-    PaginationComponent
-  ],
-  imports: [
-    CommonModule,
-    PaginationRoutingModule
-  ],
-  exports: [
-    PaginationComponent
-  ]
+  declarations: [PaginationComponent],
+  imports: [CommonModule, PaginationRoutingModule],
+  exports: [PaginationComponent],
 })
-export class PaginationModule { }
+export class PaginationModule {}

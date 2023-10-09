@@ -29,19 +29,15 @@ export class DAddComponent {
     private formbuilder: FormBuilder,
     private apiSuccessService: ApiSuccessService,
     private meta: Meta,
-   private title: Title
+    private title: Title
   ) {
-    this.meta.updateTag(
-      {
-        name: 'description',
-        content: "Créer un paquet de carte de révision du japonais",
-      },
-    );
+    this.meta.updateTag({
+      name: 'description',
+      content: 'Créer un paquet de carte de révision du japonais',
+    });
     this.setTitle('Créer paquet-JapaneseFlashcard');
   }
-  setTitle(newTitle: string) {
-    this.title.setTitle(newTitle);
-  }
+
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
     this.deckForm = this.formbuilder.group({
@@ -51,7 +47,10 @@ export class DAddComponent {
     });
   }
 
-  onSubmit() {
+  /**
+   * Ajout du paquet si formulaire valide
+   */
+  onSubmit(): void {
     if (this.deckForm.valid) {
       this.deck = {
         name: this.deckForm.value.name,
@@ -71,5 +70,9 @@ export class DAddComponent {
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
+  }
+
+  private setTitle(newTitle: string):void {
+    this.title.setTitle(newTitle);
   }
 }

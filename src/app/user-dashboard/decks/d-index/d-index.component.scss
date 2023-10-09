@@ -6,6 +6,7 @@ h1 {
   font-size: 2rem;
   margin: 20px;
 }
+//style des cartes
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background-color: $secondary-color;
@@ -52,9 +53,26 @@ header {
 section:hover {
   background-color: $primary-color;
 }
- section:hover a{
+section:hover a {
   color: $secondary-color;
 }
+
+.card footer p {
+  font-size: 14px;
+}
+
+.headerContainer .deleteButton {
+  cursor: pointer;
+  background-color: $red;
+  padding: 5px;
+  border-radius: 5px;
+  &:hover {
+    background-color: $secondary-color;
+    color: $red;
+  }
+}
+
+//style des tooltip
 .tooltip {
   position: relative;
   display: inline-block;
@@ -79,28 +97,11 @@ section:hover {
   visibility: visible;
 }
 
-.card footer p {
-  font-size: 14px;
-}
-
-.headerContainer .deleteButton {
-  cursor: pointer;
-  background-color: $red;
-  padding: 5px;
-  border-radius: 5px;
-  &:hover {
-    background-color: $secondary-color;
-    color: $red;
-  }
-}
-
-@media screen and (min-width:700px) {
-
+@media screen and (min-width: 700px) {
   .cardContainer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     max-width: 1240px;
     margin: 20px auto;
   }
-
 }

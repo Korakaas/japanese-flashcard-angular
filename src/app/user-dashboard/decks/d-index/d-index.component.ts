@@ -23,24 +23,24 @@ export class DIndexComponent implements OnInit {
     private apiSuccessService: ApiSuccessService,
     private meta: Meta,
     private title: Title
-   ) {
-     this.meta.updateTag(
-       {
-         name: 'description',
-         content: "Liste des paquets personnels de cartes de révision du japonais",
-       },
-     );
-     this.setTitle('Mes paquets-JapaneseFlashcard');
-   }
-   setTitle(newTitle: string) {
-     this.title.setTitle(newTitle);
-   }
+  ) {
+    this.meta.updateTag({
+      name: 'description',
+      content: 'Liste des paquets personnels de cartes de révision du japonais',
+    });
+    this.setTitle('Mes paquets-JapaneseFlashcard');
+  }
+
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
     this.getdeck();
   }
 
-  confirmDelete(id: string) {
+  /**
+   * Affiche une pop up confirmation de suppression
+   * @param id
+   */
+  confirmDelete(id: string): void {
     Swal.fire({
       title: 'Etes-vous sûr de vouloir supprimer ce paquet?',
       text: 'Le paquet et toutes les cartes associées setont supprimés définitivement',
@@ -55,6 +55,7 @@ export class DIndexComponent implements OnInit {
     });
   }
 
+  //pagination
   public onGoTo(page: number): void {
     this.currentPage = page;
     this.getdeck();
@@ -69,7 +70,15 @@ export class DIndexComponent implements OnInit {
     this.currentPage = page - 1;
     this.getdeck();
   }
+  //fin pagination
 
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+  }
+
+  /**
+   * Récupère les paquets de l'utilisateur
+   */
   private getdeck(): void {
     this.deckService
       .getUserDecks(this.currentPage)
@@ -80,15 +89,18 @@ export class DIndexComponent implements OnInit {
           this.total = Math.ceil(data.total_items / this.perPage);
       });
   }
-
-  private delete(id: string) {
-    this.deckService.deleteUserDecks(id).subscribe((data:string) => {
-      this.apiSuccessService.sendSuccess(data)
+  /**
+   * Supprime le deck de l'utilisateur
+   * @param id id du deck à supprimer
+   */
+  private delete(id: string): void {
+    this.deckService.deleteUserDecks(id).subscribe((data: string) => {
+      this.apiSuccessService.sendSuccess(data);
       this.getdeck();
     });
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next(true);
+  private setTitle(newTitle: string): void {
+    this.title.setTitle(newTitle);
   }
 }

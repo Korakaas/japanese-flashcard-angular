@@ -8,7 +8,12 @@ import { UHeaderComponent } from './u-header/u-header.component';
 import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  declarations: [DashboardLayoutComponent, SidemenuComponent, UHeaderComponent, FooterComponent],
+  declarations: [
+    DashboardLayoutComponent,
+    SidemenuComponent,
+    UHeaderComponent,
+    FooterComponent,
+  ],
   imports: [CommonModule, UserDashboardRoutingModule],
 })
 export class UserDashboardModule {}

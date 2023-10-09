@@ -1,26 +1,24 @@
-@import '../../../vars.scss';
+@import "../../../vars.scss";
 
-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
 }
 
-img{
-    width: 50%;
-    &:hover {
-        opacity: 0.7;
-    }
+img {
+  width: 50%;
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
- a {
-    cursor:pointer;
-    color:$noir;
-    &:hover{
-        color:$primary-color;
-        font-weight: 600;
-    }
+a {
+  cursor: pointer;
+  color: $noir;
+  &:hover {
+    color: $primary-color;
+    font-weight: 600;
+  }
 }
-
-

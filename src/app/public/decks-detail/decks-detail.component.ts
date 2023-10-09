@@ -36,26 +36,19 @@ export class DecksDetailComponent {
   constructor(
     private activated: ActivatedRoute,
     private deckService: DeckService,
-    private meta: Meta
-    , private title: Title
+    private meta: Meta,
+    private title: Title
   ) {
-    this.meta.updateTag(
-      {
-        name: 'description',
-        content: "Détail d'un paquet public avec un exemple de carte",
-      },
-    );
+    this.meta.updateTag({
+      name: 'description',
+      content: "Détail d'un paquet public avec un exemple de carte",
+    });
     this.setTitle('Détail paquet-JapaneseFlashcard');
-  }
-
-  setTitle(newTitle: string) {
-    this.title.setTitle(newTitle);
   }
 
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
     let id = this.activated.snapshot.paramMap.get('id');
-    console.log(id);
     if (id) {
       this.deckService
         .getDecksDetail(id)
@@ -64,10 +57,11 @@ export class DecksDetailComponent {
           {
             this.deck = data;
             this.flashcard = this.deck.flashcards;
+
+            //détermine le type de la carte
             this.isFlashcardKanji = (
               flashcard: Union
             ): flashcard is FlashcardKanji => flashcard.type === 'kanji';
-            console.log(this.flashcard?.type === 'kanji');
             this.isFlashcardVocab = (
               flashcard: Union
             ): flashcard is FlashcardVocabulary =>
@@ -75,18 +69,23 @@ export class DecksDetailComponent {
             this.isFlashcardGrammar = (
               flashcard: Union
             ): flashcard is FlashcardGrammar => flashcard.type === 'grammar';
-            console.log(this.flashcard?.type === 'kanji');
-
-            console.log(this.flashcard);
           }
         });
     }
   }
-  displayBack() {
+
+  /**
+   * Affiche le dos de la carte
+   */
+  displayBack(): void {
     this.display = !this.display;
-    console.log(this.display);
   }
+
   ngOnDestroy(): void {
     this.destroy$.next(true);
+  }
+
+  private setTitle(newTitle: string): void {
+    this.title.setTitle(newTitle);
   }
 }

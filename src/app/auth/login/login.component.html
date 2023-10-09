@@ -13,7 +13,10 @@
           formControlName="username"
           [class.error]="!username.valid && !username.untouched"
         />
-        <div class="errorMessage" [hidden]="username.valid || username.untouched">
+        <div
+          class="errorMessage"
+          [hidden]="username.valid || username.untouched"
+        >
           <p [hidden]="!username.hasError('maxlength')">
             L'email ne peux pas faire plus de 180 caractères.
           </p>
@@ -34,7 +37,10 @@
           formControlName="password"
           [class.error]="!password.valid && !password.untouched"
         />
-        <div class="errorMessage" [hidden]="password.valid || password.untouched">
+        <div
+          class="errorMessage"
+          [hidden]="password.valid || password.untouched"
+        >
           <p [hidden]="!password.hasError('minlength')">
             Le mot de passe doit contenit au minimum 8 caractères.
           </p>
@@ -49,8 +55,6 @@
       </div>
       <button type="submit" [disabled]="!loginForm.valid">Se connecter</button>
     </form>
-    <a [routerLink]="['../register']"
-      >Pas encore de compte? S'enregistrer</a
-    >
+    <a [routerLink]="['../register']">Pas encore de compte? S'enregistrer</a>
   </div>
 </div>

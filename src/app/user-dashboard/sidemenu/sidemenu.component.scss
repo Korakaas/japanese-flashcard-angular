@@ -1,4 +1,4 @@
-@import '../../../vars.scss';
+@import "../../../vars.scss";
 #sidemenu {
   margin-top: 20px;
   display: none;
@@ -10,12 +10,12 @@
 a {
   color: $secondary-color;
   &:hover {
-    color:$yellow;
-    font-weight:600;
+    color: $yellow;
+    font-weight: 600;
   }
 }
 
-@media screen and (min-width:700px) {
+@media screen and (min-width: 700px) {
   #sidemenu {
     display: block;
   }

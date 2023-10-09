@@ -46,37 +46,28 @@ export class DTestComponent {
     private apiSuccessService: ApiSuccessService,
     private meta: Meta,
     private title: Title
-   ) {
-     this.meta.updateTag(
-       {
-         name: 'description',
-         content: "Révision du japonais",
-       },
-     );
-     this.setTitle('Révision-JapaneseFlashcard');
-   }
-   setTitle(newTitle: string) {
-     this.title.setTitle(newTitle);
-   }
+  ) {
+    this.meta.updateTag({
+      name: 'description',
+      content: 'Révision du japonais',
+    });
+    this.setTitle('Révision-JapaneseFlashcard');
+  }
 
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
     this.deckId = this.activated.snapshot.paramMap.get('id');
-    console.log(this.deckId);
     if (this.deckId) {
       this.flashcardService
         .getFlashcardForTest(this.deckId)
         .pipe(takeUntil(this.destroy$))
         .subscribe((data: Test | Message) => {
-          console.log(data instanceof Test);
-
+          //determine le type de la carte
           if ('cards' in data) {
             this.flashcard = data.cards;
-            console.log(this.flashcard);
             this.isFlashcardKanji = (
               flashcard: Union
             ): flashcard is FlashcardKanji => this.flashcard?.type === 'kanji';
-            console.log(this.flashcard?.type === 'kanji');
             this.isFlashcardVocab = (
               flashcard: Union
             ): flashcard is FlashcardVocabulary =>
@@ -85,29 +76,33 @@ export class DTestComponent {
               flashcard: Union
             ): flashcard is FlashcardGrammar =>
               this.flashcard?.type === 'grammar';
-            console.log(this.flashcard);
-
             this.totalCardCount = data.totalCardCount;
           } else {
-            console.log(data);
             this.message = (data as Message).message;
-            console.log(this.message);
           }
         });
     }
   }
-  displayBack() {
+  /**
+   * Affiche le dos de la carte
+   */
+  displayBack(): void {
     this.display = true;
     console.log(this.display);
   }
-  submitScore(answer: number) {
+
+  /**
+   * Envoie le score de l'utilisateur
+   * Enregistreles stats de révision de la carte
+   * @param answer la réponse de l'utilisateur
+   */
+  submitScore(answer: number): void {
     this.review.score = answer;
     if (this.deckId && this.flashcard?.id) {
       this.flashcardService
         .reviewFlashcard(this.deckId, this.flashcard.id, this.review)
         .pipe(takeUntil(this.destroy$))
         .subscribe((message: string) => {
-          console.log(message);
           this.apiSuccessService.sendSuccess(message);
         });
 
@@ -121,7 +116,12 @@ export class DTestComponent {
       this.ngOnInit();
     }
   }
+
   ngOnDestroy(): void {
     this.destroy$.next(true);
+  }
+
+  private setTitle(newTitle: string): void {
+    this.title.setTitle(newTitle);
   }
 }
