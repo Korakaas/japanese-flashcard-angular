@@ -1,7 +1,41 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css"; /* You can add global styles to this file, and also import other style files */
-@import url("https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@100;300;400;500;700;800;900&display=swap");
 // styles.scss
 
+@font-face {
+  font-family: M PLUS 1p;
+  src: url("assets/font/MPLUS1p-Black.woff");
+  font-weight: 900;
+}
+@font-face {
+  font-family: M PLUS 1p;
+  src: url("assets/font/MPLUS1p-ExtraBold.woff");
+  font-weight: 800;
+}
+@font-face {
+  font-family: M PLUS 1p;
+  src: url("assets/font/MPLUS1p-Bold.woff");
+  font-weight: 700;
+}
+@font-face {
+  font-family: M PLUS 1p;
+  src: url("assets/font/MPLUS1p-Medium.woff");
+  font-weight: 500;
+}
+@font-face {
+  font-family: M PLUS 1p;
+  src: url("assets/font/MPLUS1p-regular.woff");
+  font-weight: 400;
+}
+@font-face {
+  font-family: M PLUS 1p;
+  src: url("assets/font/MPLUS1p-Light.woff");
+  font-weight: 300;
+}
+@font-face {
+  font-family: M PLUS 1p;
+  src: url("assets/font/MPLUS1p-thin.woff");
+  font-weight: 100;
+}
 * {
   margin: 0px;
   font-family: "M PLUS 1p", sans-serif;

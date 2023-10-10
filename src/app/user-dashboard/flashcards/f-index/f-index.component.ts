@@ -118,9 +118,9 @@ export class FIndexComponent {
           this.flashcardList = data.flashcards;
           this.flashcardList.forEach((flashcard) => {
             if (flashcard.knownLevel || (flashcard.knownLevel as number) === 0) {
-              if ( (flashcard.knownLevel as number) < 3 || (flashcard.knownLevel as number) === 0) {
+              if ( (flashcard.knownLevel as number) <= 3 || (flashcard.knownLevel as number) === 0) {
                 flashcard.knownLevel = 'Nouvelle';
-              } else if ((flashcard.knownLevel as number) < 8) {
+              } else if ((flashcard.knownLevel as number) <= 8) {
                 flashcard.knownLevel = 'En cours';
               } else {
                 flashcard.knownLevel = 'Su';

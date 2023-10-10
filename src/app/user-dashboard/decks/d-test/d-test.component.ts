@@ -58,29 +58,7 @@ export class DTestComponent {
     this.destroy$ = new Subject<boolean>();
     this.deckId = this.activated.snapshot.paramMap.get('id');
     if (this.deckId) {
-      this.flashcardService
-        .getFlashcardForTest(this.deckId)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((data: Test | Message) => {
-          //determine le type de la carte
-          if ('cards' in data) {
-            this.flashcard = data.cards;
-            this.isFlashcardKanji = (
-              flashcard: Union
-            ): flashcard is FlashcardKanji => this.flashcard?.type === 'kanji';
-            this.isFlashcardVocab = (
-              flashcard: Union
-            ): flashcard is FlashcardVocabulary =>
-              this.flashcard?.type === 'vocabulary';
-            this.isFlashcardGrammar = (
-              flashcard: Union
-            ): flashcard is FlashcardGrammar =>
-              this.flashcard?.type === 'grammar';
-            this.totalCardCount = data.totalCardCount;
-          } else {
-            this.message = (data as Message).message;
-          }
-        });
+      this.getFlashcardToreview(this.deckId);
     }
   }
   /**
@@ -103,6 +81,11 @@ export class DTestComponent {
         .pipe(takeUntil(this.destroy$))
         .subscribe((message: string) => {
           this.apiSuccessService.sendSuccess(message);
+          this.display = false;
+          this.flashcard = undefined;
+          if (this.deckId) {
+            this.getFlashcardToreview(this.deckId);
+          }
         });
 
       this.dailyStatsService
@@ -110,9 +93,7 @@ export class DTestComponent {
         .pipe(takeUntil(this.destroy$))
         .subscribe();
 
-      this.display = false;
-      this.flashcard = undefined;
-      this.ngOnInit();
+
     }
   }
 
@@ -122,5 +103,31 @@ export class DTestComponent {
 
   private setTitle(newTitle: string): void {
     this.title.setTitle(newTitle);
+  }
+
+  private getFlashcardToreview(deckId: string): void {
+    this.flashcardService
+      .getFlashcardForTest(deckId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: Test | Message) => {
+        //determine le type de la carte
+        if ('cards' in data) {
+          this.flashcard = data.cards;
+          this.isFlashcardKanji = (
+            flashcard: Union
+          ): flashcard is FlashcardKanji => this.flashcard?.type === 'kanji';
+          this.isFlashcardVocab = (
+            flashcard: Union
+          ): flashcard is FlashcardVocabulary =>
+            this.flashcard?.type === 'vocabulary';
+          this.isFlashcardGrammar = (
+            flashcard: Union
+          ): flashcard is FlashcardGrammar =>
+            this.flashcard?.type === 'grammar';
+          this.totalCardCount = data.totalCardCount;
+        } else {
+          this.message = (data as Message).message;
+        }
+      });
   }
 }
