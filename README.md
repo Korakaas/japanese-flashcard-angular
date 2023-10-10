@@ -24,12 +24,38 @@ JapaneseCard est une application qui permet d'apprendre et de réviser la langue
 
 ## Modèle conceptuel des données
 
-![alt text](mcd.png)
+![alt text](img/mcd.png)
 
 ## Modèle physique des données
 
-![alt text](mpd.png)
+![alt text](img/mpd.png)
 
 ## Dump de la base de données
 
 [jp_flashcard.sql](jp_flashcard.sql)
+
+## Capture d'écran de l'application
+
+### Paquets publiques
+
+![Paquets publiques ](img/paquets_publiques.png)
+
+### Mes paquets
+
+![Mes paquets](img/mes_paquets.png)
+
+### Mes cartes
+
+![Mes cartes](img/mes_cartes.png)
+
+### Ajouter une carte
+
+![Ajouter une carte](img/ajouter_carte.png)
+
+### Recto de la carte
+
+![Recto de la carte](img/recto.png)
+
+### Verso de la carte
+
+![Verso de la carte](img/verso.png)
