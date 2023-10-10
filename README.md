@@ -1,31 +1,35 @@
-# JapaneseFlashcardAngular
+# Application JapaneseCard (front) réalisée avec Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+## But de l'application
 
-## Development server
+JapaneseCard est une application qui vous permet de réviser et d'apprendre la langue japonaise à l'aide d'un système de cartes mémoire (flashcards). Chaque carte comporte une question au recto et une réponse au verso. L'application utilise le système de répétition espacée pour favoriser une mémorisation efficace sur le long terme. Les cartes sont présentées en fonction de votre niveau de connaissance et des réponses précédentes.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Fonctionalités
 
-## Code scaffolding
+### Utilisateur non connecté
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Page d'accueil
+- Parcourir les paquets de cartes publics
+- Créer un compte
 
-## Build
+### Utilisateur connecté
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Dupliquer les paquets de cartes publics
+- Accès à un espace personnel avec les fonctionnalités suivantes :
+  - Créer, modifier et supprimer des paquets de cartes
+  - Créer, modifier et supprimer des cartes
+  - Dupliquer un paquet public
+  - Réviser les cartes d'un paquet
+  - Voir les statistiques de révision
 
-## Documentation
+## Modèle conceptuel des données
 
-Run `npm run compodoc:serve` to build the documentation. The build documentation will be stored in the `documentation/` directory.
+![alt text](mcd.png)
 
-## Running unit tests
+## Modèle physique des données
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+![alt text](mpd.png)
 
-## Running end-to-end tests
+## Dump de la base de données
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+[jp_flashcard.sql](jp_flashcard.sql)
